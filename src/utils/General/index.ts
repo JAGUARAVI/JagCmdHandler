@@ -1,5 +1,4 @@
 import crypto from 'crypto';
-import { Message, MessageOptions } from 'discord.js';
 
 export default {
     trimArray(arr: Array<any>, maxLen = 10) {
