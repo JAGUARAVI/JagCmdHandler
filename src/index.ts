@@ -6,7 +6,7 @@ import TextCommandHandler from './functions/TextCommandHandler';
 import InteracionCommandHandler from './functions/InteractionCommandHandler';
 import * as Types from './types';
 
-export default {
+export {
     Client,
     BaseCommand,
     BaseEvent,
