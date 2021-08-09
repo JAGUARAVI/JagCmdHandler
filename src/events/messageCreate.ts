@@ -1,0 +1,19 @@
+import BaseEvent from '../classes/base/BaseEvent';
+import Client from '../classes/Client';
+import { Message } from '../types';
+
+export default class Event extends BaseEvent {
+    constructor() {
+        super('MessageCreate');
+    }
+
+    async run(client: Client, message: Message) {
+        if (message.partial) await message.fetch();
+        if (message.channel.type === 'DM') return client.emit('directMessageCreate', message);
+        if (message.webhookId) return client.emit('webhookMessage', message);
+        if (!message.guild) return;
+        if (!message.member || message.member.partial) await message.member?.fetch();
+
+        return await client.textCommandHandler.run(message);
+    }
+}
