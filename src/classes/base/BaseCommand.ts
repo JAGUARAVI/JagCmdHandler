@@ -14,12 +14,9 @@ export default class BaseCommand {
     }
 
     constructor(data: { [key: string]: any }) {
-        for (const key in Object.keys(data)) {
-            Reflect.defineProperty(this, key, {
-                value: data[key],
-                writable: true
-            })
-        }
+        this.config = data.config;
+        this.permissions = data.permissions;
+        this.data = data.data;
     }
 
     async run(ctx: CommandContext): Promise<any> {
