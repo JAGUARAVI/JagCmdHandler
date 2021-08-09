@@ -92,20 +92,6 @@ export default {
         return a.join(' ')
     },
 
-    async awaitReply(message: Message, question: MessageOptions, limit = 60000, obj = false) {
-        const filter = (m: Message) => m.author.id === message.author.id;
-
-        await message.channel.send(question);
-
-        try {
-            const collected = await message.channel.awaitMessages({ filter, max: 1, time: limit, errors: ['time'] });
-            if (obj) return collected.first();
-            return collected.first().content;
-        } catch (e) {
-            return false;
-        }
-    },
-
     removeDuplicates(arr: Array<any>) {
         let n = arr.length;
 

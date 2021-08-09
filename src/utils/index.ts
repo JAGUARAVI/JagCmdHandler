@@ -5,7 +5,7 @@ import Merge from './Merge';
 
 export default class Utils {
     static logger = Logger;
-    static general= General;
+    static general = General;
     static parsebool = Parsebool;
     static merge = Merge;
 };
