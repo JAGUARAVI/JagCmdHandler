@@ -41,7 +41,7 @@ class Client extends BaseClient {
 
     constructor(options: ClientOptions) {
         super(
-            Object.assign(defaultOptions, options)
+            Object.assign({}, defaultOptions, options)
         )
 
         this.debug = options.debug ? true : false;
@@ -125,6 +125,7 @@ class Client extends BaseClient {
     }
 
     init() {
+        console.log(join(__dirname, '..', 'events'));
         return Promise.all([
             this.registerEvents(join(__dirname, '..', 'events'))
         ]);

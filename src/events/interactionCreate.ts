@@ -2,9 +2,9 @@ import BaseEvent from '../classes/base/BaseEvent';
 import Client from '../classes/Client';
 import { Interaction } from 'discord.js';
 
-export default class Event extends BaseEvent {
+export = class Event extends BaseEvent {
     constructor() {
-        super('MessageCreate');
+        super('interactionCreate');
     }
 
     async run(client: Client, interaction: Interaction) {

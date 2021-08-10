@@ -2,9 +2,9 @@ import BaseEvent from '../classes/base/BaseEvent';
 import Client from '../classes/Client';
 import { Message } from '../types';
 
-export default class Event extends BaseEvent {
+export = class Event extends BaseEvent {
     constructor() {
-        super('MessageCreate');
+        super('messageCreate');
     }
 
     async run(client: Client, message: Message) {
