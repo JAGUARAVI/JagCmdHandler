@@ -84,6 +84,7 @@ export default class TextCommandHandler {
             send,
             reply,
             paginate,
+            args: [],
             flags: [],
             client
         }
@@ -107,7 +108,7 @@ export default class TextCommandHandler {
             }
 
             if (command.permissions.clientPerms) {
-                if (!ctx.source.guild.me.permissions.has(command.permissions.clientPerms) || ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.clientPerms)) {
+                if (!ctx.source.guild.me.permissions.has(command.permissions.clientPerms) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.clientPerms)) {
                     const embed = this.getErrorEmbed(
                         `Sorry, but i need the following permisions to perform this command -\n${command.permissions.clientPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`, true
                     );
@@ -119,7 +120,7 @@ export default class TextCommandHandler {
             }
 
             if (command.permissions.userPerms) {
-                if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.userPerms) || !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.userPerms)) {
+                if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.userPerms) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.userPerms)) {
                     let embed = this.getErrorEmbed(
                         `Sorry, but you don't have enough permissions to execute this command. You need the following permissions -\n${command.permissions.userPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`,
                         true

@@ -14,6 +14,7 @@ export interface PsuedoMessage {
 export interface CommandContext {
     source: Message | Interaction;
     flags: Array<string>;
+    args: Array<string>;
     isCommand: boolean;
     client: Client;
     reply(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
