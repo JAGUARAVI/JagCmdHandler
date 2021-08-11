@@ -8,7 +8,7 @@ import Paginate from './Paginate';
 import DeletableMessage from './DeletableMessage';
 import ms from 'pretty-ms';
 
-export default class TextCommandHandler {
+export = class TextCommandHandler {
     client: Client;
 
     cooldowns = new Collection<string, Collection<string, number>>();
@@ -67,28 +67,43 @@ export default class TextCommandHandler {
         });
         args = argsCopy;
 
-        const send = (async (content: MessageOptions) => {
+        const send = async (content: MessageOptions) => {
             const del = content.delete == null || content.delete != false;
-            const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message) }, content).start(message.member) : message.channel.send(content));
+            const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
 
-            if (del != false) this.messageReplies.set(message.id, [...this.messageReplies.get(message.id), msg.id]);
+            if (del != false) {
+                let arr = this.messageReplies.get(message.id);
+                if (!arr) arr = [];
+                arr.push(msg.id);
+                this.messageReplies.set(message.id, arr);
+            }
             return msg;
-        }).bind(this);
+        };
 
-        const reply = (async (content: MessageOptions) => {
+        const reply = async (content: MessageOptions) => {
             const del = content.delete == null || content.delete != false;
             const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
 
-            if (del != false) this.messageReplies.set(message.id, [...this.messageReplies.get(message.id), msg.id]);
+            if (del != false) {
+                let arr = this.messageReplies.get(message.id);
+                if (!arr) arr = [];
+                arr.push(msg.id);
+                this.messageReplies.set(message.id, arr);
+            }
             return msg;
-        }).bind(this);
+        };
 
-        const paginate = (async (options: MessageOptions) => {
+        const paginate = async (options: MessageOptions) => {
             const paginator = new Paginate({ send }, options);
             await paginator.start({ user: message.author });
-            this.messageReplies.set(message.id, [...this.messageReplies.get(message.id), paginator.message.id]);
+
+            let arr = this.messageReplies.get(message.id);
+            if (!arr) arr = [];
+            arr.push(paginator.message.id);
+            this.messageReplies.set(message.id, arr);
+
             return paginator.message;
-        }).bind(this);
+        };
 
         message.user = message.author;
 

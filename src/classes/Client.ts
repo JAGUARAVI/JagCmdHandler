@@ -45,7 +45,7 @@ class Client extends BaseClient {
         )
 
         this.debug = options.debug ? true : false;
-        this.data = options.data;
+        this.data = Object.assign({}, options.data, { owners: Array.from(options.data?.owners || options.owners) });
 
         if (!options.disableDefaultReady) this.on('ready', () => {
             this.log.success(`${this.user.tag} ready!`);
@@ -125,7 +125,6 @@ class Client extends BaseClient {
     }
 
     init() {
-        console.log(join(__dirname, '..', 'events'));
         return Promise.all([
             this.registerEvents(join(__dirname, '..', 'events'))
         ]);

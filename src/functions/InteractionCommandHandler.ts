@@ -9,7 +9,7 @@ import DeletableMessage from './DeletableMessage';
 import ms from 'pretty-ms';
 import { GuildMember } from 'discord.js';
 
-export default class TextCommandHandler {
+export = class InteractionCommandHandler {
     client: Client;
 
     cooldowns = new Collection<string, Collection<string, number>>();
@@ -80,7 +80,7 @@ export default class TextCommandHandler {
 
         const ctx: CommandContext = {
             source: interaction,
-            isCommand: false,
+            isCommand: true,
             send,
             reply,
             paginate,

@@ -16,7 +16,7 @@ const chunk = (array: Array<any>, chunkSize = 0): Array<Array<any>> => {
 }
 
 
-export default class EasyEmbedPages {
+export = class EasyEmbedPages {
     channel: TextChannel | any;
     content: MessageOptions | MessagePayload;
     user: string;
@@ -55,8 +55,8 @@ export default class EasyEmbedPages {
         this.footer = data.footer;                                    // embed footer object
         this.thumbnail = data.thumbnail;                              // embed thumbnail
         this.image = data.image;                                      // embed large image
-        this.description = data.content || data.description;  // the content to be presented dynamically
-        this.pageGen = data.pageGen;                                  // the function to customize embeds
+        this.description = data.content || data.description;          // the content to be presented dynamically
+        this.pageGen = data.pageGen || function() {};                 // the function to customize embeds
 
         if (typeof this.content != 'object') {
             this.content = { content: this.content };

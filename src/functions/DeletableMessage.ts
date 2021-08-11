@@ -1,7 +1,7 @@
 import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessageOptions, MessagePayload, GuildMember, User, InteractionCollector, ButtonInteraction } from 'discord.js';
 import { PsuedoMessage, Message } from '../types';
 
-export default class DeletableMessage {
+export = class DeletableMessage {
     channel: TextChannel;
     content: MessageOptions | MessagePayload;
     member: GuildMember | User;
