@@ -37,13 +37,13 @@ export = class EasyEmbedPages {
     footer?: {
         [a: string]: any;
     };
-    
+
     thumbnail?: string;
     image?: string;
     description?: string;
     pageGen?: (embed: MessageEmbed) => void | Promise<void>;
 
-    constructor(channel: TextChannel | any, data: any) {
+    constructor(channel: TextChannel | any, data: { [key: string]: any }) {
         this.channel = channel;
         this.pages = [];                                              // embed pages... automagically generated xD
         this.page = 0;                                                // currect page number
@@ -56,7 +56,7 @@ export = class EasyEmbedPages {
         this.thumbnail = data.thumbnail;                              // embed thumbnail
         this.image = data.image;                                      // embed large image
         this.description = data.content || data.description;          // the content to be presented dynamically
-        this.pageGen = data.pageGen || function() {};                 // the function to customize embeds
+        this.pageGen = data.pageGen || function () { };                 // the function to customize embeds
 
         if (typeof this.content != 'object') {
             this.content = { content: this.content };
@@ -199,7 +199,8 @@ export = class EasyEmbedPages {
         this.message = await this.channel.send({
             embeds: [this.pages[this.page]],
             components: [this.generateButtons(this.pages.length, this.page)],
-            delete: false
+            delete: false,
+            ephemeral: false
         });
 
         this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON' });

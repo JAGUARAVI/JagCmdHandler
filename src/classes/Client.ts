@@ -1,4 +1,4 @@
-import { Client as BaseClient, Intents, Options, Collection, ApplicationCommand, Guild } from 'discord.js';
+import { Client as BaseClient, Intents, Options, Collection, ApplicationCommand, Guild, ApplicationCommandPermissionData } from 'discord.js';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { ClientOptions } from '../types';
@@ -89,10 +89,14 @@ class Client extends BaseClient {
                 name: command.config.name,
                 description: command.config.description,
                 options: command.config.commandOptions,
-                defaultPermission: true
+                defaultPermission: command.permissions.default != false
             };
         })).then(async (data) => {
-            return await target?.commands.set(data).then((result) => {
+            return await target?.commands.set(data).then(async (result) => {
+                if (target != this.application) await Promise.all(result.map(async (command) => {
+                    const cmd = this.commands.get(command.name);
+                    if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ guild: (target as Guild), permissions: (cmd.permissions.build as (guild: Guild, command: ApplicationCommand) => Array<ApplicationCommandPermissionData>)(target as Guild, command) });
+                }));
                 this.applicationCommands.set(guild ? guild.id : '0', result);
                 return result;
             });

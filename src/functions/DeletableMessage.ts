@@ -33,7 +33,7 @@ export = class DeletableMessage {
         this.message = await this.channel.send(
             Object.assign(
                 { components: [this.generateButton(this.member.id)] },
-                { delete: false },
+                { delete: false, ephemeral: false },
                 this.content
             )
         );
