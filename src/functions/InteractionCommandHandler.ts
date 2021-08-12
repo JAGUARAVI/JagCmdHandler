@@ -40,13 +40,13 @@ export = class InteractionCommandHandler {
     }
 
     async handle(client: Client, interaction: Interaction, next: () => void, defaultChecks = true): Promise<void> {
-        if(!interaction.isCommand()) return next();
+        if (!interaction.isCommand()) return next();
 
         const command = client.commands.get(interaction.commandName)
         if (!command) return next();
 
         const _reply = (async (content: MessageOptions): Promise<Message | PsuedoMessage> => {
-            content.fetchReply = true;
+            if (!content.ephemeral) content.fetchReply = true;
 
             const replied = interaction.replied;
             const func = (replied ? interaction.editReply.bind(interaction) : interaction.reply.bind(interaction));
@@ -60,7 +60,7 @@ export = class InteractionCommandHandler {
                     delete: interaction.deleteReply.bind(interaction)
                 } as PsuedoMessage;
             }
-            
+
             return sent as Message;
         }).bind(this);
 
