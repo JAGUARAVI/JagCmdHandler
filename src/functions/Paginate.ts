@@ -160,7 +160,7 @@ export = class EasyEmbedPages {
             const data: {
                 [key: string]: any
             } = {
-                fileds: []
+                fields: []
             };
 
             if (this.description && array[index]) {
