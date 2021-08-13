@@ -1,4 +1,4 @@
-export default function merge(model: { [key: string]: any }, value: { [key: string]: any }) {
+export = function merge(model: { [key: string]: any }, value: { [key: string]: any }) {
     let obj1 = { ...model }, obj2 = { ...value };
 
     for (const key in obj1) {

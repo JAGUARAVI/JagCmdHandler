@@ -2,6 +2,7 @@ import { Client as BaseClient, Intents, Options, Collection, ApplicationCommand,
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { ClientOptions } from '../types';
+import { inspect } from 'util';
 
 import BaseCommand from './base/BaseCommand';
 import BaseEvent from './base/BaseEvent';
@@ -63,7 +64,7 @@ class Client extends BaseClient {
             }
             return false;
         } catch (e) {
-            return `Unable to load command ${dir}: ${e}`;
+            return `Unable to load command ${dir}:\n${inspect(e)}`;
         }
     }
 

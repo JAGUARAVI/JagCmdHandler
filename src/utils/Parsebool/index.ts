@@ -1,4 +1,4 @@
-export default (v: string) => {
+export = (v: string) => {
     if (v == '1') return true;
     if (v == '0') return false;
     if (v == undefined || v == 'undefined') return false;

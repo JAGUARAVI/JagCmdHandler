@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-export default {
+export = {
     trimArray(arr: Array<any>, maxLen = 10) {
         if (arr.length > maxLen) {
             arr = arr.slice(0, maxLen);
