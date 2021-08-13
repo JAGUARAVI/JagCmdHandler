@@ -89,7 +89,8 @@ class Client extends BaseClient {
                 name: command.config.name,
                 description: command.config.description,
                 options: command.config.commandOptions,
-                defaultPermission: command.permissions.default != false
+                defaultPermission: command.permissions.default != false,
+                type: command.config.applicationType || null
             };
         })).then(async (data) => {
             return await target?.commands.set(data).then(async (result) => {

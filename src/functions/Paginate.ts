@@ -42,6 +42,9 @@ export = class EasyEmbedPages {
     image?: string;
     description?: string;
     pageGen?: (embed: MessageEmbed) => void | Promise<void>;
+    ephemeral: boolean;
+
+    id: number;
 
     constructor(channel: TextChannel | any, data: { [key: string]: any }) {
         this.channel = channel;
@@ -56,18 +59,26 @@ export = class EasyEmbedPages {
         this.thumbnail = data.thumbnail;                              // embed thumbnail
         this.image = data.image;                                      // embed large image
         this.description = data.content || data.description;          // the content to be presented dynamically
-        this.pageGen = data.pageGen || function () { };                 // the function to customize embeds
+        this.pageGen = data.pageGen || function () { };               // the function to customize embeds
+        this.ephemeral = data.ephemeral || false;
+
+        this.id = Date.now() + Math.floor(Math.random() * 100000);
 
         if (typeof this.content != 'object') {
             this.content = { content: this.content };
         }
     }
 
+    filter(interaction: ButtonInteraction): boolean {
+        if (interaction.customId.match(new RegExp(`[1-5]\-${this.user}\-${this.id}`))) return true;
+        return false;
+    }
+
     generateButtons(size: number, currentPage: number) {
         if (size <= 1) return new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`5-${this.user}`)
+                    .setCustomId(`5-${this.user}-${this.id}`)
                     .setStyle('DANGER')
                     .setEmoji('<:trash:852511333165563915>')
             );
@@ -75,21 +86,21 @@ export = class EasyEmbedPages {
         else if (size <= 2) return new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`2-${this.user}`)
+                    .setCustomId(`2-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:previous:852515728514744340>')
                     .setDisabled(currentPage == 0)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`3-${this.user}`)
+                    .setCustomId(`3-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:next:852515302231375902>')
                     .setDisabled(currentPage == 1)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`5-${this.user}`)
+                    .setCustomId(`5-${this.user}-${this.id}`)
                     .setStyle('DANGER')
                     .setEmoji('<:trash:852511333165563915>')
             );
@@ -97,35 +108,35 @@ export = class EasyEmbedPages {
         else return new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`1-${this.user}`)
+                    .setCustomId(`1-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:rewind:852515586068185088>')
                     .setDisabled(currentPage == 0)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`2-${this.user}`)
+                    .setCustomId(`2-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:previous:852515728514744340>')
                     .setDisabled(currentPage == 0)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`3-${this.user}`)
+                    .setCustomId(`3-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:next:852515302231375902>')
                     .setDisabled(currentPage == size - 1)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`4-${this.user}`)
+                    .setCustomId(`4-${this.user}-${this.id}`)
                     .setStyle('PRIMARY')
                     .setEmoji('<:fastforward:852515213080395816>')
                     .setDisabled(currentPage == size - 1)
             )
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`5-${this.user}`)
+                    .setCustomId(`5-${this.user}-${this.id}`)
                     .setStyle('DANGER')
                     .setEmoji('<:trash:852511333165563915>')
             );
@@ -200,10 +211,10 @@ export = class EasyEmbedPages {
             embeds: [this.pages[this.page]],
             components: [this.generateButtons(this.pages.length, this.page)],
             delete: false,
-            ephemeral: false
+            ephemeral: this.ephemeral
         });
 
-        this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON' });
+        this.collector = this.message.channel.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
         this.collector.on('collect', this._handleInteraction.bind(this));
 
         return this.message;
@@ -222,7 +233,7 @@ export = class EasyEmbedPages {
         }
 
         switch (interaction.customId) {
-            case `1-${this.user}`:
+            case `1-${this.user}-${this.id}`:
                 if (this.pages.length <= 1) break;
                 if (this.page === 0) break;
 
@@ -234,7 +245,7 @@ export = class EasyEmbedPages {
 
                 break;
 
-            case `2-${this.user}`:
+            case `2-${this.user}-${this.id}`:
                 if (this.pages.length <= 1) break;
                 if (this.page > 0) --this.page;
 
@@ -245,7 +256,7 @@ export = class EasyEmbedPages {
 
                 break;
 
-            case `3-${this.user}`:
+            case `3-${this.user}-${this.id}`:
                 if (this.page < this.pages.length - 1) ++this.page;
 
                 this.message.edit({
@@ -255,7 +266,7 @@ export = class EasyEmbedPages {
 
                 break;
 
-            case `4-${this.user}`:
+            case `4-${this.user}-${this.id}`:
                 if (this.pages.length <= 1) break;
                 if (this.page === (this.pages.length - 1)) break;
 
@@ -267,7 +278,7 @@ export = class EasyEmbedPages {
 
                 break;
 
-            case `5-${this.user}`:
+            case `5-${this.user}-${this.id}`:
                 this.message.delete().catch(() => { })
                 break;
 

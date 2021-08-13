@@ -1,4 +1,4 @@
-import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, ClientOptions as BaseClientOptions, User, InteractionReplyOptions } from 'discord.js';
+import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, TextBasedChannels } from 'discord.js';
 import Client from '../classes/Client';
 
 export interface Message extends BaseMessage {
@@ -9,6 +9,7 @@ export interface PsuedoMessage {
     [name: string]: any;
     edit(content: DefaultMesageOption | MessagePayload): Promise<Message>;
     delete(): Promise<void>;
+    channel: TextBasedChannels
 };
 
 export interface CommandContext {

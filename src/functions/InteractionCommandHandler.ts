@@ -57,7 +57,8 @@ export = class InteractionCommandHandler {
                 return {
                     ...content,
                     edit: interaction.editReply.bind(interaction) as (content: MessageOptions) => Promise<Message>,
-                    delete: interaction.deleteReply.bind(interaction)
+                    delete: interaction.deleteReply.bind(interaction),
+                    channel: interaction.channel
                 } as PsuedoMessage;
             }
 
@@ -65,7 +66,8 @@ export = class InteractionCommandHandler {
         }).bind(this);
 
         const reply = (async (content: MessageOptions) => {
-            const del = content.delete == null || content.delete != false;
+            let del = content.delete != false;
+            if(content.ephemeral) del = false;
             const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
             return msg;
         }).bind(this);

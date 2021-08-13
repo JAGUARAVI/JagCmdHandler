@@ -4,54 +4,61 @@ import { PsuedoMessage, Message } from '../types';
 export = class DeletableMessage {
     channel: TextChannel;
     content: MessageOptions | MessagePayload;
-    member: GuildMember | User;
+    user: string;
     message: Message | PsuedoMessage;
     collector: InteractionCollector<ButtonInteraction>;
+    id: number;
 
     constructor(channel: TextChannel | any, content: MessageOptions | MessagePayload) {
         this.channel = channel;
         this.content = content;
+        this.id = Date.now() + Math.floor(Math.random() * 100000);
 
         if (typeof this.content != 'object') {
             this.content = { content: this.content };
         }
     }
 
-    generateButton(id: number | string): MessageActionRow {
+    filter(interaction: ButtonInteraction): boolean {
+        if (interaction.customId === `5-${this.user}-${this.id}`) return true;
+        return false;
+    }
+
+    generateButton(): MessageActionRow {
         return new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId(`5-${id}`)
+                    .setCustomId(`5-${this.user}-${this.id}`)
                     .setStyle('DANGER')
                     .setEmoji('<:trash:852511333165563915>')
             );
     }
 
     async start(member?: GuildMember | User): Promise<Message | PsuedoMessage> {
-        if (member) this.member = member;
+        if (member) this.user = member.id;
 
         this.message = await this.channel.send(
             Object.assign(
-                { components: [this.generateButton(this.member.id)] },
+                { components: [this.generateButton()] },
                 { delete: false, ephemeral: false },
                 this.content
             )
         );
 
-        this.collector = this.message.createMessageComponentCollector();
+        this.collector = this.message.channel.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
         this.collector.on('collect', this._handleInteraction.bind(this));
 
         return this.message;
     }
 
     async _handleInteraction(interaction: ButtonInteraction): Promise<void> {
-        if(interaction.customId !== `5-${this.member.id}`) return;
+        if (interaction.customId !== `5-${this.user}-${this.id}`) return;
 
-        if (interaction.user.id != this.member.id) {
+        if (interaction.user.id != this.user) {
             interaction.reply({
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(`Only <@${this.member.id}> can interact with this message.`)
+                        .setDescription(`Only <@${this.user}> can interact with this message.`)
                         .setColor('RED')
                 ],
                 ephemeral: true
