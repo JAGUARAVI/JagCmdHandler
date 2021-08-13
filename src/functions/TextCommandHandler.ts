@@ -118,6 +118,8 @@ export = class TextCommandHandler {
             client
         }
 
+        await this.checks.run(ctx, command);
+
         let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
         if (defaultChecks) {
             if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
@@ -192,8 +194,6 @@ export = class TextCommandHandler {
                 }
             }
         }
-
-        await this.checks.run({ ctx, command });
 
         try {
             const success = await command.run(ctx);

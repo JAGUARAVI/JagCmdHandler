@@ -159,7 +159,7 @@ export = class InteractionCommandHandler {
             }
         }
 
-        await this.checks.run({ ctx, command });
+        await this.checks.run(ctx, command);
 
         try {
             const success = await command.run(ctx);
