@@ -172,6 +172,7 @@ export = class InteractionCommandHandler {
             ctx.reply({
                 embeds: [embed],
                 allowedMentions: { repliedUser: false },
+                ephemeral: true
             });
             Utils.logger.error(e);
         }
