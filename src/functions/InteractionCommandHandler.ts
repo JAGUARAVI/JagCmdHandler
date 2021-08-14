@@ -26,10 +26,6 @@ export = class InteractionCommandHandler {
         })
     }
 
-    async getPrefix(client: Client, guild: Guild): Promise<string> {
-        return '!';
-    }
-
     getErrorEmbed(msg: string, large?: boolean): MessageEmbed {
         const embed = new MessageEmbed()
             .setColor('RED')
@@ -48,7 +44,7 @@ export = class InteractionCommandHandler {
         const _reply = (async (content: MessageOptions): Promise<Message | PsuedoMessage> => {
             if (!content.ephemeral) content.fetchReply = true;
 
-            const replied = interaction.replied;
+            const replied = interaction.replied || interaction.deferred;
             const func = (replied ? interaction.editReply.bind(interaction) : interaction.reply.bind(interaction));
 
             const sent = await func(content);
