@@ -13,17 +13,10 @@ export = class InteractionCommandHandler {
     client: Client;
 
     cooldowns = new Collection<string, Collection<string, number>>();
-    messageReplies = new Collection<string, Array<string>>();
     checks = new Middleware();
 
     constructor(client: Client) {
         this.client = client;
-
-        this.client.on('messageDelete', async (message) => {
-            this.messageReplies.get(message.id)?.map(async (id) => {
-                await message.channel.messages.cache.get(id)?.delete().catch(() => { });
-            })
-        })
     }
 
     getErrorEmbed(msg: string, large?: boolean): MessageEmbed {
@@ -41,7 +34,7 @@ export = class InteractionCommandHandler {
         const command = client.commands.get(interaction.commandName)
         if (!command) return next();
 
-        const _reply = (async (content: MessageOptions): Promise<Message | PsuedoMessage> => {
+        const _reply = async (content: MessageOptions): Promise<Message | PsuedoMessage> => {
             if (!content.ephemeral) content.fetchReply = true;
 
             const replied = interaction.replied || interaction.deferred;
@@ -59,22 +52,38 @@ export = class InteractionCommandHandler {
             }
 
             return sent as Message;
-        }).bind(this);
+        };
 
-        const reply = (async (content: MessageOptions) => {
+        const reply = async (content: MessageOptions) => {
             let del = content.delete != false;
             if(content.ephemeral) del = false;
             const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
             return msg;
-        }).bind(this);
+        };
 
         const send = reply;
 
-        const paginate = (async (options: MessageOptions) => {
+        const paginate = async (options: MessageOptions) => {
             const paginator = new Paginate({ send: _reply }, options);
             await paginator.start({ user: interaction.user });
             return paginator.message;
-        }).bind(this);
+        };
+
+        const prompt = async (options: MessageOptions) => {
+            if (!(interaction.replied || interaction.deferred)) await interaction.deferReply();
+
+            const msg = await interaction.followUp(options) as Message;
+
+            const reply = await interaction.channel.awaitMessages({
+                max: 1,
+                time: 60000,
+                errors: ['time'],
+                filter: (m) => m.author.id === interaction.user.id
+            });
+
+            msg.delete?.().catch(() => { });
+            return reply.first();
+        }
 
         const ctx: CommandContext = {
             source: interaction,
@@ -82,6 +91,7 @@ export = class InteractionCommandHandler {
             send,
             reply,
             paginate,
+            prompt,
             args: [],
             flags: [],
             client

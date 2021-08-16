@@ -105,6 +105,20 @@ export = class TextCommandHandler {
             return paginator.message;
         };
 
+        const prompt = async (options: MessageOptions) => {
+            const msg = await message.channel.send(options);
+
+            const reply = await message.channel.awaitMessages({
+                max: 1,
+                time: 60000,
+                errors: ['time'],
+                filter: (m) => m.author.id === message.author.id
+            });
+
+            msg.delete().catch(() => { });
+            return reply.first();
+        }
+
         message.user = message.author;
 
         const ctx: CommandContext = {
@@ -113,6 +127,7 @@ export = class TextCommandHandler {
             send,
             reply,
             paginate,
+            prompt,
             args,
             flags,
             client

@@ -1,5 +1,5 @@
-import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessageOptions, MessagePayload, InteractionCollector, ButtonInteraction } from 'discord.js';
-import { PsuedoMessage, Message } from '../types';
+import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction } from 'discord.js';
+import { PsuedoMessage, Message, MessageOptions } from '../types';
 
 const chunk = (array: Array<any>, chunkSize = 0): Array<Array<any>> => {
     if (!Array.isArray(array)) throw new Error('First parameter must be an array');
@@ -74,73 +74,67 @@ export = class EasyEmbedPages {
         return false;
     }
 
-    generateButtons(size: number, currentPage: number) {
-        if (size <= 1) return new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`5-${this.user}-${this.id}`)
-                    .setStyle('DANGER')
-                    .setEmoji('<:trash:852511333165563915>')
-            );
+    generateButtons(size: number, currentPage: number): MessageActionRow {
+        const row = new MessageActionRow();
 
-        else if (size <= 2) return new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`2-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:previous:852515728514744340>')
-                    .setDisabled(currentPage == 0)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`3-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:next:852515302231375902>')
-                    .setDisabled(currentPage == 1)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`5-${this.user}-${this.id}`)
-                    .setStyle('DANGER')
-                    .setEmoji('<:trash:852511333165563915>')
-            );
+        if (size > 2) {
+            row
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`1-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:rewind:852515586068185088>')
+                        .setDisabled(currentPage == 0)
+                )
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`2-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:previous:852515728514744340>')
+                        .setDisabled(currentPage == 0)
+                )
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`3-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:next:852515302231375902>')
+                        .setDisabled(currentPage == size - 1)
+                )
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`4-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:fastforward:852515213080395816>')
+                        .setDisabled(currentPage == size - 1)
+                )
+        }
 
-        else return new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`1-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:rewind:852515586068185088>')
-                    .setDisabled(currentPage == 0)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`2-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:previous:852515728514744340>')
-                    .setDisabled(currentPage == 0)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`3-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:next:852515302231375902>')
-                    .setDisabled(currentPage == size - 1)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`4-${this.user}-${this.id}`)
-                    .setStyle('PRIMARY')
-                    .setEmoji('<:fastforward:852515213080395816>')
-                    .setDisabled(currentPage == size - 1)
-            )
-            .addComponents(
-                new MessageButton()
-                    .setCustomId(`5-${this.user}-${this.id}`)
-                    .setStyle('DANGER')
-                    .setEmoji('<:trash:852511333165563915>')
-            );
+        else if (size == 2) {
+            row
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`2-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:previous:852515728514744340>')
+                        .setDisabled(currentPage == 0)
+                )
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId(`3-${this.user}-${this.id}`)
+                        .setStyle('PRIMARY')
+                        .setEmoji('<:next:852515302231375902>')
+                        .setDisabled(currentPage == 1)
+                );
+        }
 
+        row.addComponents(
+            new MessageButton()
+                .setCustomId(`5-${this.user}-${this.id}`)
+                .setStyle('DANGER')
+                .setEmoji('<:trash:852511333165563915>')
+        );
+
+        return row;
     }
 
     generatePages() {
@@ -233,55 +227,61 @@ export = class EasyEmbedPages {
         }
 
         switch (interaction.customId) {
-            case `1-${this.user}-${this.id}`:
+            case `1-${this.user}-${this.id}`: {
                 if (this.pages.length <= 1) break;
                 if (this.page === 0) break;
-
                 this.page = 0;
-                this.message.edit({
-                    embeds: [this.pages[this.page]],
-                    components: [this.generateButtons(this.pages.length, this.page)]
-                });
+                
+                const message: MessageOptions = {
+                    embeds: [this.pages[this.page]]
+                }
+                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
+
+                this.message.edit(message);
 
                 break;
-
-            case `2-${this.user}-${this.id}`:
+            }
+            case `2-${this.user}-${this.id}`: {
                 if (this.pages.length <= 1) break;
                 if (this.page > 0) --this.page;
 
-                this.message.edit({
-                    embeds: [this.pages[this.page]],
-                    components: [this.generateButtons(this.pages.length, this.page)]
-                });
+                const message: MessageOptions = {
+                    embeds: [this.pages[this.page]]
+                }
+                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
+
+                this.message.edit(message);
 
                 break;
-
-            case `3-${this.user}-${this.id}`:
+            }
+            case `3-${this.user}-${this.id}`: {
                 if (this.page < this.pages.length - 1) ++this.page;
 
-                this.message.edit({
-                    embeds: [this.pages[this.page]],
-                    components: [this.generateButtons(this.pages.length, this.page)]
-                });
+                const message: MessageOptions = {
+                    embeds: [this.pages[this.page]]
+                }
+                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
+
+                this.message.edit(message);
 
                 break;
-
-            case `4-${this.user}-${this.id}`:
+            }
+            case `4-${this.user}-${this.id}`: {
                 if (this.pages.length <= 1) break;
                 if (this.page === (this.pages.length - 1)) break;
-
                 this.page = this.pages.length - 1;
-                this.message.edit({
-                    embeds: [this.pages[this.page]],
-                    components: [this.generateButtons(this.pages.length, this.page)]
-                });
+                
+                const message: MessageOptions = {
+                    embeds: [this.pages[this.page]]
+                }
+                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
 
                 break;
-
-            case `5-${this.user}-${this.id}`:
+            }
+            case `5-${this.user}-${this.id}`: {
                 this.message.delete().catch(() => { })
                 break;
-
+            }
             default:
                 break;
         }

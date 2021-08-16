@@ -21,6 +21,7 @@ export interface CommandContext {
     reply(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
     send(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
     paginate(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
+    prompt(Payload: MessagePayload | MessageOptions): Promise<Message>
 };
 
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions {
