@@ -73,9 +73,9 @@ export = {
         return obj;
     },
 
-    removeFromArray(...arr: any) {
+    removeFromArray<T>(arr: Array<T>, ...rem: Array<T>): Array<T> {
         let what, a = arguments, L = a.length, ax;
-        while (L > 1 && arr.length) {
+        while (L > 1 && rem.length) {
             what = a[--L];
             while ((ax = arr.indexOf(what)) !== -1) {
                 arr.splice(ax, 1);
