@@ -68,10 +68,10 @@ export = class TextCommandHandler {
         args = argsCopy;
 
         const send = async (content: MessageOptions) => {
-            const del = content.delete == null || content.delete != false;
+            const del = content.delete != false;
             const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
 
-            if (del != false) {
+            if (del) {
                 let arr = this.messageReplies.get(message.id);
                 if (!arr) arr = [];
                 arr.push(msg.id);
@@ -81,10 +81,10 @@ export = class TextCommandHandler {
         };
 
         const reply = async (content: MessageOptions) => {
-            const del = content.delete == null || content.delete != false;
+            const del = content.delete != false;
             const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
 
-            if (del != false) {
+            if (del) {
                 let arr = this.messageReplies.get(message.id);
                 if (!arr) arr = [];
                 arr.push(msg.id);

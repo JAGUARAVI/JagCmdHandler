@@ -201,12 +201,7 @@ export = class EasyEmbedPages {
 
         if (this.page > this.pages.length) throw new Error('Page number greater than total pages!');
 
-        this.message = await this.channel.send({
-            embeds: [this.pages[this.page]],
-            components: [this.generateButtons(this.pages.length, this.page)],
-            delete: false,
-            ephemeral: this.ephemeral
-        });
+        this.message = await this.channel.send(this.generateMessage());
 
         this.collector = this.message.channel.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
         this.collector.on('collect', this._handleInteraction.bind(this));
@@ -214,9 +209,20 @@ export = class EasyEmbedPages {
         return this.message;
     }
 
+    generateMessage(): MessageOptions {
+        const message: MessageOptions = {
+            embeds: [this.pages[this.page]],
+            ephemeral: this.ephemeral,
+            delete: false
+        }
+        if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
+
+        return message;
+    }
+
     async _handleInteraction(interaction: ButtonInteraction): Promise<void> {
         if (interaction.user.id != this.user) {
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: [
                     new MessageEmbed()
                         .setDescription(`Only <@${this.user}> can interact with this message.`)
@@ -231,13 +237,8 @@ export = class EasyEmbedPages {
                 if (this.pages.length <= 1) break;
                 if (this.page === 0) break;
                 this.page = 0;
-                
-                const message: MessageOptions = {
-                    embeds: [this.pages[this.page]]
-                }
-                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
 
-                this.message.edit(message);
+                this.message.edit(this.generateMessage());
 
                 break;
             }
@@ -245,24 +246,14 @@ export = class EasyEmbedPages {
                 if (this.pages.length <= 1) break;
                 if (this.page > 0) --this.page;
 
-                const message: MessageOptions = {
-                    embeds: [this.pages[this.page]]
-                }
-                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
-
-                this.message.edit(message);
+                this.message.edit(this.generateMessage());
 
                 break;
             }
             case `3-${this.user}-${this.id}`: {
                 if (this.page < this.pages.length - 1) ++this.page;
 
-                const message: MessageOptions = {
-                    embeds: [this.pages[this.page]]
-                }
-                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
-
-                this.message.edit(message);
+                this.message.edit(this.generateMessage());
 
                 break;
             }
@@ -271,11 +262,8 @@ export = class EasyEmbedPages {
                 if (this.page === (this.pages.length - 1)) break;
                 this.page = this.pages.length - 1;
                 
-                const message: MessageOptions = {
-                    embeds: [this.pages[this.page]]
-                }
-                if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
-
+                this.message.edit(this.generateMessage());
+                
                 break;
             }
             case `5-${this.user}-${this.id}`: {

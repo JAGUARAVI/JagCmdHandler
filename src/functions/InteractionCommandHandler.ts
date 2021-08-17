@@ -55,8 +55,7 @@ export = class InteractionCommandHandler {
         };
 
         const reply = async (content: MessageOptions) => {
-            let del = content.delete != false;
-            if(content.ephemeral) del = false;
+            let del = content.delete != false && !content.ephemeral;
             const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
             return msg;
         };
