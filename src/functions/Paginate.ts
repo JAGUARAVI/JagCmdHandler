@@ -241,43 +241,37 @@ export = class EasyEmbedPages {
 		}
 
 		switch (interaction.customId) {
-			case `1-${this.user}-${this.id}`: {
-				if (this.pages.length <= 1) break;
-				if (this.page === 0) break;
-				this.page = 0;
-
-				this.message.edit(this.generateMessage());
-
-				break;
-			}
-			case `2-${this.user}-${this.id}`: {
-				if (this.pages.length <= 1) break;
-				if (this.page > 0) --this.page;
-
-				this.message.edit(this.generateMessage());
-
-				break;
-			}
-			case `3-${this.user}-${this.id}`: {
-				if (this.page < this.pages.length - 1) ++this.page;
-
-				this.message.edit(this.generateMessage());
-
-				break;
-			}
-			case `4-${this.user}-${this.id}`: {
-				if (this.pages.length <= 1) break;
-				if (this.page === (this.pages.length - 1)) break;
-				this.page = this.pages.length - 1;
-				this.message.edit(this.generateMessage());
-				break;
-			}
-			case `5-${this.user}-${this.id}`: {
-				this.message.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-				break;
-			}
-			default:
-				break;
+		case `1-${this.user}-${this.id}`: {
+			if (this.pages.length <= 1) break;
+			if (this.page === 0) break;
+			this.page = 0;
+			this.message.edit(this.generateMessage());
+			break;
+		}
+		case `2-${this.user}-${this.id}`: {
+			if (this.pages.length <= 1) break;
+			if (this.page > 0) --this.page;
+			this.message.edit(this.generateMessage());
+			break;
+		}
+		case `3-${this.user}-${this.id}`: {
+			if (this.page < this.pages.length - 1) ++this.page;
+			this.message.edit(this.generateMessage());
+			break;
+		}
+		case `4-${this.user}-${this.id}`: {
+			if (this.pages.length <= 1) break;
+			if (this.page === (this.pages.length - 1)) break;
+			this.page = this.pages.length - 1;
+			this.message.edit(this.generateMessage());
+			break;
+		}
+		case `5-${this.user}-${this.id}`: {
+			this.message.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+			break;
+		}
+		default:
+			break;
 		}
 
 		interaction.deferUpdate();
