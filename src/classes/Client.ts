@@ -96,7 +96,7 @@ class Client extends BaseClient {
 				type: command.config.applicationType || null
 			};
 		})).then(async (data) => {
-			return await target?.commands.set(data).then(async (result) => {
+			return target?.commands.set(data).then(async (result) => {
 				if (target != this.application) await Promise.all(result.map(async (command) => {
 					const cmd = this.commands.get(command.name);
 					if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ guild: (target as Guild), permissions: (cmd.permissions.build as (guild: Guild, command: ApplicationCommand) => Array<ApplicationCommandPermissionData>)(target as Guild, command) });
@@ -111,7 +111,7 @@ class Client extends BaseClient {
 		const target = guild ?? this.application;
 
 		this.applicationCommands.delete(guild ? guild.id : '0');
-		return await target.commands.set([]);
+		return target.commands.set([]);
 	}
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any

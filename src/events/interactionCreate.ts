@@ -11,6 +11,6 @@ export = class Event extends BaseEvent {
 	async run(client: Client, interaction: Interaction): Promise<void | any> {
 		if(!interaction.inGuild()) return client.emit('directInteractionCreate', interaction);
 
-		return await client.applicationCommandHandler.run(interaction);
+		return client.applicationCommandHandler.run(interaction);
 	}
 }

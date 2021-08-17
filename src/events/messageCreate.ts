@@ -15,6 +15,6 @@ export = class Event extends BaseEvent {
 		if (!message.guild) return;
 		if (!message.member || message.member.partial) await message.member?.fetch();
 
-		return await client.textCommandHandler.run(message);
+		return client.textCommandHandler.run(message);
 	}
 }

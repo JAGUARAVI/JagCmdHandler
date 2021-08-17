@@ -22,7 +22,7 @@ export default class Resolve {
 		if (!search || typeof search !== 'string') return null;
 		const user = await this.user(search);
 		if (!user) return null;
-		return await guild.members.fetch(user).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+		return guild.members.fetch(user).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
 	}
 
 	role(search: string, guild: Guild): Role | null {
