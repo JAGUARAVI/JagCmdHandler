@@ -65,7 +65,7 @@ export = class EasyEmbedPages {
 		this.image = data.image;									  // embed large image
 		this.description = data.content || data.description;		  // the content to be presented dynamically
 		/* eslint-disable-next-line @typescript-eslint/no-empty-function */
-		this.pageGen = data.pageGen || function () { };				  // the function to customize embeds 
+		this.pageGen = data.pageGen || function () { };				  // the function to customize embeds
 		this.ephemeral = data.ephemeral || false;
 
 		this.id = Date.now() + Math.floor(Math.random() * 100000);
