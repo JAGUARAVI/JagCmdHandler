@@ -28,7 +28,7 @@ Will add docs soon.
 
 ## License
 
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://opensource.org/licenses/GPL-3.0)
 
   
 ## Support
