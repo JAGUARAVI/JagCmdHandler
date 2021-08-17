@@ -5,9 +5,9 @@ import Merge from './Merge';
 import Time from './Time';
 
 export default class Utils {
-    static logger = Logger;
-    static general = General;
-    static time = Time;
-    static parsebool = Parsebool;
-    static merge = Merge;
+	static logger = Logger;
+	static general = General;
+	static time = Time;
+	static parsebool = Parsebool;
+	static merge = Merge;
 }

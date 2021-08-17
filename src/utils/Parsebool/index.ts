@@ -1,4 +1,4 @@
-export = (v: string) => {
+export = (v: string): boolean => {
 	if (v == '1') return true;
 	if (v == '0') return false;
 	if (v == undefined || v == 'undefined') return false;
@@ -9,4 +9,3 @@ export = (v: string) => {
 	if (v == 'off') return false;
 	return (v.toLowerCase() === 'true');
 }
-  

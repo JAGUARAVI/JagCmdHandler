@@ -1,4 +1,5 @@
-export = function merge(model: { [key: string]: any }, value: { [key: string]: any }) {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+export = function merge(model: { [key: string]: any }, value: { [key: string]: any }): { [key: string]: any }  {
 	const obj1 = { ...model }, obj2 = { ...value };
 
 	for (const key in obj1) {

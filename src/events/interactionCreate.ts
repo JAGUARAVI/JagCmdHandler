@@ -7,7 +7,8 @@ export = class Event extends BaseEvent {
 		super('interactionCreate');
 	}
 
-	async run(client: Client, interaction: Interaction) {
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	async run(client: Client, interaction: Interaction): Promise<void | any> {
 		if(!interaction.inGuild()) return client.emit('directInteractionCreate', interaction);
 
 		return await client.applicationCommandHandler.run(interaction);

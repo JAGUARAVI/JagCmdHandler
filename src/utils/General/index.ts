@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 export = {
-	trimArray(arr: Array<any>, maxLen = 10) {
+	trimArray(arr: Array<string>, maxLen = 10): Array<string> {
 		if (arr.length > maxLen) {
 			arr = arr.slice(0, maxLen);
 			arr.push(`${arr.length - maxLen} more...`);
@@ -9,11 +9,11 @@ export = {
 		return arr;
 	},
 
-	shorten(text: string, maxLen = 2000) {
+	shorten(text: string, maxLen = 2000): string {
 		return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
 	},
 
-	formatNumber(number: number | string, minimumFractionDigits = 0) {
+	formatNumber(number: number | string, minimumFractionDigits = 0): string {
 		return Number.parseFloat(number.toString()).toLocaleString(undefined, {
 			minimumFractionDigits,
 			maximumFractionDigits: 2
@@ -26,26 +26,26 @@ export = {
 		return null;
 	},
 
-	embedURL(title: string, url: string, display: string) {
+	embedURL(title: string, url: string, display: string): string {
 		return `[${title}](${url.replace(/\)/g, '%27')}${display ? ` '${display}'` : ''})`;
 	},
 
-	hash(text: string, algorithm: string) {
+	hash(text: string, algorithm: string): string {
 		return crypto.createHash(algorithm).update(text).digest('hex');
 	},
 
-	escapeRegex(str: string) {
+	escapeRegex(str: string): string {
 		return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	},
 
-	replaceAll(str: string, term: string, replacement: string) {
+	replaceAll(str: string, term: string, replacement: string): string {
 		return str.replace(new RegExp(this.escapeRegex(term), 'g'), replacement);
 	},
 
-	chunk(array: Array<any>, chunkSize = 0): Array<Array<any>> {
+	chunk<T>(array: Array<T>, chunkSize = 0): Array<Array<T>> {
 		if (!Array.isArray(array)) throw new Error('First Parameter must be an array');
 		return array.reduce((previous, current) => {
-			let chunk: Array<any>;
+			let chunk: Array<T>;
 			if (previous.length === 0 || previous[previous.length - 1].length === chunkSize) {
 				chunk = [];
 				previous.push(chunk);
@@ -57,6 +57,7 @@ export = {
 		}, []);
 	},
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	shuffle(obj: Array<any> | string | any): Array<any> | string | any {
 		if (!obj) return null;
 		if (Array.isArray(obj)) {
@@ -74,9 +75,9 @@ export = {
 	},
 
 	removeFromArray<T>(arr: Array<T>, ...rem: Array<T>): Array<T> {
-		let what, a = arguments, L = a.length, ax;
+		let what, L = rem.length, ax;
 		while (L > 1 && rem.length) {
-			what = a[--L];
+			what = rem[--L];
 			while ((ax = arr.indexOf(what)) !== -1) {
 				arr.splice(ax, 1);
 			}
@@ -84,20 +85,20 @@ export = {
 		return arr;
 	},
 
-	capitalize(str: string) {
+	capitalize(str: string): string {
 		if (typeof str !== 'string') return '';
 		const j = str.split(' ');
 		const a = j.map(x => x.charAt(0).toUpperCase() + x.slice(1));
 		return a.join(' ');
 	},
 
-	removeDuplicates(arr: Array<any>) {
+	removeDuplicates<T>(arr: Array<T>): Array<T> {
 		const n = arr.length;
 
 		if (n == 0 || n == 1)
-			return n;
+			return arr;
 
-		const temp = new Array(n);
+		const temp = new Array<T>(n);
 
 		let j = 0;
 		for (let i = 0; i < n - 1; i++)
@@ -109,6 +110,6 @@ export = {
 		for (let i = 0; i < j; i++)
 			arr[i] = temp[i];
 
-		return j;
+		return arr;
 	}
 }

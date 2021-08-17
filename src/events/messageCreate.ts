@@ -7,7 +7,8 @@ export = class Event extends BaseEvent {
 		super('messageCreate');
 	}
 
-	async run(client: Client, message: Message) {
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	async run(client: Client, message: Message): Promise<void | any> {
 		if (message.partial) await message.fetch();
 		if (message.channel.type === 'DM') return client.emit('directMessageCreate', message);
 		if (message.webhookId) return client.emit('webhookMessage', message);
