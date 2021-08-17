@@ -10,4 +10,4 @@ export default class Utils {
     static time = Time;
     static parsebool = Parsebool;
     static merge = Merge;
-};
+}

@@ -3,14 +3,14 @@ import Client from '../classes/Client';
 
 export interface Message extends BaseMessage {
     user?: User;
-};
+}
 
 export interface PsuedoMessage {
     [name: string]: any;
     edit(content: DefaultMesageOption | MessagePayload): Promise<Message>;
     delete(): Promise<void>;
     channel: TextBasedChannels
-};
+}
 
 export interface CommandContext {
     source: Message | Interaction;
@@ -22,7 +22,7 @@ export interface CommandContext {
     send(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
     paginate(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
     prompt(Payload: MessagePayload | MessageOptions): Promise<Message>
-};
+}
 
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions {
     delete?: boolean
@@ -37,4 +37,4 @@ export interface ClientOptions extends BaseClientOptions {
         [key: string]: any;
         owners: Array<string>;
     };
-};
+}

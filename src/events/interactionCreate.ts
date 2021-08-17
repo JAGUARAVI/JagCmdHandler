@@ -3,13 +3,13 @@ import Client from '../classes/Client';
 import { Interaction } from 'discord.js';
 
 export = class Event extends BaseEvent {
-    constructor() {
-        super('interactionCreate');
-    }
+	constructor() {
+		super('interactionCreate');
+	}
 
-    async run(client: Client, interaction: Interaction) {
-        if(!interaction.inGuild()) return client.emit('directInteractionCreate', interaction);
+	async run(client: Client, interaction: Interaction) {
+		if(!interaction.inGuild()) return client.emit('directInteractionCreate', interaction);
 
-        return await client.applicationCommandHandler.run(interaction);
-    }
+		return await client.applicationCommandHandler.run(interaction);
+	}
 }

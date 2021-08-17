@@ -14,15 +14,15 @@ export default class BaseCommand {
     }
 
     constructor(data: { [key: string]: any }) {
-        this.config = data.config;
-        this.permissions = data.permissions;
-        this.data = data.data;
+    	this.config = data.config;
+    	this.permissions = data.permissions;
+    	this.data = data.data;
     }
 
     async run(ctx: CommandContext): Promise<any> {
-        ctx.reply({
-            content: 'This command hasn\'t yet been configured!',
-            allowedMentions: { repliedUser: false }
-        });
+    	ctx.reply({
+    		content: 'This command hasn\'t yet been configured!',
+    		allowedMentions: { repliedUser: false }
+    	});
     }
 }

@@ -7,11 +7,11 @@ import InteracionCommandHandler from './functions/InteractionCommandHandler';
 import * as Types from './types';
 
 export {
-    Client,
-    BaseCommand,
-    BaseEvent,
-    TextCommandHandler,
-    InteracionCommandHandler,
-    Utils,
-    Types
+	Client,
+	BaseCommand,
+	BaseEvent,
+	TextCommandHandler,
+	InteracionCommandHandler,
+	Utils,
+	Types
 };

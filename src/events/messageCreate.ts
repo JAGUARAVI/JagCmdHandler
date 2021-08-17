@@ -3,17 +3,17 @@ import Client from '../classes/Client';
 import { Message } from '../types';
 
 export = class Event extends BaseEvent {
-    constructor() {
-        super('messageCreate');
-    }
+	constructor() {
+		super('messageCreate');
+	}
 
-    async run(client: Client, message: Message) {
-        if (message.partial) await message.fetch();
-        if (message.channel.type === 'DM') return client.emit('directMessageCreate', message);
-        if (message.webhookId) return client.emit('webhookMessage', message);
-        if (!message.guild) return;
-        if (!message.member || message.member.partial) await message.member?.fetch();
+	async run(client: Client, message: Message) {
+		if (message.partial) await message.fetch();
+		if (message.channel.type === 'DM') return client.emit('directMessageCreate', message);
+		if (message.webhookId) return client.emit('webhookMessage', message);
+		if (!message.guild) return;
+		if (!message.member || message.member.partial) await message.member?.fetch();
 
-        return await client.textCommandHandler.run(message);
-    }
+		return await client.textCommandHandler.run(message);
+	}
 }
