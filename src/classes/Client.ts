@@ -48,7 +48,7 @@ class Client extends BaseClient {
 		);
 
 		this.debug = options.debug ? true : false;
-		this.data = Object.assign({}, options.data, { owners: Array.from(options.data?.owners || options.owners) });
+		this.data = Object.assign({}, options?.data, { owners: Array.from(options?.data?.owners || options?.owners || []) });
 
 		if (!options.disableDefaultReady) this.on('ready', () => {
 			this.log.success(`${this.user.tag} ready!`);
@@ -90,10 +90,10 @@ class Client extends BaseClient {
 		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1 && !cmd.config.nsfw && !cmd.permissions.botOwnerOnly).map((command) => {
 			return {
 				name: command.config.name,
-				description: command.config.description,
+				description: ['MESSAGE', 3, 'USER', 2].includes(command.config.applicationType) ? null : command.config.description,
 				options: command.config.commandOptions,
 				defaultPermission: command.permissions.default != false,
-				type: command.config.applicationType || null
+				type: command.config.applicationType || 1,
 			};
 		})).then(async (data) => {
 			return target?.commands.set(data).then(async (result) => {
