@@ -216,7 +216,7 @@ export = class TextCommandHandler {
 				timestamps.set(ctx.source.user.id, now);
 				setTimeout(() => timestamps.delete(ctx.source.user.id), cooldownAmount);
 			}
-		} catch (e) {
+		} catch (e: any) {	// eslint-disable-line @typescript-eslint/no-explicit-any
 			const embed = this.getErrorEmbed(`Something went wrong executing that command\nError Message: \`${e.message ?? e}\``, true);
 			ctx.reply({
 				embeds: [embed],
