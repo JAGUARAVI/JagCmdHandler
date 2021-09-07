@@ -29,7 +29,7 @@ export = class InteractionCommandHandler {
 	}
 
 	async handle(client: Client, interaction: Interaction, next: () => void, defaultChecks = true): Promise<void> {
-		if (!interaction.isCommand()) return next();
+		if (!interaction.isCommand() && !interaction.isContextMenu()) return next();
 
 		const command = client.commands.get(interaction.commandName);
 		if (!command) return next();
@@ -172,7 +172,7 @@ export = class InteractionCommandHandler {
 				timestamps.set(ctx.source.user.id, now);
 				setTimeout(() => timestamps.delete(ctx.source.user.id), cooldownAmount);
 			}
-		} catch (e) {
+		} catch (e: any) {	// eslint-disable-line  @typescript-eslint/no-explicit-any
 			const embed = this.getErrorEmbed(`Something went wrong executing that command\nError Message: \`${e.message ?? e}\``, true);
 			ctx.reply({
 				embeds: [embed],
