@@ -55,33 +55,45 @@ export = class InteractionCommandHandler {
 		};
 
 		const reply = async (content: MessageOptions) => {
-			const del = content.delete != false && !content.ephemeral;
-			const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
-			return msg;
+			try {
+				const del = content.delete != false && !content.ephemeral;
+				const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
+				return msg;
+			} catch (e) {
+				Utils.logger.error(e);
+			}
 		};
 
 		const send = reply;
 
 		const paginate = async (options: MessageOptions) => {
-			const paginator = new Paginate({ send: _reply }, options);
-			await paginator.start({ user: interaction.user });
-			return paginator.message;
+			try {
+				const paginator = new Paginate({ send: _reply }, options);
+				await paginator.start({ user: interaction.user });
+				return paginator.message;
+			} catch (e) {
+				Utils.logger.error(e);
+			}
 		};
 
 		const prompt = async (options: MessageOptions) => {
-			if (!(interaction.replied || interaction.deferred)) await interaction.deferReply();
+			try {
+				if (!(interaction.replied || interaction.deferred)) await interaction.deferReply();
 
-			const msg = await interaction.followUp(options) as Message;
+				const msg = await interaction.followUp(options) as Message;
 
-			const reply = await interaction.channel.awaitMessages({
-				max: 1,
-				time: 60000,
-				errors: ['time'],
-				filter: (m) => m.author.id === interaction.user.id
-			});
+				const reply = await interaction.channel.awaitMessages({
+					max: 1,
+					time: 60000,
+					errors: ['time'],
+					filter: (m) => m.author.id === interaction.user.id
+				});
 
-			msg.delete?.().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-			return reply.first();
+				msg.delete?.().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+				return reply.first();
+			} catch (e) {
+				Utils.logger.error(e);
+			}
 		};
 
 		const ctx: CommandContext = {

@@ -1,4 +1,4 @@
-import { Guild, Collection, MessageEmbed, TextChannel, GuildMember } from 'discord.js';
+import { Collection, MessageEmbed, TextChannel, GuildMember } from 'discord.js';
 import { MessageOptions, Message, CommandContext } from '../types';
 
 import Client from '../classes/Client';
@@ -68,55 +68,71 @@ export = class TextCommandHandler {
 		args = argsCopy;
 
 		const send = async (content: MessageOptions) => {
-			const del = content.delete != false;
-			const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
+			try {
+				const del = content.delete != false;
+				const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
 
-			if (del) {
-				let arr = this.messageReplies.get(message.id);
-				if (!arr) arr = [];
-				arr.push(msg.id);
-				this.messageReplies.set(message.id, arr);
+				if (del) {
+					let arr = this.messageReplies.get(message.id);
+					if (!arr) arr = [];
+					arr.push(msg.id);
+					this.messageReplies.set(message.id, arr);
+				}
+				return msg;
+			} catch (e) {
+				Utils.logger.error(e);
 			}
-			return msg;
 		};
 
 		const reply = async (content: MessageOptions) => {
-			const del = content.delete != false;
-			const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
+			try {
+				const del = content.delete != false;
+				const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
 
-			if (del) {
-				let arr = this.messageReplies.get(message.id);
-				if (!arr) arr = [];
-				arr.push(msg.id);
-				this.messageReplies.set(message.id, arr);
+				if (del) {
+					let arr = this.messageReplies.get(message.id);
+					if (!arr) arr = [];
+					arr.push(msg.id);
+					this.messageReplies.set(message.id, arr);
+				}
+				return msg;
+			} catch (e) {
+				Utils.logger.error(e);
 			}
-			return msg;
 		};
 
 		const paginate = async (options: MessageOptions) => {
-			const paginator = new Paginate({ send }, options);
-			await paginator.start({ user: message.author });
+			try {
+				const paginator = new Paginate({ send }, options);
+				await paginator.start({ user: message.author });
 
-			let arr = this.messageReplies.get(message.id);
-			if (!arr) arr = [];
-			arr.push(paginator.message.id);
-			this.messageReplies.set(message.id, arr);
+				let arr = this.messageReplies.get(message.id);
+				if (!arr) arr = [];
+				arr.push(paginator.message.id);
+				this.messageReplies.set(message.id, arr);
 
-			return paginator.message;
+				return paginator.message;
+			} catch (e) {
+				Utils.logger.error(e);
+			}
 		};
 
 		const prompt = async (options: MessageOptions) => {
-			const msg = await message.channel.send(options);
+			try {
+				const msg = await message.channel.send(options);
 
-			const reply = await message.channel.awaitMessages({
-				max: 1,
-				time: 60000,
-				errors: ['time'],
-				filter: (m) => m.author.id === message.author.id
-			});
+				const reply = await message.channel.awaitMessages({
+					max: 1,
+					time: 60000,
+					errors: ['time'],
+					filter: (m) => m.author.id === message.author.id
+				});
 
-			msg.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-			return reply.first();
+				msg.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+				return reply.first();
+			} catch (e) {
+				Utils.logger.error(e);
+			}
 		};
 
 		message.user = message.author;
