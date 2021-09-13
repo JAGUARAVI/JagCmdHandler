@@ -25,7 +25,7 @@ export = class TextCommandHandler {
 		});
 	}
 
-	async getPrefix(client: Client, guild: Guild): Promise<string> { /* eslint-disable-line @typescript-eslint/no-unused-vars */
+	async getPrefix(client: Client, message: Message): Promise<string | Array<string>> { /* eslint-disable-line @typescript-eslint/no-unused-vars */
 		return '!';
 	}
 
@@ -41,10 +41,11 @@ export = class TextCommandHandler {
 	async handle(client: Client, message: Message, next: () => void, defaultChecks = true): Promise<void> {
 		if (message.author.bot) return next();
 
-		let prefix = await this.getPrefix(client, message.guild);
+		let prefix = await this.getPrefix(client, message);
 		if (prefix == 'none') prefix = '';
 
-		const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${Utils.general.escapeRegex(prefix)})\\s*`);
+		const prefixString = typeof prefix === 'string' ? Utils.general.escapeRegex(prefix) : prefix.map(Utils.general.escapeRegex).join('|');
+		const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${prefixString})\\s*`);
 		if (!prefixRegex.test(message.content)) return next();
 		const [, matchedPrefix] = message.content.match(prefixRegex);
 
