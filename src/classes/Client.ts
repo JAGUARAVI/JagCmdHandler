@@ -135,7 +135,7 @@ class Client extends BaseClient {
 	}
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	init(): Promise<Array<any | void>> {
+	init(): Promise<any> {
 		return Promise.all([
 			this.registerEvents(join(__dirname, '..', 'events'))
 		]);
