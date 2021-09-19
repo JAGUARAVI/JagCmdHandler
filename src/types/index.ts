@@ -37,6 +37,6 @@ export interface ClientOptions extends BaseClientOptions {
 	data?: {
 		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		[key: string]: any;
-		owners: Array<string>;
+		owners?: Array<string>;
 	};
 }
