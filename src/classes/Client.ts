@@ -126,8 +126,8 @@ class Client extends BaseClient {
 				if (Event.prototype instanceof BaseEvent) {
 					const instance: BaseEvent = new Event();
 					instance.run = instance.run.bind(instance, this);
-					target.on(instance.name, instance.run);
-					target.events?.set(instance.name, instance);
+					target.on?.(instance.name, instance.run);
+					target.events?.set?.(instance.name, instance);
 					if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
 				}
 			}
