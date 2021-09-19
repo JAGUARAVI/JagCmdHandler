@@ -30,6 +30,6 @@ export interface ClientOptions extends BaseClientOptions {
     disableDefaultReady?: boolean;
     data?: {
         [key: string]: any;
-        owners: Array<string>;
+        owners?: Array<string>;
     };
 }
