@@ -86,6 +86,7 @@ export = class TextCommandHandler {
 
 		const reply = async (content: MessageOptions) => {
 			try {
+				content.failIfNotExists = false;
 				const del = content.delete != false;
 				const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
 

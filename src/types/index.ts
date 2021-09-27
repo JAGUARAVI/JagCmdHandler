@@ -28,6 +28,7 @@ export interface CommandContext {
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions {
 	delete?: boolean
 	pageGen?: () => void
+	failIfNotExists?: boolean
 }
 
 export interface ClientOptions extends BaseClientOptions {
