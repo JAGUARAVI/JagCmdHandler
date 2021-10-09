@@ -1,5 +1,5 @@
 
-# Jag Cmd Handler [![CodeFactor](https://www.codefactor.io/repository/github/avidoesdev/jagcmdhandler/badge)](https://www.codefactor.io/repository/github/avidoesdev/jagcmdhandler)
+# Jag Cmd Handler [![CodeFactor](https://www.codefactor.io/repository/github/jaguaravi/jagcmdhandler/badge)](https://www.codefactor.io/repository/github/avidoesdev/jagcmdhandler)
 
 Jag Cmd Handler is and advanced [Discord.js 13](https://discord.js.org/) command handler. 
 
