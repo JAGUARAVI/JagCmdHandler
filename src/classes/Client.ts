@@ -87,7 +87,7 @@ class Client extends BaseClient {
 	async registerApplicationCommands(guild: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
 		const target = guild ?? this.application;
 
-		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1 && !cmd.config.nsfw && !cmd.permissions.botOwnerOnly).map((command) => {
+		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1).map((command) => {
 			return {
 				name: command.config.name,
 				description: ['MESSAGE', 3, 'USER', 2].includes(command.config.applicationType) ? null : command.config.description,
