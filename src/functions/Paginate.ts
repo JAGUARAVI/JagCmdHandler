@@ -1,5 +1,5 @@
 import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction } from 'discord.js';
-import { PsuedoMessage, Message, MessageOptions } from '../types';
+import { Message, MessageOptions } from '../types';
 
 const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
 	if (!Array.isArray(array)) throw new Error('First parameter must be an array');
@@ -21,7 +21,7 @@ export = class EasyEmbedPages {
 	channel: TextChannel | any;
 	content: MessageOptions | MessagePayload;
 	user: string;
-	message: Message | PsuedoMessage;
+	message: Message;
 	collector: InteractionCollector<ButtonInteraction>;
 
 	pages: Array<MessageEmbed>;
@@ -48,8 +48,6 @@ export = class EasyEmbedPages {
 	pageGen?: (embed: MessageEmbed) => void | Promise<void>;
 	ephemeral: boolean;
 
-	id: number;
-
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	constructor(channel: TextChannel | any, data: { [key: string]: any }) {
 		this.channel = channel;
@@ -64,11 +62,8 @@ export = class EasyEmbedPages {
 		this.thumbnail = data.thumbnail;							  // embed thumbnail
 		this.image = data.image;									  // embed large image
 		this.description = data.content || data.description;		  // the content to be presented dynamically
-		/* eslint-disable-next-line @typescript-eslint/no-empty-function */
-		this.pageGen = data.pageGen || function () { };				  // the function to customize embeds
+		this.pageGen = data.pageGen || function () { /* eslint-disable-line @typescript-eslint/no-empty-function */ }; // the function to customize embeds
 		this.ephemeral = data.ephemeral || false;
-
-		this.id = Date.now() + Math.floor(Math.random() * 100000);
 
 		if (typeof this.content != 'object') {
 			this.content = { content: this.content };
@@ -76,7 +71,7 @@ export = class EasyEmbedPages {
 	}
 
 	filter(interaction: ButtonInteraction): boolean {
-		if (interaction.customId.match(new RegExp(`[1-5]-${this.user}-${this.id}`))) return true;
+		if (interaction.customId.match(new RegExp('[1-5]'))) return true;
 		return false;
 	}
 
@@ -87,28 +82,28 @@ export = class EasyEmbedPages {
 			row
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`1-${this.user}-${this.id}`)
+						.setCustomId('1')
 						.setStyle('PRIMARY')
 						.setEmoji('<:rewind:852515586068185088>')
 						.setDisabled(currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`2-${this.user}-${this.id}`)
+						.setCustomId('2')
 						.setStyle('PRIMARY')
 						.setEmoji('<:previous:852515728514744340>')
 						.setDisabled(currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`3-${this.user}-${this.id}`)
+						.setCustomId('3')
 						.setStyle('PRIMARY')
 						.setEmoji('<:next:852515302231375902>')
 						.setDisabled(currentPage == size - 1)
 				)
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`4-${this.user}-${this.id}`)
+						.setCustomId('4')
 						.setStyle('PRIMARY')
 						.setEmoji('<:fastforward:852515213080395816>')
 						.setDisabled(currentPage == size - 1)
@@ -119,23 +114,23 @@ export = class EasyEmbedPages {
 			row
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`2-${this.user}-${this.id}`)
+						.setCustomId('2')
 						.setStyle('PRIMARY')
 						.setEmoji('<:previous:852515728514744340>')
 						.setDisabled(currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
-						.setCustomId(`3-${this.user}-${this.id}`)
+						.setCustomId('3')
 						.setStyle('PRIMARY')
 						.setEmoji('<:next:852515302231375902>')
 						.setDisabled(currentPage == 1)
 				);
 		}
 
-		row.addComponents(
+		if (!this.ephemeral) row.addComponents(
 			new MessageButton()
-				.setCustomId(`5-${this.user}-${this.id}`)
+				.setCustomId('5')
 				.setStyle('DANGER')
 				.setEmoji('<:trash:852511333165563915>')
 		);
@@ -185,7 +180,7 @@ export = class EasyEmbedPages {
 
 			if ((this.dataPages[index] && this.dataPages[index].thumbnail) || this.thumbnail) data.thumbnail = this.dataPages[index] && this.dataPages[index].thumbnail || this.thumbnail;
 			if ((this.dataPages[index] && this.dataPages[index].image) || this.image) data.image = this.dataPages[index] && this.dataPages[index].image || this.image;
-			if (this.dataPages[index] && this.dataPages[index].fields) this.dataPages[index].fields.map((x: { name?: string, value: string, inline: boolean }) => data.fields.push({ name: x.name || '\u200b', value: x.value || '\u200b', inline: x.inline || false }));
+			if (this.dataPages[index] && this.dataPages[index].fields) this.dataPages[index].fields.map((y: { name?: string, value: string, inline: boolean }) => data.fields.push({ name: y.name || '\u200b', value: y.value || '\u200b', inline: y.inline || false }));
 
 			const embed = new MessageEmbed(data);
 			this.pageGen(embed);
@@ -194,7 +189,7 @@ export = class EasyEmbedPages {
 	}
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	async start(options?: { [key: string]: any }, page = 0): Promise<Message | PsuedoMessage> {
+	async start(options?: { [key: string]: any }, page = 0): Promise<Message> {
 		this.page = page;
 
 		if (options instanceof TextChannel) options = { channel: options };
@@ -211,7 +206,7 @@ export = class EasyEmbedPages {
 
 		this.message = await this.channel.send(this.generateMessage());
 
-		this.collector = this.message.channel.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
+		this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
 		this.collector.on('collect', this._handleInteraction.bind(this));
 
 		return this.message;
@@ -241,32 +236,32 @@ export = class EasyEmbedPages {
 		}
 
 		switch (interaction.customId) {
-		case `1-${this.user}-${this.id}`: {
+		case '1': {
 			if (this.pages.length <= 1) break;
 			if (this.page === 0) break;
 			this.page = 0;
 			this.message.edit(this.generateMessage());
 			break;
 		}
-		case `2-${this.user}-${this.id}`: {
+		case '2': {
 			if (this.pages.length <= 1) break;
 			if (this.page > 0) --this.page;
 			this.message.edit(this.generateMessage());
 			break;
 		}
-		case `3-${this.user}-${this.id}`: {
+		case '3': {
 			if (this.page < this.pages.length - 1) ++this.page;
 			this.message.edit(this.generateMessage());
 			break;
 		}
-		case `4-${this.user}-${this.id}`: {
+		case '4': {
 			if (this.pages.length <= 1) break;
 			if (this.page === (this.pages.length - 1)) break;
 			this.page = this.pages.length - 1;
 			this.message.edit(this.generateMessage());
 			break;
 		}
-		case `5-${this.user}-${this.id}`: {
+		case '5': {
 			this.message.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
 			break;
 		}

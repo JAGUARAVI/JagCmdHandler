@@ -59,7 +59,7 @@ export = class TextCommandHandler {
 		const flags: Array<string> = [];
 		let argsCopy = [...args];
 
-		args.map((arg) => {
+		args.forEach((arg) => {
 			if (arg[0] === '-' && arg[1] === '-' && arg[2] != undefined) {
 				flags.push(arg.slice(2));
 				argsCopy = Utils.general.removeFromArray(argsCopy, arg);
@@ -69,6 +69,7 @@ export = class TextCommandHandler {
 
 		const send = async (content: MessageOptions) => {
 			try {
+				if (typeof content === 'string') content = { content };
 				const del = content.delete != false;
 				const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
 
@@ -86,6 +87,7 @@ export = class TextCommandHandler {
 
 		const reply = async (content: MessageOptions) => {
 			try {
+				if (typeof content === 'string') content = { content };
 				content.failIfNotExists = false;
 				const del = content.delete != false;
 				const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));

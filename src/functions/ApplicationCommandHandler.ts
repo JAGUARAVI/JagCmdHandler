@@ -1,5 +1,5 @@
-import { Collection, MessageEmbed, TextChannel, Interaction } from 'discord.js';
-import { MessageOptions, Message, CommandContext, PsuedoMessage } from '../types';
+import { Collection, MessageEmbed, TextChannel, Interaction, GuildMember } from 'discord.js';
+import { MessageOptions, Message, CommandContext } from '../types';
 
 import Client from '../classes/Client';
 import Utils from '../utils';
@@ -7,7 +7,6 @@ import Middleware from '../classes/base/Middleware';
 import Paginate from './Paginate';
 import DeletableMessage from './DeletableMessage';
 import ms from 'pretty-ms';
-import { GuildMember } from 'discord.js';
 
 export = class InteractionCommandHandler {
 	client: Client;
@@ -34,31 +33,18 @@ export = class InteractionCommandHandler {
 		const command = client.commands.get(interaction.commandName);
 		if (!command) return next();
 
-		const _reply = async (content: MessageOptions): Promise<Message | PsuedoMessage> => {
-			if (!content.ephemeral) content.fetchReply = true;
-
+		const _reply = async (content: MessageOptions): Promise<Message> => {
+			if (typeof content === 'string') content = { content };
+			content.fetchReply = true;
 			const replied = interaction.replied || interaction.deferred;
 			const func = (replied ? interaction.editReply.bind(interaction) : interaction.reply.bind(interaction));
-
-			const sent = await func(content);
-
-			if (content.ephemeral) {
-				return {
-					...content,
-					edit: interaction.editReply.bind(interaction) as (content: MessageOptions) => Promise<Message>,
-					delete: interaction.deleteReply.bind(interaction),
-					channel: interaction.channel
-				} as PsuedoMessage;
-			}
-
-			return sent as Message;
+			return await func(content) as Message;
 		};
 
 		const reply = async (content: MessageOptions) => {
 			try {
 				const del = content.delete != false && !content.ephemeral;
-				const msg = await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
-				return msg;
+				return await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
 			} catch (e) {
 				Utils.logger.error(e);
 			}
@@ -82,7 +68,7 @@ export = class InteractionCommandHandler {
 
 				const msg = await interaction.followUp(options) as Message;
 
-				const reply = await interaction.channel.awaitMessages({
+				const replies = await interaction.channel.awaitMessages({
 					max: 1,
 					time: 60000,
 					errors: ['time'],
@@ -90,7 +76,7 @@ export = class InteractionCommandHandler {
 				});
 
 				msg.delete?.().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-				return reply.first();
+				return replies.first();
 			} catch (e) {
 				Utils.logger.error(e);
 			}

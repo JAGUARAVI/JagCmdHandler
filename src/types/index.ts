@@ -5,23 +5,15 @@ export interface Message extends BaseMessage {
 	user?: User;
 }
 
-export interface PsuedoMessage {
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	[name: string]: any;
-	edit(content: DefaultMesageOption | MessagePayload): Promise<Message>;
-	delete(): Promise<void>;
-	channel: TextBasedChannels
-}
-
 export interface CommandContext {
 	source: Message | Interaction;
 	flags: Array<string>;
 	args: Array<string>;
 	isCommand: boolean;
 	client: Client;
-	reply(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
-	send(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
-	paginate(Payload: MessagePayload | MessageOptions): Promise<Message | PsuedoMessage | null>;
+	reply(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
+	send(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
+	paginate(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
 	prompt(Payload: MessagePayload | MessageOptions): Promise<Message>
 }
 
