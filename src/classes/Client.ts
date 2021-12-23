@@ -84,7 +84,7 @@ class Client extends BaseClient {
 		}
 	}
 
-	async registerApplicationCommands(guild: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
+	async registerApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
 		const target = guild ?? this.application;
 
 		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1).map((command) => {
@@ -107,7 +107,7 @@ class Client extends BaseClient {
 		});
 	}
 
-	async unregisterApplicationCommands(guild: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
+	async unregisterApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
 		const target = guild ?? this.application;
 
 		this.applicationCommands.delete(guild ? guild.id : '0');
