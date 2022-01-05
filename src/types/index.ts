@@ -1,4 +1,4 @@
-import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, TextBasedChannels } from 'discord.js';
+import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, TextBasedChannel } from 'discord.js';
 import Client from '../classes/Client';
 
 export interface Message extends BaseMessage {
