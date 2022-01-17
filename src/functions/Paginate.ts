@@ -78,7 +78,7 @@ export = class EasyEmbedPages {
 	}
 
 	filter(interaction: ButtonInteraction): boolean {
-		if (interaction.customId.match(/[1-5]/)) return true;
+		if (interaction.customId.match(/[1-6]/)) return true;
 		return false;
 	}
 

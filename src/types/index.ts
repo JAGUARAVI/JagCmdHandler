@@ -19,8 +19,13 @@ export interface CommandContext {
 
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions {
 	delete?: boolean
-	pageGen?: () => void
 	failIfNotExists?: boolean
+	/** Only for paginate */
+	refresh?: boolean
+	/** Only for paginate */
+	refreshData?: () => unknown
+	/** Only for paginate */
+	pageGen?: () => void
 }
 
 export interface ClientOptions extends BaseClientOptions {
