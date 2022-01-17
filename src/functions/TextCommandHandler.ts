@@ -33,7 +33,7 @@ export = class TextCommandHandler {
 		const embed = new MessageEmbed()
 			.setColor('RED')
 			.setDescription((!large ? ':x:  ' : '') + (msg ?? 'Error'));
-		if (large) embed.setAuthor('Error', 'https://i.imgur.com/M6CN1Ft.png');
+		if (large) embed.setAuthor({ name: 'Error', iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
 		return embed;
 	}

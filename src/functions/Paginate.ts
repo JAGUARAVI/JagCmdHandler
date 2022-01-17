@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
@@ -46,6 +47,8 @@ export = class EasyEmbedPages {
 	image?: string;
 	description?: string;
 	pageGen?: (embed: MessageEmbed) => void | Promise<void>;
+	refresh: boolean;
+	refreshData?: () => unknown;
 	ephemeral: boolean;
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -64,6 +67,10 @@ export = class EasyEmbedPages {
 		this.description = data.content || data.description;		  // the content to be presented dynamically
 		this.pageGen = data.pageGen || function () { /* eslint-disable-line @typescript-eslint/no-empty-function */ }; // the function to customize embeds
 		this.ephemeral = data.ephemeral || false;
+		this.refresh = data.refresh || false;
+		this.refreshData = data.refreshData || function () { return [{}]; };
+
+		if (data.content) this.content = data.message;
 
 		if (typeof this.content != 'object') {
 			this.content = { content: this.content };
@@ -71,7 +78,7 @@ export = class EasyEmbedPages {
 	}
 
 	filter(interaction: ButtonInteraction): boolean {
-		if (interaction.customId.match(new RegExp('[1-5]'))) return true;
+		if (interaction.customId.match(/[1-5]/)) return true;
 		return false;
 	}
 
@@ -135,6 +142,13 @@ export = class EasyEmbedPages {
 				.setEmoji('<:trash:852511333165563915>')
 		);
 
+		if (this.refresh) row.addComponents(
+			new MessageButton()
+				.setCustomId('6')
+				.setStyle('SECONDARY')
+				.setEmoji('🔄')
+		);
+
 		return row;
 	}
 
@@ -190,7 +204,7 @@ export = class EasyEmbedPages {
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async start(options?: { [key: string]: any }, page = 0): Promise<Message> {
-		this.page = page;
+		this.page = options.page || page;
 
 		if (options instanceof TextChannel) options = { channel: options };
 		else if (!options || typeof options !== 'object') options = {};
@@ -202,7 +216,10 @@ export = class EasyEmbedPages {
 
 		this.generatePages();
 
-		if (this.page > this.pages.length) throw new Error('Page number greater than total pages!');
+		if (this.page > this.pages.length) {
+			console.error('Page number greater than total pages!\nUsing page 0 instead.');
+			this.page = 0;
+		}
 
 		this.message = await this.channel.send(this.generateMessage());
 
@@ -212,11 +229,53 @@ export = class EasyEmbedPages {
 		return this.message;
 	}
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	async update(options: { [key: string]: any }, page = 0): Promise<Message> {
+		this.page = options.page || page;
+
+		if (options instanceof TextChannel) options = { channel: options };
+		else if (!options || typeof options !== 'object') options = {};
+
+		if (options.user) this.user = options.user;
+		if (options.channel) this.channel = options.channel;
+
+		if (this.page > this.pages.length) {
+			console.error('Page number greater than total pages!\nUsing page 0 instead.');
+			this.page = 0;
+		}
+
+		if (options.pages != undefined) this.dataPages = Array.isArray(options.pages) ? options.pages : [];
+		if (options.color != undefined) this.color = options.color;
+		if (options.url != undefined) this.url = options.url;
+		if (options.title != undefined) this.title = options.title;
+		if (options.author != undefined) this.author = options.author;
+		if (options.footer != undefined) this.footer = options.footer;
+		if (options.thumbnail != undefined) this.thumbnail = options.thumbnail;
+		if (options.image != undefined) this.image = options.image;
+		if (options.content != undefined || options.description != undefined) this.description = options.content || options.description;
+		if (options.pageGen != undefined && typeof options.pageGen == 'function') this.pageGen = options.pageGen;
+		if (options.ephemeral != undefined) this.ephemeral = options.ephemeral;
+		if (options.refresh != undefined) this.refresh = options.refresh;
+
+		if (options.content) this.content = options.content;
+
+		if (typeof this.content != 'object') {
+			this.content = { content: this.content };
+		}
+
+		this.generatePages();
+
+		this.message.edit(this.generateMessage());
+
+		return this.message;
+	}
+
 	generateMessage(): MessageOptions {
 		const message: MessageOptions = {
 			embeds: [this.pages[this.page]],
 			ephemeral: this.ephemeral,
-			delete: false
+			delete: false,
+			...this.content
 		};
 		if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
 
@@ -236,37 +295,41 @@ export = class EasyEmbedPages {
 		}
 
 		switch (interaction.customId) {
-		case '1': {
-			if (this.pages.length <= 1) break;
-			if (this.page === 0) break;
-			this.page = 0;
-			this.message.edit(this.generateMessage());
-			break;
-		}
-		case '2': {
-			if (this.pages.length <= 1) break;
-			if (this.page > 0) --this.page;
-			this.message.edit(this.generateMessage());
-			break;
-		}
-		case '3': {
-			if (this.page < this.pages.length - 1) ++this.page;
-			this.message.edit(this.generateMessage());
-			break;
-		}
-		case '4': {
-			if (this.pages.length <= 1) break;
-			if (this.page === (this.pages.length - 1)) break;
-			this.page = this.pages.length - 1;
-			this.message.edit(this.generateMessage());
-			break;
-		}
-		case '5': {
-			this.message.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-			break;
-		}
-		default:
-			break;
+			case '1': {
+				if (this.pages.length <= 1) break;
+				if (this.page === 0) break;
+				this.page = 0;
+				this.message.edit(this.generateMessage());
+				break;
+			}
+			case '2': {
+				if (this.pages.length <= 1) break;
+				if (this.page > 0) --this.page;
+				this.message.edit(this.generateMessage());
+				break;
+			}
+			case '3': {
+				if (this.page < this.pages.length - 1) ++this.page;
+				this.message.edit(this.generateMessage());
+				break;
+			}
+			case '4': {
+				if (this.pages.length <= 1) break;
+				if (this.page === (this.pages.length - 1)) break;
+				this.page = this.pages.length - 1;
+				this.message.edit(this.generateMessage());
+				break;
+			}
+			case '5': {
+				this.message.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+				break;
+			}
+			case '6': {
+				this.update(this.refreshData());
+				break;
+			}
+			default:
+				break;
 		}
 
 		interaction.deferUpdate();
