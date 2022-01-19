@@ -82,8 +82,9 @@ export = class EasyEmbedPages {
 		return false;
 	}
 
-	generateButtons(size: number, currentPage: number): MessageActionRow {
-		const row = new MessageActionRow();
+	generateButtons(size: number, currentPage: number): Array<MessageActionRow> {
+		const rows = [new MessageActionRow()];
+		const row = rows[0];
 
 		if (size > 2) {
 			row
@@ -142,14 +143,25 @@ export = class EasyEmbedPages {
 				.setEmoji('<:trash:852511333165563915>')
 		);
 
-		if (this.refresh) row.addComponents(
-			new MessageButton()
-				.setCustomId('6')
-				.setStyle('SECONDARY')
-				.setEmoji('🔄')
-		);
+		if (this.refresh) {
+			if (row.components.length >= 5) {
+				rows.push(new MessageActionRow());
+				rows[1].addComponents(
+					new MessageButton()
+						.setCustomId('6')
+						.setStyle('SECONDARY')
+						.setEmoji('🔄')
+				);
+			}
+			else row.addComponents(
+				new MessageButton()
+					.setCustomId('6')
+					.setStyle('SECONDARY')
+					.setEmoji('🔄')
+			);
+		}
 
-		return row;
+		return rows;
 	}
 
 	generatePages(): void {
@@ -277,7 +289,7 @@ export = class EasyEmbedPages {
 			delete: false,
 			...this.content
 		};
-		if (this.pages.length > 1 || !this.ephemeral) message.components = [this.generateButtons(this.pages.length, this.page)];
+		if (this.pages.length > 1 || !this.ephemeral) message.components = this.generateButtons(this.pages.length, this.page);
 
 		return message;
 	}
