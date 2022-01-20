@@ -1,6 +1,6 @@
 {
   "name": "jag-cmd-handler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An advanced djs 13 command handler.",
   "main": "lib/index.js",
   "scripts": {

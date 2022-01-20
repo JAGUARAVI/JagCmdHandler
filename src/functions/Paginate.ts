@@ -51,6 +51,9 @@ export = class EasyEmbedPages {
 	refreshData?: () => unknown;
 	ephemeral: boolean;
 
+	time: number;
+	timeout: NodeJS.Timeout;
+
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	constructor(channel: TextChannel | any, data: { [key: string]: any }) {
 		this.channel = channel;
@@ -69,6 +72,7 @@ export = class EasyEmbedPages {
 		this.ephemeral = data.ephemeral || false;
 		this.refresh = data.refresh || false;
 		this.refreshData = data.refreshData || function () { return [{}]; };
+		this.time = data.time || 300000;
 
 		if (data.content) this.content = data.message;
 
@@ -82,7 +86,7 @@ export = class EasyEmbedPages {
 		return false;
 	}
 
-	generateButtons(size: number, currentPage: number): Array<MessageActionRow> {
+	generateButtons(size: number, currentPage: number, disabled = false): Array<MessageActionRow> {
 		const rows = [new MessageActionRow()];
 		const row = rows[0];
 
@@ -93,28 +97,28 @@ export = class EasyEmbedPages {
 						.setCustomId('1')
 						.setStyle('PRIMARY')
 						.setEmoji('<:rewind:852515586068185088>')
-						.setDisabled(currentPage == 0)
+						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
 						.setCustomId('2')
 						.setStyle('PRIMARY')
 						.setEmoji('<:previous:852515728514744340>')
-						.setDisabled(currentPage == 0)
+						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
 						.setCustomId('3')
 						.setStyle('PRIMARY')
 						.setEmoji('<:next:852515302231375902>')
-						.setDisabled(currentPage == size - 1)
+						.setDisabled(disabled ?? currentPage == size - 1)
 				)
 				.addComponents(
 					new MessageButton()
 						.setCustomId('4')
 						.setStyle('PRIMARY')
 						.setEmoji('<:fastforward:852515213080395816>')
-						.setDisabled(currentPage == size - 1)
+						.setDisabled(disabled ?? currentPage == size - 1)
 				);
 		}
 
@@ -125,14 +129,14 @@ export = class EasyEmbedPages {
 						.setCustomId('2')
 						.setStyle('PRIMARY')
 						.setEmoji('<:previous:852515728514744340>')
-						.setDisabled(currentPage == 0)
+						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
 					new MessageButton()
 						.setCustomId('3')
 						.setStyle('PRIMARY')
 						.setEmoji('<:next:852515302231375902>')
-						.setDisabled(currentPage == 1)
+						.setDisabled(disabled ?? currentPage == 1)
 				);
 		}
 
@@ -141,6 +145,7 @@ export = class EasyEmbedPages {
 				.setCustomId('5')
 				.setStyle('DANGER')
 				.setEmoji('<:trash:852511333165563915>')
+				.setDisabled(disabled)
 		);
 
 		if (this.refresh) {
@@ -151,6 +156,7 @@ export = class EasyEmbedPages {
 						.setCustomId('6')
 						.setStyle('SECONDARY')
 						.setEmoji('🔄')
+						.setDisabled(disabled)
 				);
 			}
 			else row.addComponents(
@@ -158,6 +164,7 @@ export = class EasyEmbedPages {
 					.setCustomId('6')
 					.setStyle('SECONDARY')
 					.setEmoji('🔄')
+					.setDisabled(disabled)
 			);
 		}
 
@@ -221,8 +228,9 @@ export = class EasyEmbedPages {
 		if (options instanceof TextChannel) options = { channel: options };
 		else if (!options || typeof options !== 'object') options = {};
 
-		if (options.user) this.user = options.user;
+		if (options.user) this.user = typeof options.user == 'object' ? options.user.id : options.user;
 		if (options.channel) this.channel = options.channel;
+		if (options.time) this.time = options.time;
 
 		if (!this.channel) throw new Error('No text channel specified!');
 
@@ -237,6 +245,8 @@ export = class EasyEmbedPages {
 
 		this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
 		this.collector.on('collect', this._handleInteraction.bind(this));
+
+		if (this.time) this.timeout = setTimeout(this.stop.bind(this), this.time);
 
 		return this.message;
 	}
@@ -282,14 +292,19 @@ export = class EasyEmbedPages {
 		return this.message;
 	}
 
-	generateMessage(): MessageOptions {
+	async stop(): Promise<void> {
+		if (this.collector) this.collector.stop();
+		if (this.message) this.message.edit(this.generateMessage(true)).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+	}
+
+	generateMessage(disabled = false): MessageOptions {
 		const message: MessageOptions = {
 			embeds: [this.pages[this.page]],
 			ephemeral: this.ephemeral,
 			delete: false,
 			...this.content
 		};
-		if (this.pages.length > 1 || !this.ephemeral) message.components = this.generateButtons(this.pages.length, this.page);
+		if (this.pages.length > 1 || !this.ephemeral) message.components = this.generateButtons(this.pages.length, this.page, disabled);
 
 		return message;
 	}
@@ -345,5 +360,8 @@ export = class EasyEmbedPages {
 		}
 
 		interaction.deferUpdate();
+
+		if (this.time) clearTimeout(this.timeout);
+		this.timeout = setTimeout(this.stop.bind(this), this.time);
 	}
 }

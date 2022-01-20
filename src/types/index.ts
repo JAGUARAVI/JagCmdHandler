@@ -26,6 +26,8 @@ export interface MessageOptions extends DefaultMesageOption, InteractionReplyOpt
 	refreshData?: () => unknown
 	/** Only for paginate */
 	pageGen?: () => void
+	/** Only for paginate & deletableMessage */
+	time?: number
 }
 
 export interface ClientOptions extends BaseClientOptions {
