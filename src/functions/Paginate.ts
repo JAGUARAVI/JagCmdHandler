@@ -237,7 +237,7 @@ export = class EasyEmbedPages {
 		this.generatePages();
 
 		if (this.page > this.pages.length) {
-			console.error('Page number greater than total pages!\nUsing page 0 instead.');
+			console.error('Paginate: Page number greater than total pages! Using page 0 instead.');
 			this.page = 0;
 		}
 
@@ -258,11 +258,12 @@ export = class EasyEmbedPages {
 		if (options instanceof TextChannel) options = { channel: options };
 		else if (!options || typeof options !== 'object') options = {};
 
-		if (options.user) this.user = options.user;
+		if (options.user) this.user = typeof options.user == 'object' ? options.user.id : options.user;
+
 		if (options.channel) this.channel = options.channel;
 
 		if (this.page > this.pages.length) {
-			console.error('Page number greater than total pages!\nUsing page 0 instead.');
+			console.error('Paginate: Page number greater than total pages! Using page 0 instead.');
 			this.page = 0;
 		}
 

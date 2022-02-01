@@ -117,7 +117,7 @@ class Client extends BaseClient {
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async registerEvents(dir: string, target?: any): Promise<void> { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
 		const defaultTarget = target == undefined;
-		if (!target) target = this;
+		if (defaultTarget) target = this;
 		const files = await fs.readdir(dir);
 		for (const file of files) {
 			if (file.endsWith('.js')) {
