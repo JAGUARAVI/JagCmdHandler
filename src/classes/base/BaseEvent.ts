@@ -1,7 +1,7 @@
 import Client from '../Client';
 
 export default class BaseEvent {
-	public name: string
+	public name: string;
 
 	constructor(eventName: string) {
 		this.name = eventName;

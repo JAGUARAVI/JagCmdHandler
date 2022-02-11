@@ -4,17 +4,17 @@ export default class BaseCommand {
 	config: {
 		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		[key: string]: any
-	}
+	};
 
 	permissions: {
 		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		[key: string]: any
-	}
+	};
 
 	data: {
 		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		[key: string]: any
-	}
+	};
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	constructor(data: { [key: string]: any }) {

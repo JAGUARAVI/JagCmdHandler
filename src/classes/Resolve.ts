@@ -2,7 +2,7 @@ import Client from './Client';
 import { Guild, User, Role, GuildMember, Channel } from 'discord.js';
 
 export default class Resolve {
-	client: Client
+	client: Client;
 
 	constructor(client: Client) {
 		this.client = client;
