@@ -1,16 +1,53 @@
 {
   "name": "jag-cmd-handler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An advanced djs 13 command handler.",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npx tsc"
+    "postinstall": "npx tsc",
+    "build": "npx tsc",
+    "lint": "eslint ./src --ext .ts"
   },
   "author": "JAGUARAVI",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JAGUARAVI/JagCmdHandler.git"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        "tab"
+      ],
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
@@ -21,8 +58,8 @@
   },
   "devDependencies": {
     "@types/node": "^16.4.13",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "typescript": "^4.3.5"
   }
