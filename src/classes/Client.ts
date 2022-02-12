@@ -37,7 +37,7 @@ class Client extends BaseClient {
 	events = new Collection<string, BaseEvent>();
 	commands = new Collection<string, BaseCommand>();
 	// eslint-disable-next-line @typescript-eslint/ban-types
-	applicationCommands = new Collection<string, Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>>();
+	applicationCommands = new Collection<string, Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>>();
 	textCommandHandler = new Handler(this);
 	applicationCommandHandler = new Handler(this);
 	resolve = new Resolve(this);
@@ -63,6 +63,11 @@ class Client extends BaseClient {
 				props.config.category = category;
 				this.commands.set(props.config.name, props);
 				if (this.debug) this.log.debug(`Loaded Command - ${props.config.name}`);
+			} else if (Command?.default?.prototype instanceof BaseCommand) {
+				const props: BaseCommand = new Command.default();
+				props.config.category = category;
+				this.commands.set(props.config.name, props);
+				if (this.debug) this.log.debug(`Loaded Command - ${props.config.name}`);
 			}
 			return false;
 		} catch (e) {
@@ -84,7 +89,7 @@ class Client extends BaseClient {
 		}
 	}
 
-	async registerApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
+	async registerApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>> {
 		const target = guild ?? this.application;
 
 		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1).map((command) => {
@@ -107,7 +112,7 @@ class Client extends BaseClient {
 		});
 	}
 
-	async unregisterApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{guild?: GuildResolvable}>>> {
+	async unregisterApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>> {
 		const target = guild ?? this.application;
 
 		this.applicationCommands.delete(guild ? guild.id : '0');
@@ -125,6 +130,12 @@ class Client extends BaseClient {
 				const Event = require(join(dir, file));
 				if (Event.prototype instanceof BaseEvent) {
 					const instance: BaseEvent = new Event();
+					instance.run = instance.run.bind(instance, this);
+					target.on?.(instance.name, instance.run);
+					target.events?.set?.(instance.name, instance);
+					if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
+				} else if (Event?.default?.prototype instanceof BaseEvent) {
+					const instance: BaseEvent = new Event.default();
 					instance.run = instance.run.bind(instance, this);
 					target.on?.(instance.name, instance.run);
 					target.events?.set?.(instance.name, instance);
