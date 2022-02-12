@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.0.3
+
+* Nothing changes. Only fixes the NPM package installation.
+
 ## Version 0.0.2
 
 ### Added
