@@ -157,7 +157,7 @@ export = class TextCommandHandler {
 		let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
 		if (defaultChecks) {
 			if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
-				const embed = this.getErrorEmbed('This is a owner only command!');
+				const embed = this.getErrorEmbed('This is an owner only command!');
 				ctx.send({
 					embeds: [embed]
 				});

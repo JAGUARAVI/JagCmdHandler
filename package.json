@@ -1,11 +1,10 @@
 {
   "name": "jag-cmd-handler",
-  "version": "0.0.3",
+  "version": "0.0.3-lts",
   "description": "An advanced djs 13 command handler.",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npx tsc",
     "build": "npx tsc",
     "lint": "eslint ./src --ext .ts"
   },
