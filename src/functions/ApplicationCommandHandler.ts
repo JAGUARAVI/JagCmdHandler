@@ -18,11 +18,18 @@ export = class InteractionCommandHandler {
 		this.client = client;
 	}
 
-	getErrorEmbed(msg: string, large?: boolean): Embed {
+	async getLanguage(client: Client, interaction: CommandInteraction): Promise<string> {
+		if (interaction.guildLocale) return interaction.guildLocale.substring(0,2);
+		else if (interaction.locale) return interaction.locale.substring(0,2);
+		else return 'en';
+	}
+
+	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
+		if (!language) language = 'en';
 		const embed = new Embed()
 			.setColor(Colors.Red)
-			.setDescription((!large ? ':x:  ' : '') + (msg ?? 'Error'));
-		if (large) embed.setAuthor({ name: 'Error', iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
+			.setDescription((!large ? ':x:  ' : '') + (msg ?? this.client.messages.get(language, 'error.body')));
+		if (large) embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
 		return embed;
 	}
@@ -93,6 +100,7 @@ export = class InteractionCommandHandler {
 			reply,
 			paginate,
 			prompt,
+			language: await this.getLanguage(this.client, interaction),
 			args: [],
 			flags: [],
 			client
@@ -101,7 +109,7 @@ export = class InteractionCommandHandler {
 		let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
 		if (defaultChecks) {
 			if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
-				const embed = this.getErrorEmbed('This is an owner only command!');
+				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
 				ctx.send({
 					embeds: [embed]
 				});
@@ -109,7 +117,7 @@ export = class InteractionCommandHandler {
 			}
 
 			if (command.permissions.serverOwnerOnly && ctx.source.member.user.id !== ctx.source.guild.ownerId) {
-				const embed = this.getErrorEmbed('This is a server owner only command!');
+				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
 				ctx.send({
 					embeds: [embed]
 				});

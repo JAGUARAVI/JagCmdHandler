@@ -18,7 +18,7 @@ export default class BaseCommand {
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async run(ctx: CommandContext): Promise<any> {
 		ctx.reply({
-			content: 'This command hasn\'t yet been configured!',
+			content: ctx.client.messages.get(ctx.language, 'command.notImplemented'),
 			allowedMentions: { repliedUser: false }
 		});
 	}

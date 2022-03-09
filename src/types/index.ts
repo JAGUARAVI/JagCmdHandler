@@ -13,6 +13,8 @@ export interface CommandContext {
 	args: Array<string>;
 	/** Whether the command is an ApplicationCommand. */
 	isApplicationCommand: boolean;
+	/** Used for messages */
+	language: string;
 	client: Client;
 	reply(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
 	send(Payload: MessagePayload | MessageOptions): Promise<Message | null>;

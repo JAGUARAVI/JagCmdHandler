@@ -1,11 +1,24 @@
+import { Locale }  from 'discord-api-types/v10';
+
 interface Data {
     [key: string]: string | Data
 }
 
 const DefaultData: Data = {
     'en': {
-        'error': 'An error occurred.',
-        'welcome': 'Welcome %user%!'
+        'errors': {
+            'title': 'Error!',
+            'header': 'An error occurred!',
+            'body': 'An error occurred while completing that operation! Please try again later.',
+            'tryAgain': 'Please try again later.',
+        },
+        'command': {
+            'notImplemented': 'This command is not yet implemented.',
+            'ownerOnly': 'This command is only available to the bot owner.',
+            'serverOwnerOnly': 'This command is only available to the server owner.',
+            'botInsufficientPerissions': 'Sorry, but I need the following permissions to perform this command -\n%perms%',
+        },
+        'welcome': 'Welcome %user%!',
     }
 };
 
@@ -22,8 +35,8 @@ export = class Messages {
         return this;
     }
 
-    get(...keys: string[]): string | Data {
-        if (!keys.length) return this.data;
+    get(...keys: string[]): string {
+        if (!keys.length) return this.data.toString();
 
         const path: string[] = [];
         keys.map((key) => key.split('.').map((_key) => path.push(_key)));
@@ -33,7 +46,7 @@ export = class Messages {
             if (typeof ob === 'string') return ob;
             ob = ob[path[i]];
             if (!ob) {
-                if (path[0] != 'en' && this.getKeys().includes(path[0]) && path[1]) {
+                if (path[0] != 'en' && (this.getKeys().includes(path[0]) || Object.values(Locale).map((k) => k.toString()).includes(path[0])) && path[1]) {
                     path[0] = 'en';
                     return this.get(...path);
                 }
@@ -41,7 +54,7 @@ export = class Messages {
             }
         }
 
-        return ob;
+        return ob.toString();
     }
 
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
