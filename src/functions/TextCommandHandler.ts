@@ -1,4 +1,4 @@
-import { Collection, MessageEmbed, TextChannel, GuildMember } from 'discord.js';
+import { Collection, Embed, TextChannel, GuildMember, Colors } from 'discord.js';
 import { MessageOptions, Message, CommandContext } from '../types';
 
 import Client from '../classes/Client';
@@ -25,13 +25,19 @@ export = class TextCommandHandler {
 		});
 	}
 
-	async getPrefix(client: Client, message: Message): Promise<string | Array<string>> { /* eslint-disable-line @typescript-eslint/no-unused-vars */
+	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+	async getPrefix(client: Client, message: Message): Promise<string | Array<string>> {
 		return '!';
 	}
 
-	getErrorEmbed(msg: string, large?: boolean): MessageEmbed {
-		const embed = new MessageEmbed()
-			.setColor('RED')
+	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+	async getLanguage(client: Client, message: Message): Promise<string> {
+		return 'en';
+	}
+
+	getErrorEmbed(msg: string, large?: boolean): Embed {
+		const embed = new Embed()
+			.setColor(Colors.Red)
 			.setDescription((!large ? ':x:  ' : '') + (msg ?? 'Error'));
 		if (large) embed.setAuthor({ name: 'Error', iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
@@ -54,7 +60,7 @@ export = class TextCommandHandler {
 		const commandName = args.shift().toLowerCase();
 		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.config.aliases && cmd.config.aliases.includes(commandName));
 
-		if (!command) return next();
+		if (!command || command.config?.availibility == 3) return next();
 
 		const flags: Array<string> = [];
 		let argsCopy = [...args];
@@ -142,7 +148,7 @@ export = class TextCommandHandler {
 
 		const ctx: CommandContext = {
 			source: message,
-			isCommand: false,
+			isApplicationCommand: false,
 			send,
 			reply,
 			paginate,

@@ -4,6 +4,7 @@ import BaseEvent from './classes/base/BaseEvent';
 import Utils from './utils';
 import TextCommandHandler from './functions/TextCommandHandler';
 import ApplicationCommandHandler from './functions/ApplicationCommandHandler';
+import Messages from './classes/Messages';
 import * as Types from './types';
 
 export {
@@ -13,5 +14,6 @@ export {
 	TextCommandHandler,
 	ApplicationCommandHandler,
 	Utils,
+	Messages,
 	Types
 };

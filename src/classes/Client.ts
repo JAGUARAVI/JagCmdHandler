@@ -1,4 +1,5 @@
-import { Client as BaseClient, Intents, Options, Collection, ApplicationCommand, Guild, ApplicationCommandPermissionData, GuildResolvable } from 'discord.js';
+import { Client as BaseClient, Options, Collection, ApplicationCommand, Guild, ApplicationCommandPermissionData, ApplicationCommandType, GuildResolvable, Partials } from 'discord.js';
+import { GatewayIntentBits } from 'discord-api-types/v10';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { ClientOptions } from '../types';
@@ -9,19 +10,25 @@ import BaseEvent from './base/BaseEvent';
 import Utils from '../utils';
 import Handler from './Handler';
 import Resolve from './Resolve';
+import Messages from './Messages';
 
 const defaultOptions: ClientOptions = {
-	partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'],
+	partials: [Partials.User, Partials.GuildMember, Partials.Message, Partials.Channel, Partials.Reaction, Partials.GuildScheduledEvent],
 	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MESSAGES,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
 	],
 	makeCache: Options.cacheWithLimits({
 		MessageManager: {
 			maxSize: 100,
-			sweepInterval: 30
 		}
-	})
+	}),
+	sweepers: {
+		messages: {
+			interval: 60,
+			lifetime: 100
+		}
+	}
 };
 
 class Client extends BaseClient {
@@ -41,6 +48,7 @@ class Client extends BaseClient {
 	textCommandHandler = new Handler(this);
 	applicationCommandHandler = new Handler(this);
 	resolve = new Resolve(this);
+	messages = new Messages();
 
 	constructor(options: ClientOptions) {
 		super(
@@ -55,9 +63,9 @@ class Client extends BaseClient {
 		});
 	}
 
-	registerCommand(dir: string, category: string): boolean | string {
+	async registerCommand(dir: string, category: string): Promise<boolean | string> {
 		try {
-			const Command = require(dir); /* eslint-disable-line @typescript-eslint/no-var-requires */
+			const Command = await import(dir);
 			if (Command.prototype instanceof BaseCommand) {
 				const props: BaseCommand = new Command();
 				props.config.category = category;
@@ -75,36 +83,36 @@ class Client extends BaseClient {
 		}
 	}
 
-	async registerCommands(dir: string): Promise<void> {
+	async registerCommands(dir: string): Promise<Collection<string, BaseCommand>> {
 		const files = await fs.readdir(dir);
 		for (const file of files) {
 			const filesPath = join(dir, file);
 			const commands = await fs.readdir(filesPath);
-			for (const command of commands) {
-				if (command.endsWith('.js')) {
-					const response = this.registerCommand(join(filesPath, command), file);
-					if (response) this.log.error(response);
-				}
-			}
+			await Promise.all(commands.filter((command) => command.endsWith('.js')).map(async (command) => {
+				const response = await this.registerCommand(join(filesPath, command), file);
+				if (response) this.log.error(response);
+			}));
 		}
+
+		return this.commands;
 	}
 
 	async registerApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>> {
 		const target = guild ?? this.application;
 
-		return Promise.all(this.commands.filter(cmd => cmd.config.commandType != 1).map((command) => {
+		return Promise.all(this.commands.filter(cmd => cmd.config.availibility != 1).map((command) => {
 			return {
 				name: command.config.name,
-				description: ['MESSAGE', 3, 'USER', 2].includes(command.config.applicationType) ? null : command.config.description,
+				description: [ApplicationCommandType.Message, ApplicationCommandType.User].includes(command.config.applicationType) ? null : command.config.description,
 				options: command.config.commandOptions,
 				defaultPermission: command.permissions.default != false,
-				type: command.config.applicationType || 1,
+				type: [ApplicationCommandType.ChatInput, ApplicationCommandType.User, ApplicationCommandType.Message].includes(command.config.applicationType) ? command.config.applicationType : ApplicationCommandType.ChatInput,
 			};
 		})).then(async (data) => {
 			return target?.commands.set(data).then(async (result) => {
 				if (target != this.application) await Promise.all(result.map(async (command) => {
 					const cmd = this.commands.get(command.name);
-					if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ guild: (target as Guild), permissions: (cmd.permissions.build as (guild: Guild, command: ApplicationCommand) => Array<ApplicationCommandPermissionData>)(target as Guild, command) });
+					if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ permissions: (cmd.permissions.build as (command: ApplicationCommand, guild: Guild) => Array<ApplicationCommandPermissionData>)(command, guild) });
 				}));
 				this.applicationCommands.set(guild ? guild.id : '0', result);
 				return result;
@@ -124,25 +132,23 @@ class Client extends BaseClient {
 		const defaultTarget = target == undefined;
 		if (defaultTarget) target = this;
 		const files = await fs.readdir(dir);
-		for (const file of files) {
-			if (file.endsWith('.js')) {
-				// eslint-disable-next-line  @typescript-eslint/no-var-requires
-				const Event = require(join(dir, file));
-				if (Event.prototype instanceof BaseEvent) {
-					const instance: BaseEvent = new Event();
-					instance.run = instance.run.bind(instance, this);
-					target.on?.(instance.name, instance.run);
-					target.events?.set?.(instance.name, instance);
-					if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
-				} else if (Event?.default?.prototype instanceof BaseEvent) {
-					const instance: BaseEvent = new Event.default();
-					instance.run = instance.run.bind(instance, this);
-					target.on?.(instance.name, instance.run);
-					target.events?.set?.(instance.name, instance);
-					if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
-				}
+
+		Promise.all(files.filter((file) => file.endsWith('.js')).map(async (file) => {
+			const Event = await import(join(dir, file));
+			if (Event.prototype instanceof BaseEvent) {
+				const instance: BaseEvent = new Event();
+				instance.run = instance.run.bind(instance, this);
+				target.on?.(instance.name, instance.run);
+				target.events?.set?.(instance.name, instance);
+				if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
+			} else if (Event?.default?.prototype instanceof BaseEvent) {
+				const instance: BaseEvent = new Event.default();
+				instance.run = instance.run.bind(instance, this);
+				target.on?.(instance.name, instance.run);
+				target.events?.set?.(instance.name, instance);
+				if (this.debug) this.log.debug(`Loaded ${defaultTarget ? 'Client' : target.constructor.name ?? ''} Event - ${instance.name}`);
 			}
-		}
+		}));
 	}
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any

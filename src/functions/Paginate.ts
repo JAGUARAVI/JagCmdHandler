@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction } from 'discord.js';
+import { ActionRow, ButtonComponent, Embed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
@@ -25,7 +25,7 @@ export = class EasyEmbedPages {
 	message: Message;
 	collector: InteractionCollector<ButtonInteraction>;
 
-	pages: Array<MessageEmbed>;
+	pages: Array<Embed>;
 	page: number;
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	dataPages: Array<any>;
@@ -46,7 +46,7 @@ export = class EasyEmbedPages {
 	thumbnail?: string;
 	image?: string;
 	description?: string;
-	pageGen?: (embed: MessageEmbed) => void | Promise<void>;
+	pageGen?: (embed: Embed) => void | Promise<void>;
 	refresh: boolean;
 	refreshData?: () => unknown;
 	ephemeral: boolean;
@@ -86,38 +86,38 @@ export = class EasyEmbedPages {
 		return false;
 	}
 
-	generateButtons(size: number, currentPage: number, disabled = false): Array<MessageActionRow> {
-		const rows = [new MessageActionRow()];
+	generateButtons(size: number, currentPage: number, disabled = false): Array<ActionRow> {
+		const rows = [new ActionRow()];
 		const row = rows[0];
 
 		if (size > 2) {
 			row
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('1')
-						.setStyle('PRIMARY')
-						.setEmoji('<:rewind:852515586068185088>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515586068185088' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('2')
-						.setStyle('PRIMARY')
-						.setEmoji('<:previous:852515728514744340>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515728514744340' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('3')
-						.setStyle('PRIMARY')
-						.setEmoji('<:next:852515302231375902>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515302231375902' })
 						.setDisabled(disabled ?? currentPage == size - 1)
 				)
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('4')
-						.setStyle('PRIMARY')
-						.setEmoji('<:fastforward:852515213080395816>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515213080395816' })
 						.setDisabled(disabled ?? currentPage == size - 1)
 				);
 		}
@@ -125,45 +125,45 @@ export = class EasyEmbedPages {
 		else if (size == 2) {
 			row
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('2')
-						.setStyle('PRIMARY')
-						.setEmoji('<:previous:852515728514744340>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515728514744340' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('3')
-						.setStyle('PRIMARY')
-						.setEmoji('<:next:852515302231375902>')
+						.setStyle(ButtonStyle.Primary)
+						.setEmoji({ id: '852515302231375902' })
 						.setDisabled(disabled ?? currentPage == 1)
 				);
 		}
 
 		if (!this.ephemeral) row.addComponents(
-			new MessageButton()
+			new ButtonComponent()
 				.setCustomId('5')
-				.setStyle('DANGER')
-				.setEmoji('<:trash:852511333165563915>')
+				.setStyle(ButtonStyle.Danger)
+				.setEmoji({ id: '852511333165563915' })
 				.setDisabled(disabled)
 		);
 
 		if (this.refresh) {
 			if (row.components.length >= 5) {
-				rows.push(new MessageActionRow());
+				rows.push(new ActionRow());
 				rows[1].addComponents(
-					new MessageButton()
+					new ButtonComponent()
 						.setCustomId('6')
-						.setStyle('SECONDARY')
-						.setEmoji('🔄')
+						.setStyle(ButtonStyle.Secondary)
+						.setEmoji({ name: '🔄' })
 						.setDisabled(disabled)
 				);
 			}
 			else row.addComponents(
-				new MessageButton()
+				new ButtonComponent()
 					.setCustomId('6')
-					.setStyle('SECONDARY')
-					.setEmoji('🔄')
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji({ name: '🔄' })
 					.setDisabled(disabled)
 			);
 		}
@@ -215,7 +215,7 @@ export = class EasyEmbedPages {
 			if ((this.dataPages[index] && this.dataPages[index].image) || this.image) data.image = this.dataPages[index] && this.dataPages[index].image || this.image;
 			if (this.dataPages[index] && this.dataPages[index].fields) this.dataPages[index].fields.map((y: { name?: string, value: string, inline: boolean }) => data.fields.push({ name: y.name || '\u200b', value: y.value || '\u200b', inline: y.inline || false }));
 
-			const embed = new MessageEmbed(data);
+			const embed = new Embed(data);
 			this.pageGen(embed);
 			this.pages.push(embed);
 		}
@@ -243,7 +243,7 @@ export = class EasyEmbedPages {
 
 		this.message = await this.channel.send(this.generateMessage());
 
-		this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
+		this.collector = this.message.createMessageComponentCollector({ componentType: ComponentType.Button, filter: this.filter.bind(this) });
 		this.collector.on('collect', this._handleInteraction.bind(this));
 
 		if (this.time) this.timeout = setTimeout(this.stop.bind(this), this.time);
@@ -314,9 +314,9 @@ export = class EasyEmbedPages {
 		if (interaction.user.id != this.user) {
 			return interaction.reply({
 				embeds: [
-					new MessageEmbed()
+					new Embed()
 						.setDescription(`Only <@${this.user}> can interact with this message.`)
-						.setColor('RED')
+						.setColor(Colors.Red)
 				],
 				ephemeral: true
 			});

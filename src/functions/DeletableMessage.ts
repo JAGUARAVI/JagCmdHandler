@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, GuildMember, User, InteractionCollector, ButtonInteraction } from 'discord.js';
+import { ActionRow, ButtonComponent, Embed, TextChannel, GuildMember, User, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, CacheType, ComponentType } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 export = class DeletableMessage {
@@ -6,7 +6,7 @@ export = class DeletableMessage {
 	content: MessageOptions;
 	user: string;
 	message: Message;
-	collector: InteractionCollector<ButtonInteraction>;
+	collector: InteractionCollector<ButtonInteraction<CacheType>>;
 	time: number;
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -27,13 +27,13 @@ export = class DeletableMessage {
 		return false;
 	}
 
-	generateButton(disabled = false): MessageActionRow {
-		return new MessageActionRow()
+	generateButton(disabled = false): ActionRow {
+		return new ActionRow()
 			.addComponents(
-				new MessageButton()
+				new ButtonComponent()
 					.setCustomId('5')
-					.setStyle('DANGER')
-					.setEmoji('<:trash:852511333165563915>')
+					.setStyle(ButtonStyle.Danger)
+					.setEmoji({ id: '852511333165563915', })
 					.setDisabled(disabled)
 			);
 	}
@@ -49,7 +49,7 @@ export = class DeletableMessage {
 			)
 		);
 
-		this.collector = this.message.createMessageComponentCollector({ componentType: 'BUTTON', filter: this.filter.bind(this) });
+		this.collector = this.message.createMessageComponentCollector({ componentType: ComponentType.Button, filter: this.filter.bind(this) });
 		this.collector.on('collect', this._handleInteraction.bind(this));
 
 		if (this.time) setTimeout(this.stop.bind(this), this.time);
@@ -74,9 +74,9 @@ export = class DeletableMessage {
 		if (interaction.user.id != this.user) {
 			interaction.reply({
 				embeds: [
-					new MessageEmbed()
+					new Embed()
 						.setDescription(`Only <@${this.user}> can interact with this message.`)
-						.setColor('RED')
+						.setColor(Colors.Red)
 				],
 				ephemeral: true
 			});

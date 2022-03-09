@@ -1,4 +1,4 @@
-import { Collection, MessageEmbed, TextChannel, Interaction, GuildMember } from 'discord.js';
+import { Collection, Embed, TextChannel, GuildMember, Colors, CommandInteraction } from 'discord.js';
 import { MessageOptions, Message, CommandContext } from '../types';
 
 import Client from '../classes/Client';
@@ -18,20 +18,24 @@ export = class InteractionCommandHandler {
 		this.client = client;
 	}
 
-	getErrorEmbed(msg: string, large?: boolean): MessageEmbed {
-		const embed = new MessageEmbed()
-			.setColor('RED')
+	getErrorEmbed(msg: string, large?: boolean): Embed {
+		const embed = new Embed()
+			.setColor(Colors.Red)
 			.setDescription((!large ? ':x:  ' : '') + (msg ?? 'Error'));
 		if (large) embed.setAuthor({ name: 'Error', iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
 		return embed;
 	}
 
-	async handle(client: Client, interaction: Interaction, next: () => void, defaultChecks = true): Promise<void> {
-		if (!interaction.isCommand() && !interaction.isContextMenu()) return next();
+	async handle(client: Client, interaction: CommandInteraction, next: () => void, defaultChecks = true): Promise<void> {
+		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand() && !interaction.isAutocomplete()) return next();
 
 		const command = client.commands.get(interaction.commandName);
-		if (!command) return next();
+		if (!command || command.config?.availibility == 1) return next();
+
+		if (interaction.isAutocomplete()) {
+			return;
+		}
 
 		const _reply = async (content: MessageOptions): Promise<Message> => {
 			if (typeof content === 'string') content = { content };
@@ -84,7 +88,7 @@ export = class InteractionCommandHandler {
 
 		const ctx: CommandContext = {
 			source: interaction,
-			isCommand: true,
+			isApplicationCommand: true,
 			send,
 			reply,
 			paginate,
