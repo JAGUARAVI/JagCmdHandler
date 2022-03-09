@@ -1,8 +1,8 @@
 import { CommandContext, CommandConfig, CommandPermissions } from '../../types';
 
 export default class BaseCommand {
-	config: CommandConfig
-	permissions: CommandPermissions
+	config: CommandConfig;
+	permissions: CommandPermissions;
 	data: {
 		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		[key: string]: any

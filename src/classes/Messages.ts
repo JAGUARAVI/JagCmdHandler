@@ -6,7 +6,7 @@ interface Data {
 }
 
 export = class Messages {
-    data: Data
+    data: Data;
 
     constructor(data: Data = {}) {
         this.data = Object.assign({}, DefaultData, data);
