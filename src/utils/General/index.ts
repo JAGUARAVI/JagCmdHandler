@@ -58,7 +58,7 @@ export = {
 	},
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	shuffle(obj: Array<any> | string | any): Array<any> | string | any {
+	shuffle<T>(obj: Array<T> | string): Array<T> | string {
 		if (!obj) return null;
 		if (Array.isArray(obj)) {
 			let i = obj.length;
@@ -70,7 +70,7 @@ export = {
 			}
 			return obj;
 		}
-		if (typeof obj === 'string') return this.shuffle(obj.split('')).join('');
+		if (typeof obj === 'string') return (this.shuffle(obj.split('')) as Array<string>).join('');
 		return obj;
 	},
 

@@ -18,10 +18,10 @@ export = class Messages {
         return this;
     }
 
-    get(...keys: string[]): string {
+    get(...keys: Array<string>): string {
         if (!keys.length) return this.data.toString();
 
-        const path: string[] = [];
+        const path: Array<string> = [];
         keys.map((key) => key.split('.').map((_key) => path.push(_key)));
 
         let ob = this.data as string | Data;
@@ -49,10 +49,10 @@ export = class Messages {
         });
     }
 
-    getKeys(...keys: string[]): string[] {
+    getKeys(...keys: Array<string>): Array<string> {
         if (!keys.length) return Object.keys(this.data);
 
-        const path: string[] = [];
+        const path: Array<string> = [];
         keys.map((key) => key.split('.').map((_key) => path.push(_key)));
 
         let ob = this.data as string | Data;

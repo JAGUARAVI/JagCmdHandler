@@ -24,12 +24,12 @@ export interface CommandContext {
 
 export interface CommandConfig {
 	name: string;
-	aliases?: string[];
+	aliases?: Array<string>;
 	/** 1 = Text Only, 2 = Both, 3 = Application Only */
 	availibility?: 1 | 2 | 3;
 	/** ApplicationCommandType - For ApplicationCommand only. */
 	commandType?: ApplicationCommandType;
-	description?: string[];
+	description?: string;
 	usage?: string;
 	nsfw?: boolean;
 	cooldown?: number;
@@ -37,16 +37,16 @@ export interface CommandConfig {
 	deleteAuthorMessage?: boolean;
 	protected?: boolean;
 	/** ApplicationCommandOptionData - For ApplicationCommand only. */
-	commandOptions?: ApplicationCommandOptionData[];
+	commandOptions?: Array<ApplicationCommandOptionData>;
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	[key: string]: any;
 }
 
 export interface CommandPermissions {
 	/** Permissions for Users in order to execute the command. */
-	user?: PermissionsString[];
+	user?: Array<PermissionsString>;
 	/** Permissions for Bot in order to execute the command. */
-	client?: PermissionsString[];
+	client?: Array<PermissionsString>;
 	serverOwnerOnly?: boolean;
 	botOwnerOnly?: boolean;
 	/** Whether to enable this command by default or set using build() - For ApplicationCommand only. */
