@@ -13,6 +13,7 @@
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "typeRoots": ["node_modules/@types"],
+        "resolveJsonModule": true
     },
     "include": ["src/**/**/*"]
   }

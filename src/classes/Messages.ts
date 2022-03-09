@@ -1,32 +1,15 @@
-import { Locale }  from 'discord-api-types/v10';
+import { Locale } from 'discord-api-types/v10';
+import * as DefaultData from '../languages/default.json';
 
 interface Data {
     [key: string]: string | Data
 }
 
-const DefaultData: Data = {
-    'en': {
-        'errors': {
-            'title': 'Error!',
-            'header': 'An error occurred!',
-            'body': 'An error occurred while completing that operation! Please try again later.',
-            'tryAgain': 'Please try again later.',
-        },
-        'command': {
-            'notImplemented': 'This command is not yet implemented.',
-            'ownerOnly': 'This command is only available to the bot owner.',
-            'serverOwnerOnly': 'This command is only available to the server owner.',
-            'botInsufficientPerissions': 'Sorry, but I need the following permissions to perform this command -\n%perms%',
-        },
-        'welcome': 'Welcome %user%!',
-    }
-};
-
 export = class Messages {
     data: Data
 
     constructor(data: Data = {}) {
-        this.data = Object.assign(DefaultData, data);
+        this.data = Object.assign({}, DefaultData, data);
     }
 
     import(data: Data, language?: string): this {
@@ -58,7 +41,8 @@ export = class Messages {
     }
 
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-    parseVariables(str: string, data: { [key: string]: any }): string {
+    parseVariables(str: string, data: { [key: string]: any } = {}): string {
+        data.nl = '\n';
         return str.replace(/%([^%]+)%/g, (match, key: string) => {
             if (data[key] != null) return data[key].toString();
             return match;

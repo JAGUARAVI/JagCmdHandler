@@ -35,14 +35,16 @@ export = class TextCommandHandler {
 		return 'en';
 	}
 
-	getErrorEmbed(msg: string, large?: boolean): Embed {
+	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
+		if (!language) language = 'en';
 		const embed = new Embed()
 			.setColor(Colors.Red)
-			.setDescription((!large ? ':x:  ' : '') + (msg ?? 'Error'));
-		if (large) embed.setAuthor({ name: 'Error', iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
+			.setDescription((!large ? ':x:  ' : '') + (msg ?? this.client.messages.get(language, 'error.body')));
+		if (large) embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
 		return embed;
 	}
+
 
 	async handle(client: Client, message: Message, next: () => void, defaultChecks = true): Promise<void> {
 		if (message.author.bot) return next();
@@ -153,17 +155,16 @@ export = class TextCommandHandler {
 			reply,
 			paginate,
 			prompt,
+			language: await this.getLanguage(client, message),
 			args,
 			flags,
 			client
 		};
 
-		await this.checks.run(ctx, command);
-
 		let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
 		if (defaultChecks) {
 			if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
-				const embed = this.getErrorEmbed('This is an owner only command!');
+				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
 				ctx.send({
 					embeds: [embed]
 				});
@@ -171,17 +172,17 @@ export = class TextCommandHandler {
 			}
 
 			if (command.permissions.serverOwnerOnly && ctx.source.member.user.id !== ctx.source.guild.ownerId) {
-				const embed = this.getErrorEmbed('This is a server owner only command!');
+				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
 				ctx.send({
 					embeds: [embed]
 				});
 				return next();
 			}
 
-			if (command.permissions.clientPerms) {
-				if (!ctx.source.guild.me.permissions.has(command.permissions.clientPerms) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.clientPerms)) {
+			if (command.permissions.client) {
+				if (!ctx.source.guild.me.permissions.has(command.permissions.client) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.client)) {
 					const embed = this.getErrorEmbed(
-						`Sorry, but i need the following permisions to perform this command -\n${command.permissions.clientPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`, true
+						client.messages.parseVariables(client.messages.get(ctx.language, 'command.botInsufficientPerissions'), { perms: command.permissions.client.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
 						embeds: [embed]
@@ -190,10 +191,12 @@ export = class TextCommandHandler {
 				}
 			}
 
-			if (command.permissions.userPerms) {
-				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.userPerms) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.userPerms)) {
+			if (command.permissions.user) {
+				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.user) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.user)) {
 					const embed = this.getErrorEmbed(
-						`Sorry, but you don't have enough permissions to execute this command. You need the following permissions -\n${command.permissions.userPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`,
+						client.messages.parseVariables(
+							client.messages.get(ctx.language, 'command.userInsufficientPerissions'), { perms: command.permissions.user.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }
+						),
 						true
 					);
 					ctx.send({
@@ -204,16 +207,19 @@ export = class TextCommandHandler {
 			}
 
 			if (command.config.args && !args.length && command.config.usage) {
-				const embed = this.getErrorEmbed(`You didn't provide any arguments, ${ctx.source.member}!\nThe proper usage would be: \n\`\`\`html\n${command.config.usage}\n\`\`\``, true);
 				ctx.send({
-					embeds: [embed]
+					embeds: [this.getErrorEmbed(
+						client.messages.parseVariables(
+							client.messages.get(ctx.language, 'command.arguments'), { user: `<@${ctx.source.user.id}>`, usage: command.config.usage }
+						)
+					)]
 				});
 				return next();
 			}
+
 			if (command.config.nsfw && !(ctx.source.channel as TextChannel).nsfw) {
-				const embed = this.getErrorEmbed('Sorry, i can\'t run nsfw commands on a non-nsfw channel.');
 				ctx.send({
-					embeds: [embed],
+					embeds: [this.getErrorEmbed(client.messages.get(ctx.language, 'command.nsfw'))],
 				});
 				return next();
 			}
@@ -221,19 +227,20 @@ export = class TextCommandHandler {
 			if (!this.cooldowns.has(command.config.name)) this.cooldowns.set(command.config.name, new Collection());
 			now = Date.now();
 			timestamps = this.cooldowns.get(command.config.name);
-			cooldownAmount = (command.config.cooldown || 3) * 1000;
+			cooldownAmount = (command.config.cooldown || 5) * 1000;
 			if (timestamps.has(ctx.source.user.id)) {
 				const expirationTime = timestamps.get(ctx.source.user.id) + cooldownAmount;
 				if (now < expirationTime && !client.data.owners.includes(ctx.source.user.id)) {
 					const timeLeft = Math.floor(expirationTime - now);
-					const embed = this.getErrorEmbed(`Please wait **${ms(timeLeft)}** before reusing the command again.`);
 					ctx.send({
-						embeds: [embed],
+						embeds: [this.getErrorEmbed(client.messages.parseVariables(client.messages.get(ctx.language, 'command.cooldown'), { time: ms(timeLeft) }))],
 					});
 					return next();
 				}
 			}
 		}
+
+		await this.checks.run(ctx, command);
 
 		try {
 			const success = await command.run(ctx);
@@ -243,9 +250,8 @@ export = class TextCommandHandler {
 				setTimeout(() => timestamps.delete(ctx.source.user.id), cooldownAmount);
 			}
 		} catch (e: any) {	// eslint-disable-line @typescript-eslint/no-explicit-any
-			const embed = this.getErrorEmbed(`Something went wrong executing that command\nError Message: \`${e.message ?? e}\``, true);
 			ctx.reply({
-				embeds: [embed],
+				embeds: [this.getErrorEmbed(client.messages.parseVariables(ctx.client.messages.get(ctx.language, 'errors.body') + '\n' + ctx.client.messages.get(ctx.language, 'errors.message'), { error: e.message ?? e }), true)],
 				allowedMentions: { repliedUser: false },
 			});
 			Utils.logger.error(e);

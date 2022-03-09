@@ -1,0 +1,173 @@
+{
+    "en": {
+        "errors": {
+            "title": "Error!",
+            "header": "An error occurred!",
+            "body": "An error occurred while completing that operation! Please try again later.",
+            "tryAgain": "Please try again later.",
+            "message": "Error message: %error%"
+        },
+        "command": {
+            "notImplemented": "This command is not yet implemented.",
+            "ownerOnly": "This command is only available to the bot owner.",
+            "serverOwnerOnly": "This command is only available to the server owner.",
+            "botInsufficientPerissions": "Sorry, but I need the following permissions to perform this command -%nl%%perms%",
+            "userInsufficientPermissions": "Sorry, but you don\"t have enough permissions to perform this command. You need the following permissions -%nl%%perms%",
+            "nsfw": "Sorry, but this command can only be used in NSFW channels.",
+            "cooldown": "Please wait %time% before using this command again.",
+            "arguments": "You didn\"t provide any arguments, %user%!%nl%The proper usage would be: %nl%```html%nl%%usage%%nl%```"
+        }
+    },
+    "hi": {
+        "errors": {
+            "title": "त्रुटि!",
+            "header": "एक त्रुटि हुई!",
+            "body": "उस ऑपरेशन को पूरा करते समय एक त्रुटि हुई! कृपया बाद में पुन: प्रयास करें।",
+            "tryAgain": "कृपया बाद में पुन: प्रयास करें।",
+            "message": "त्रुटि संदेश:% त्रुटि%"
+        },
+        "command": {
+            "notImplemented": "यह आदेश अभी तक लागू नहीं किया गया है।",
+            "ownerOnly": "यह आदेश केवल बॉट मालिक के लिए उपलब्ध है।",
+            "serverOwnerOnly": "यह आदेश केवल के लिए उपलब्ध है सर्वर स्वामी।",
+            "botInsufficientPerissions": "क्षमा करें, लेकिन मुझे इस आदेश को निष्पादित करने के लिए निम्नलिखित अनुमतियों की आवश्यकता है -%nl%%perms%",
+            "userInsufficientPermissions": "क्षमा करें, लेकिन आपके पास इस आदेश को करने के लिए पर्याप्त अनुमति नहीं है। आपको निम्नलिखित अनुमतियों की आवश्यकता है -%nl% %perms%",
+            "nsfw": "क्षमा करें, लेकिन यह आदेश केवल NSFW चैनलों में उपयोग किया जा सकता है।",
+            "cooldown": "कृपया इस आदेश का पुन: उपयोग करने से पहले %time% प्रतीक्षा करें।",
+            "arguments": "आपने कोई तर्क नहीं दिया, %user%!%nl%उचित उपयोग होगा: %nl%```html%nl%%usage%%nl%```"
+        }
+    },
+    "bg": {
+        "errors": {
+            "title": "Грешка!",
+            "header": "Възникна грешка!",
+            "body": "Възникна грешка при завършване на тази операция! Моля, опитайте отново по-късно.",
+            "tryAgain": "Моля, опитайте отново по-късно.",
+            "message": "Съобщение за грешка: %error%"
+        },
+        "command": {
+            "notImplemented": "Тази команда все още не е внедрена.",
+            "ownerOnly": "Тази команда е достъпна само за собственика на бота.",
+            "serverOwnerOnly": "Тази команда е достъпна само за собственика на сървъра.",
+            "botInsufficientPerissions": "Съжалявам, но имам нужда от следните разрешения, за да изпълня тази команда -%nl% %perms%",
+            "userInsufficientPermissions": "Съжаляваме, но нямате достатъчно разрешения, за да изпълните тази команда. Нуждаете се от следните разрешения -%nl%%perms%",
+            "nsfw": "Съжаляваме, но тази команда може да се използва само в NSFW канали.",
+            "cooldown": "Моля, моля. изчакайте %time%, преди да използвате тази команда отново.",
+            "arguments": "Не сте предоставили никакви аргументи, %user%!%nl%Правилното използване би било: %nl%```html%nl%%usage%%nl%` ``"
+        }
+    },
+    "zh": {
+        "errors": {
+            "title": "错误！",
+            "header": "发生错误！",
+            "body": "完成该操作时发生错误！请稍后再试。",
+            "tryAgain": "请稍后再试。",
+            "message": "错误消息：%error%"
+        },
+        "command": {
+            "notImplemented": "此命令尚未实现。",
+            "ownerOnly": "此命令仅对 bot 所有者可用。",
+            "serverOwnerOnly": "此命令仅对服务器所有者可用。",
+            "botInsufficientPerissions": "对不起，但我需要以下权限才能执行此命令 -%nl% %perms%",
+            "userInsufficientPermissions": "抱歉，您没有足够的权限执行此命令。您需要以下权限 -%nl%%perms%",
+            "nsfw": "抱歉，此命令只能在 NSFW 频道中使用。",
+            "cooldown": "请在再次使用此命令之前等待 %time%。",
+            "arguments": "你没有提供任何参数，%user%!%nl%正确的用法是：%nl%```html%nl%%usage%%nl%` ``"
+        }
+    },
+    "hr": {
+        "errors": {
+            "title": "Pogreška!",
+            "header": "Došlo je do pogreške!",
+            "body": "Došlo je do pogreške pri dovršavanju te operacije! Molimo pokušajte ponovo kasnije.",
+            "tryAgain": "Molimo pokušajte ponovo kasnije.",
+            "message": "Poruka o pogrešci: %error%"
+        },
+        "command": {
+            "notImplemented": "Ova naredba još nije implementirana.",
+            "ownerOnly": "Ova je naredba dostupna samo vlasniku bota.",
+            "serverOwnerOnly": "Ova naredba dostupna je samo vlasniku poslužitelja.",
+            "botInsufficientPerissions": "Oprostite, ali trebam sljedeća dopuštenja za izvođenje ove naredbe -%nl% %perms%",
+            "userInsufficientPermissions": "Oprostite, ali nemate dovoljno dopuštenja za izvođenje ove naredbe. Potrebna su vam sljedeća dopuštenja -%nl%%perms%",
+            "nsfw": "Oprostite, ali ova se naredba može koristiti samo u NSFW kanalima.",
+            "cooldown": "Molim vas. pričekajte %time% prije ponovnog korištenja ove naredbe.",
+            "arguments": "Niste naveli nikakve argumente, %user%!%nl%Pravilna upotreba bi bila: %nl%```html%nl%%usage%%nl%` ``"
+        }
+    },
+    "cs": {
+        "errors": {
+            "title": "Chyba!",
+            "header": "Došlo k chybě!",
+            "body": "Při dokončení operace došlo k chybě! Zkuste to znovu později.",
+            "tryAgain": "Zkuste to znovu později.",
+            "message": "Chybová zpráva: %error%"
+        },
+        "command": {
+            "notImplemented": "Tento příkaz ještě není implementován.",
+            "ownerOnly": "Tento příkaz je dostupný pouze vlastníkovi robota.",
+            "serverOwnerOnly": "Tento příkaz je dostupný pouze vlastník serveru.",
+            "botInsufficientPerissions": "Omlouvám se, ale k provedení tohoto příkazu potřebuji následující oprávnění -%nl%%perms%",
+            "userInsufficientPermissions": "Omlouvám se, ale k provedení tohoto příkazu nemáte dostatečná oprávnění. Potřebujete následující oprávnění -%nl% %perms%",
+            "nsfw": "Došlo k chybě!0",
+            "cooldown": "Došlo k chybě!1",
+            "arguments": "Došlo k chybě!2"
+        }
+    },
+    "da": {
+        "errors": {
+            "title": "Fejl!",
+            "header": "Der opstod en fejl!",
+            "body": "Der opstod en fejl under fuldførelse af den handling! Prøv venligst igen senere.",
+            "tryAgain": "Prøv venligst igen senere.",
+            "message": "Fejlmeddelelse: %error%"
+        },
+        "command": {
+            "notImplemented": "Denne kommando er endnu ikke implementeret.",
+            "ownerOnly": "Denne kommando er kun tilgængelig for bot-ejeren.",
+            "serverOwnerOnly": "Denne kommando er kun tilgængelig for serverejeren.",
+            "botInsufficientPerissions": "Beklager, men jeg har brug for følgende tilladelser for at udføre denne kommando -%nl% %perms%",
+            "userInsufficientPermissions": "Beklager, men du har ikke nok tilladelser til at udføre denne kommando. Du har brug for følgende tilladelser -%nl%%perms%",
+            "nsfw": "Beklager, men denne kommando kan kun bruges i NSFW-kanaler.",
+            "cooldown": "Venligst vent %time%, før du bruger denne kommando igen.",
+            "arguments": "Du har ikke givet nogen argumenter, %user%!%nl%Den korrekte brug ville være: %nl%```html%nl%%usage%%nl%` ``"
+        }
+    },
+    "nl": {
+        "errors": {
+            "title": "Fout!",
+            "header": "Er is een fout opgetreden!",
+            "body": "Er is een fout opgetreden tijdens het voltooien van die bewerking! Probeer het later opnieuw.",
+            "tryAgain": "Probeer het later opnieuw.",
+            "message": "Foutbericht: %error%"
+        },
+        "command": {
+            "notImplemented": "Deze opdracht is nog niet geïmplementeerd.",
+            "ownerOnly": "Deze opdracht is alleen beschikbaar voor de eigenaar van de bot.",
+            "serverOwnerOnly": "Deze opdracht is alleen beschikbaar voor de eigenaar van de server.",
+            "botInsufficientPerissions": "Sorry, maar ik heb de volgende rechten nodig om deze opdracht uit te voeren -%nl% %perms%",
+            "userInsufficientPermissions": "Sorry, maar je hebt niet genoeg rechten om deze opdracht uit te voeren. Je hebt de volgende rechten nodig -%nl%%perms%",
+            "nsfw": "Sorry, maar deze opdracht kan alleen worden gebruikt in NSFW-kanalen.",
+            "cooldown": "Gelieve wacht %time% voordat je dit commando opnieuw gebruikt.",
+            "arguments": "Je hebt geen argumenten gegeven, %user%!%nl%Het juiste gebruik zou zijn: %nl%```html%nl%%usage%%nl%` ``"
+        }
+    },
+    "tr": {
+        "errors": {
+            "title": "Hata!",
+            "header": "Bir hata oluştu!",
+            "body": "Bu işlem tamamlanırken bir hata oluştu! Lütfen daha sonra tekrar deneyin.",
+            "tryAgain": "Lütfen daha sonra tekrar deneyin.",
+            "message": "Hata mesajı: %error%"
+        },
+        "command": {
+            "notImplemented": "Bu komut henüz uygulanmadı.",
+            "ownerOnly": "Bu komut yalnızca bot sahibi tarafından kullanılabilir.",
+            "serverOwnerOnly": "Bu komut yalnızca sunucu sahibi tarafından kullanılabilir.",
+            "botInsufficientPerissions": "Üzgünüm, ancak bu komutu gerçekleştirmek için aşağıdaki izinlere ihtiyacım var -%nl% %perms%",
+            "userInsufficientPermissions": "Üzgünüz, ancak bu komutu gerçekleştirmek için yeterli izniniz yok. Aşağıdaki izinlere ihtiyacınız var -%nl%%perms%",
+            "nsfw": "Üzgünüz, ancak bu komut yalnızca NSFW kanallarında kullanılabilir.",
+            "cooldown": "Lütfen bu komutu tekrar kullanmadan önce %time% bekleyin.",
+            "arguments": "Hiçbir argüman sağlamadınız, %user%!%nl%Doğru kullanım: %nl%```html%nl%%usage%%nl%` ``"
+        }
+    }
+}

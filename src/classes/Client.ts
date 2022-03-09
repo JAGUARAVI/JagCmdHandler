@@ -112,7 +112,7 @@ class Client extends BaseClient {
 			return target?.commands.set(data).then(async (result) => {
 				if (target != this.application) await Promise.all(result.map(async (command) => {
 					const cmd = this.commands.get(command.name);
-					if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ permissions: (cmd.permissions.build as (command: ApplicationCommand, guild: Guild) => Array<ApplicationCommandPermissionData>)(command, guild) });
+					if (typeof cmd?.permissions?.build === 'function') await command.permissions.add({ guild: guild, permissions: (cmd.permissions.build as (command: ApplicationCommand, guild: Guild) => Array<ApplicationCommandPermissionData>)(command, guild) });
 				}));
 				this.applicationCommands.set(guild ? guild.id : '0', result);
 				return result;

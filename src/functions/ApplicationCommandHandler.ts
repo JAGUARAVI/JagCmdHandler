@@ -19,8 +19,8 @@ export = class InteractionCommandHandler {
 	}
 
 	async getLanguage(client: Client, interaction: CommandInteraction): Promise<string> {
-		if (interaction.guildLocale) return interaction.guildLocale.substring(0,2);
-		else if (interaction.locale) return interaction.locale.substring(0,2);
+		if (interaction.guildLocale) return interaction.guildLocale.substring(0, 2);
+		else if (interaction.locale) return interaction.locale.substring(0, 2);
 		else return 'en';
 	}
 
@@ -124,10 +124,10 @@ export = class InteractionCommandHandler {
 				return next();
 			}
 
-			if (command.permissions.clientPerms) {
-				if (!ctx.source.guild.me.permissions.has(command.permissions.clientPerms) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.clientPerms)) {
+			if (command.permissions.client) {
+				if (!ctx.source.guild.me.permissions.has(command.permissions.client) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.client)) {
 					const embed = this.getErrorEmbed(
-						`Sorry, but i need the following permisions to perform this command -\n${command.permissions.clientPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`, true
+						client.messages.parseVariables(client.messages.get(ctx.language, 'command.botInsufficientPerissions'), { perms: command.permissions.client.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
 						embeds: [embed]
@@ -136,11 +136,10 @@ export = class InteractionCommandHandler {
 				}
 			}
 
-			if (command.permissions.userPerms) {
-				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.userPerms) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.userPerms)) {
+			if (command.permissions.user) {
+				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.user) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.user)) {
 					const embed = this.getErrorEmbed(
-						`Sorry, but you don't have enough permissions to execute this command. You need the following permissions -\n${command.permissions.userPerms.map((p: string) => `> \`- ${p}\``).join('\n')}`,
-						true
+						client.messages.parseVariables(client.messages.get(ctx.language, 'command.userInsufficientPerissions'), { perms: command.permissions.user.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
 						embeds: [embed]
@@ -150,9 +149,8 @@ export = class InteractionCommandHandler {
 			}
 
 			if (command.config.nsfw && !(ctx.source.channel as TextChannel).nsfw) {
-				const embed = this.getErrorEmbed('Sorry, i can\'t run nsfw commands on a non-nsfw channel.');
 				ctx.send({
-					embeds: [embed],
+					embeds: [this.getErrorEmbed(client.messages.get(ctx.language, 'command.nsfw'))],
 				});
 				return next();
 			}
@@ -160,14 +158,13 @@ export = class InteractionCommandHandler {
 			if (!this.cooldowns.has(command.config.name)) this.cooldowns.set(command.config.name, new Collection());
 			now = Date.now();
 			timestamps = this.cooldowns.get(command.config.name);
-			cooldownAmount = (command.config.cooldown || 3) * 1000;
+			cooldownAmount = (command.config.cooldown || 5) * 1000;
 			if (timestamps.has(ctx.source.user.id)) {
 				const expirationTime = timestamps.get(ctx.source.user.id) + cooldownAmount;
 				if (now < expirationTime && !client.data.owners.includes(ctx.source.user.id)) {
 					const timeLeft = Math.floor(expirationTime - now);
-					const embed = this.getErrorEmbed(`Please wait **${ms(timeLeft)}** before reusing the command again.`);
 					ctx.send({
-						embeds: [embed],
+						embeds: [this.getErrorEmbed(client.messages.parseVariables(client.messages.get(ctx.language, 'command.cooldown'), { time: ms(timeLeft) }))],
 					});
 					return next();
 				}
@@ -183,9 +180,8 @@ export = class InteractionCommandHandler {
 				setTimeout(() => timestamps.delete(ctx.source.user.id), cooldownAmount);
 			}
 		} catch (e: any) {	// eslint-disable-line  @typescript-eslint/no-explicit-any
-			const embed = this.getErrorEmbed(`Something went wrong executing that command\nError Message: \`${e.message ?? e}\``, true);
 			ctx.reply({
-				embeds: [embed],
+				embeds: [this.getErrorEmbed(client.messages.parseVariables(ctx.client.messages.get(ctx.language, 'errors.body') + '\n' + ctx.client.messages.get(ctx.language, 'errors.message'), { error: e.message ?? e }), true)],
 				allowedMentions: { repliedUser: false },
 				ephemeral: true
 			});
