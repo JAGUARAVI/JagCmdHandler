@@ -63,6 +63,7 @@ class Client extends BaseClient {
 		});
 	}
 
+	/** Registers a command from file path. */
 	async registerCommand(dir: string, category: string): Promise<boolean | string> {
 		try {
 			const Command = await import(dir);
@@ -83,6 +84,7 @@ class Client extends BaseClient {
 		}
 	}
 
+	/** Registers commands from directory path */
 	async registerCommands(dir: string): Promise<Collection<string, BaseCommand>> {
 		const files = await fs.readdir(dir);
 		for (const file of files) {
@@ -97,6 +99,7 @@ class Client extends BaseClient {
 		return this.commands;
 	}
 
+	/** Registers application commands from Client#commands globally or for a guild if it is specified. */
 	async registerApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>> {
 		const target = guild ?? this.application;
 
@@ -120,6 +123,7 @@ class Client extends BaseClient {
 		});
 	}
 
+	/** Unregisters application commands globally or for a guild if it is specified. */
 	async unregisterApplicationCommands(guild?: Guild): Promise<Collection<string, ApplicationCommand<{ guild?: GuildResolvable }>>> {
 		const target = guild ?? this.application;
 
@@ -127,8 +131,8 @@ class Client extends BaseClient {
 		return target.commands.set([]);
 	}
 
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	async registerEvents(dir: string, target?: any): Promise<void> { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+	/** Regsiters events from directory path */
+	async registerEvents(dir: string, target?: any): Promise<void> { /* eslint-disable-line @typescript-eslint/explicit-module-boundary-types */  /* eslint-disable-line @typescript-eslint/no-explicit-any */
 		const defaultTarget = target == undefined;
 		if (defaultTarget) target = this;
 		const files = await fs.readdir(dir);
@@ -151,6 +155,7 @@ class Client extends BaseClient {
 		}));
 	}
 
+	/** Initiates the Client. Necessary for basic functions (function added in JagCmdHandler) to work.*/
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	init(): Promise<any> {
 		return Promise.all([

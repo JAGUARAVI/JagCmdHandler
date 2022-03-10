@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { ActionRow, ButtonComponent, Embed, TextChannel, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
+import { ActionRow, ButtonComponent, Embed, TextChannel, EmbedAuthorData, EmbedFooterData, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
@@ -18,57 +18,73 @@ const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
 
 
 export = class EasyEmbedPages {
+	/** Channel object or an object with send as a function which returns a `Message`. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	channel: TextChannel | any;
+	channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> };
+	/** The content to be dynamically adjusted and displayed */
 	content: MessageOptions | MessagePayload;
-	user: string;
+	/** UserId of person who can interact with the embed. */
+	user?: string;
+	/** Message object which contains the interactable embed */
 	message: Message;
+	/** Button collector used to collect interactions. */
 	collector: InteractionCollector<ButtonInteraction>;
 
+	/** Embed pages... Automagically generated */
 	pages: Array<Embed>;
+	/** Current page number. */
 	page: number;
+	/** Pages with embed data for extra configuration for each page. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	dataPages: Array<any>;
 
+	/** General embed color. (Can be specified differently for each page using `dataPages`) */
 	color?: string;
+	/** General embed url. (Can be specified differently for each page using `dataPages`) */
 	url?: string;
+	/** General embed title. (Can be specified differently for each page using `dataPages`) */
 	title?: string;
 
-	author?: {
-		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-		[a: string]: any;
-	};
-	footer?: {
-		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-		[a: string]: any;
-	};
+	/** General author object. (Can be specified differently for each page using `dataPages`) */
+	author?: EmbedAuthorData
+	/** General footer object. (Can be specified differently for each page using `dataPages`) */
+	footer?: EmbedFooterData
 
+	/** General embed thumbnail. (Can be specified differently for each page using `dataPages`) */
 	thumbnail?: string;
+	/** General embed large image. (Can be specified differently for each page using `dataPages`) */
 	image?: string;
+	/** General embed description. (Can be specified differently for each page using `dataPages`) */
 	description?: string;
+	/** Function used to modify each embed page for better customizability. Edit the embed object provided instead of returning one. */
 	pageGen?: (embed: Embed) => void | Promise<void>;
+	/** Whether to display the refresh button used by users to manually refrest embed data. */
 	refresh: boolean;
+	/** Function called to refresh embed data when user manually requests to. Not needed if `refresh` is false. */
 	refreshData?: () => unknown;
+	/** Whether to send the paginate embed in an ephemeral message. (Only for application command response.) */
 	ephemeral: boolean;
 
+	/** The time after which the button collector stops (in milliseconds). */
 	time: number;
+	/** Used to store timeouts. */
 	timeout: NodeJS.Timeout;
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	constructor(channel: TextChannel | any, data: { [key: string]: any }) {
+	constructor(channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> }, data: { [key: string]: any }) {
 		this.channel = channel;
-		this.pages = [];											  // embed pages... automagically generated xD
-		this.page = 0;												  // currect page number
-		this.dataPages = data.pages || [];							  // page data for extra configuration
-		this.color = data.color;									  // embed color
-		this.url = data.url;										  // embed url
-		this.title = data.title;									  // embed title
-		this.author = data.author;									  // embed author object
-		this.footer = data.footer;									  // embed footer object
-		this.thumbnail = data.thumbnail;							  // embed thumbnail
-		this.image = data.image;									  // embed large image
-		this.description = data.content || data.description;		  // the content to be presented dynamically
-		this.pageGen = data.pageGen || function () { /* eslint-disable-line @typescript-eslint/no-empty-function */ }; // the function to customize embeds
+		this.pages = [];
+		this.page = 0;
+		this.dataPages = data.pages || [];
+		this.color = data.color;
+		this.url = data.url;
+		this.title = data.title;
+		this.author = data.author;
+		this.footer = data.footer;
+		this.thumbnail = data.thumbnail;
+		this.image = data.image;
+		this.description = data.content || data.description;
+		this.pageGen = data.pageGen || function () { /* eslint-disable-line @typescript-eslint/no-empty-function */ };
 		this.ephemeral = data.ephemeral || false;
 		this.refresh = data.refresh || false;
 		this.refreshData = data.refreshData || function () { return [{}]; };
@@ -221,6 +237,7 @@ export = class EasyEmbedPages {
 		}
 	}
 
+	/** Sends the Paginate embed and starts the button collection. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async start(options?: { [key: string]: any }, page = 0): Promise<Message> {
 		this.page = options.page || page;
@@ -251,6 +268,7 @@ export = class EasyEmbedPages {
 		return this.message;
 	}
 
+	/** Use this to update the data of the pages. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async update(options: { [key: string]: any }, page = 0): Promise<Message> {
 		this.page = options.page || page;
@@ -293,6 +311,7 @@ export = class EasyEmbedPages {
 		return this.message;
 	}
 
+	/** Stops the button collector. */
 	async stop(): Promise<void> {
 		if (this.collector) this.collector.stop();
 		if (this.message) this.message.edit(this.generateMessage(true)).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
@@ -311,7 +330,7 @@ export = class EasyEmbedPages {
 	}
 
 	async _handleInteraction(interaction: ButtonInteraction): Promise<void> {
-		if (interaction.user.id != this.user) {
+		if (this.user && interaction.user.id != this.user) {
 			return interaction.reply({
 				embeds: [
 					new Embed()

@@ -18,12 +18,14 @@ export = class InteractionCommandHandler {
 		this.client = client;
 	}
 
+	/** Extend this function to return the language you want to use for error embeds. */
 	async getLanguage(client: Client, interaction: CommandInteraction): Promise<string> {
 		if (interaction.guildLocale) return interaction.guildLocale.substring(0, 2);
 		else if (interaction.locale) return interaction.locale.substring(0, 2);
 		else return 'en';
 	}
 
+	/** Extend this function to customize error embeds.. */
 	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
 		if (!language) language = 'en';
 		const embed = new Embed()
@@ -34,6 +36,7 @@ export = class InteractionCommandHandler {
 		return embed;
 	}
 
+	/** This is the function which handles the interactions. */
 	async handle(client: Client, interaction: CommandInteraction, next: () => void, defaultChecks = true): Promise<void> {
 		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand() && !interaction.isAutocomplete()) return next();
 

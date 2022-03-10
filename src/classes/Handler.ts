@@ -1,7 +1,8 @@
 import Middleware from './base/Middleware';
 import Client from './Client';
 
-export default class CommandHandler extends Middleware {
+/** Same as Middleware but has client present in middleware arguments. */
+export = class CommandHandler extends Middleware {
 	client: Client;
 
 	constructor(client: Client){

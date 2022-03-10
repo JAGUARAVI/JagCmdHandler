@@ -12,7 +12,7 @@ export = class TextCommandHandler {
 	client: Client;
 
 	cooldowns = new Collection<string, Collection<string, number>>();
-	messageReplies = new Collection<string, Array<string>>();
+	messageReplies = new Map<string, Array<string>>();
 	checks = new Middleware();
 
 	constructor(client: Client) {
@@ -22,19 +22,23 @@ export = class TextCommandHandler {
 			this.messageReplies.get(message.id)?.map(async (id) => {
 				await message.channel.messages.cache.get(id)?.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
 			});
+			this.messageReplies.delete(message.id);
 		});
 	}
 
+	/** Extend this function to return the prefix to be used. */
 	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 	async getPrefix(client: Client, message: Message): Promise<string | Array<string>> {
 		return '!';
 	}
 
+	/** Extend this function to return the language you want to use for error embeds. */
 	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 	async getLanguage(client: Client, message: Message): Promise<string> {
 		return 'en';
 	}
 
+	/** Extend this function to customize error embeds.. */
 	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
 		if (!language) language = 'en';
 		const embed = new Embed()
@@ -45,7 +49,7 @@ export = class TextCommandHandler {
 		return embed;
 	}
 
-
+	/** This is the function which handles the messages. */
 	async handle(client: Client, message: Message, next: () => void, defaultChecks = true): Promise<void> {
 		if (message.author.bot) return next();
 

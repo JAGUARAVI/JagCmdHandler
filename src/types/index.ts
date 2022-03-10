@@ -5,6 +5,10 @@ export interface Message extends BaseMessage {
 	user?: User;
 }
 
+export interface Data {
+    [key: string]: string | Data
+}
+
 export interface CommandContext {
 	source: Message | Interaction;
 	/** Only for text commands. */

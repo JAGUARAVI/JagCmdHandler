@@ -8,6 +8,7 @@ export default class Resolve {
 		this.client = client;
 	}
 
+	/** Resolves a User object from search string. */
 	async user(search: string): Promise<User | void> {
 		if (!search || typeof search !== 'string') return null;
 		let user = null;
@@ -18,6 +19,7 @@ export default class Resolve {
 		return user;
 	}
 
+	/** Resolves a GuildMember from search string and Guild to search from. */
 	async member(search: string, guild: Guild): Promise<GuildMember | void> {
 		if (!search || typeof search !== 'string') return null;
 		const user = await this.user(search);
@@ -25,6 +27,7 @@ export default class Resolve {
 		return guild.members.fetch(user).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
 	}
 
+	/** Resolves a Role from search string and Guild to search from. */
 	role(search: string, guild: Guild): Role | null {
 		if (!search || typeof search !== 'string') return null;
 		let role = null;
@@ -34,6 +37,7 @@ export default class Resolve {
 		return role;
 	}
 
+	/** Resolves a Channel from search string and Guild to search from. */
 	channel(search: string, guild: Guild): Channel | null {
 		if (!search || typeof search !== 'string') return null;
 		let channel = null;

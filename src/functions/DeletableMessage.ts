@@ -2,15 +2,21 @@ import { ActionRow, ButtonComponent, Embed, TextChannel, GuildMember, User, Inte
 import { Message, MessageOptions } from '../types';
 
 export = class DeletableMessage {
-	channel: TextChannel;
+	/** Channel object or an object with send as a function which returns a `Message`. */
+	channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> };
+	/** The content to send. */
 	content: MessageOptions;
-	user: string;
+	/** UserId of person who can delete the message using the button. */
+	user?: string;
+	/** Object which contains the message. */
 	message: Message;
+	/** Button collector used to collect interactions. */
 	collector: InteractionCollector<ButtonInteraction<CacheType>>;
+	/** The time after which the button collector stops (in milliseconds). */
 	time: number;
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	constructor(channel: TextChannel | any, content: MessageOptions) {
+	constructor(channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> }, content: MessageOptions) {
 		this.channel = channel;
 		this.content = content;
 		this.time = content.time || 300000;

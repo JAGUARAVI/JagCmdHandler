@@ -15,6 +15,7 @@ export default class BaseCommand {
 		this.data = data.data;
 	}
 
+	/** Command body which gets executed. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async run(ctx: CommandContext): Promise<any> {
 		ctx.reply({

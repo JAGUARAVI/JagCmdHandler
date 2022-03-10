@@ -1,9 +1,6 @@
 import { Locale } from 'discord-api-types/v10';
 import * as DefaultData from '../languages/default.json';
-
-interface Data {
-    [key: string]: string | Data
-}
+import {Data} from '../types/index';
 
 export = class Messages {
     data: Data;
@@ -12,12 +9,14 @@ export = class Messages {
         this.data = Object.assign({}, DefaultData, data);
     }
 
+    /** Import data. */
     import(data: Data, language?: string): this {
         if (language) this.data = Object.assign(this.data, { [language]: data });
         else this.data = Object.assign(this.data, data);
         return this;
     }
 
+    /** Get data from object path. (Example- 'en.errors.title') */
     get(...keys: Array<string>): string {
         if (!keys.length) return this.data.toString();
 
@@ -40,6 +39,7 @@ export = class Messages {
         return ob.toString();
     }
 
+    /** Parse variables in string. */
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     parseVariables(str: string, data: { [key: string]: any } = {}): string {
         data.nl = '\n';
@@ -49,6 +49,7 @@ export = class Messages {
         });
     }
 
+    /** Get keys of objects from path. */
     getKeys(...keys: Array<string>): Array<string> {
         if (!keys.length) return Object.keys(this.data);
 
