@@ -46,9 +46,9 @@ export = class EasyEmbedPages {
 	title?: string;
 
 	/** General author object. (Can be specified differently for each page using `dataPages`) */
-	author?: EmbedAuthorData
+	author?: EmbedAuthorData;
 	/** General footer object. (Can be specified differently for each page using `dataPages`) */
-	footer?: EmbedFooterData
+	footer?: EmbedFooterData;
 
 	/** General embed thumbnail. (Can be specified differently for each page using `dataPages`) */
 	thumbnail?: string;
