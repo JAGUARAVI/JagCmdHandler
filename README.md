@@ -18,7 +18,7 @@ Jag Cmd Handler is and advanced [Discord.js 14](https://discord.js.org/) command
   
 ## Documentation
 
-[Documentation](./docs/README.md)
+[Documentation](./docs/modules.md)
 
 
 ## License
