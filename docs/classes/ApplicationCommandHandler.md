@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L15)
+[src/functions/ApplicationCommandHandler.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L15)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L12)
+[src/functions/ApplicationCommandHandler.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L12)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:14](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L14)
+[src/functions/ApplicationCommandHandler.ts:14](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L14)
 
 ## Methods
 
@@ -68,7 +68,7 @@ Extend this function to customize error embeds..
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:29](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L29)
+[src/functions/ApplicationCommandHandler.ts:29](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L29)
 
 ___
 
@@ -91,7 +91,7 @@ Extend this function to return the language you want to use for error embeds.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:22](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L22)
+[src/functions/ApplicationCommandHandler.ts:22](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L22)
 
 ___
 
@@ -116,4 +116,4 @@ This is the function which handles the interactions.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/functions/ApplicationCommandHandler.ts#L40)
+[src/functions/ApplicationCommandHandler.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L40)

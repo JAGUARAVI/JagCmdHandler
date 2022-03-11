@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:65](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L65)
+[src/types/index.ts:65](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L65)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L66)
+[src/types/index.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L66)
 
 ___
 
@@ -170,7 +170,7 @@ DefaultMesageOption.files
 
 #### Defined in
 
-[src/types/index.ts:78](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L78)
+[src/types/index.ts:78](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L78)
 
 ___
 
@@ -184,7 +184,7 @@ DefaultMesageOption.flags
 
 #### Defined in
 
-[src/types/index.ts:76](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L76)
+[src/types/index.ts:76](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L76)
 
 ___
 
@@ -210,7 +210,7 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L68)
+[src/types/index.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L68)
 
 ___
 
@@ -264,7 +264,7 @@ Only for paginate & deletableMessage
 
 #### Defined in
 
-[src/types/index.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L74)
+[src/types/index.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L74)
 
 ___
 
@@ -294,7 +294,7 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:72](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L72)
+[src/types/index.ts:72](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L72)
 
 ___
 
@@ -310,4 +310,4 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:70](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L70)
+[src/types/index.ts:70](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L70)

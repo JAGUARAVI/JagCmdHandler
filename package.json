@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
+    "build:full": "npm run build && npm run docsgen",
     "lint": "eslint ./src --ext .ts",
     "docsgen": "typedoc --plugin typedoc-plugin-markdown --out docs src/"
   },

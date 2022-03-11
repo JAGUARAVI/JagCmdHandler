@@ -16,6 +16,7 @@
 
 ### Methods
 
+- [autocomplete](BaseCommand.md#autocomplete)
 - [run](BaseCommand.md#run)
 
 ## Constructors
@@ -35,7 +36,7 @@
 
 #### Defined in
 
-[src/classes/base/BaseCommand.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/classes/base/BaseCommand.ts#L12)
+[src/classes/base/BaseCommand.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L13)
 
 ## Properties
 
@@ -45,7 +46,7 @@
 
 #### Defined in
 
-[src/classes/base/BaseCommand.ts:4](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/classes/base/BaseCommand.ts#L4)
+[src/classes/base/BaseCommand.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L5)
 
 ___
 
@@ -59,7 +60,7 @@ ___
 
 #### Defined in
 
-[src/classes/base/BaseCommand.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/classes/base/BaseCommand.ts#L6)
+[src/classes/base/BaseCommand.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L7)
 
 ___
 
@@ -69,9 +70,31 @@ ___
 
 #### Defined in
 
-[src/classes/base/BaseCommand.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/classes/base/BaseCommand.ts#L5)
+[src/classes/base/BaseCommand.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L6)
 
 ## Methods
+
+### autocomplete
+
+▸ **autocomplete**(`interaction`): `Promise`<`ApplicationCommandOptionChoice`[]\>
+
+Use if you have an Autocomplete option. Return the data and don't use `AutocompleteInteraction#respond`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `interaction` | `AutocompleteInteraction`<`CacheType`\> |
+
+#### Returns
+
+`Promise`<`ApplicationCommandOptionChoice`[]\>
+
+#### Defined in
+
+[src/classes/base/BaseCommand.ts:21](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L21)
+
+___
 
 ### run
 
@@ -91,4 +114,4 @@ Command body which gets executed.
 
 #### Defined in
 
-[src/classes/base/BaseCommand.ts:20](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/classes/base/BaseCommand.ts#L20)
+[src/classes/base/BaseCommand.ts:27](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/base/BaseCommand.ts#L27)

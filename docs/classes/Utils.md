@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[src/utils/index.ts:9](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/utils/index.ts#L9)
+[src/utils/index.ts:9](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/utils/index.ts#L9)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:8](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/utils/index.ts#L8)
+[src/utils/index.ts:8](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/utils/index.ts#L8)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/utils/index.ts#L12)
+[src/utils/index.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/utils/index.ts#L12)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/utils/index.ts#L11)
+[src/utils/index.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/utils/index.ts#L11)
 
 ___
 
@@ -133,4 +133,4 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:10](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/utils/index.ts#L10)
+[src/utils/index.ts:10](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/utils/index.ts#L10)

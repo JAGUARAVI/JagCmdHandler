@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L86)
+[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L86)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:82](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L82)
+[src/types/index.ts:82](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L82)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L85)
+[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L85)
 
 ___
 
@@ -141,7 +141,7 @@ Array containing Ids of bot owners (people who can use staff commands like eval.
 
 #### Defined in
 
-[src/types/index.ts:84](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L84)
+[src/types/index.ts:84](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L84)
 
 ___
 

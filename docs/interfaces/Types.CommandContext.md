@@ -32,7 +32,7 @@ Only for text commands.
 
 #### Defined in
 
-[src/types/index.ts:17](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L17)
+[src/types/index.ts:17](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L17)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:22](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L22)
+[src/types/index.ts:22](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L22)
 
 ___
 
@@ -54,7 +54,7 @@ Only for text commands.
 
 #### Defined in
 
-[src/types/index.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L15)
+[src/types/index.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L15)
 
 ___
 
@@ -66,7 +66,7 @@ Whether the command is an ApplicationCommand.
 
 #### Defined in
 
-[src/types/index.ts:19](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L19)
+[src/types/index.ts:19](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L19)
 
 ___
 
@@ -78,7 +78,7 @@ Used for messages
 
 #### Defined in
 
-[src/types/index.ts:21](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L21)
+[src/types/index.ts:21](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L21)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L13)
+[src/types/index.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L13)
 
 ## Methods
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:25](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L25)
+[src/types/index.ts:25](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L25)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:26](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L26)
+[src/types/index.ts:26](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L26)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:23](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L23)
+[src/types/index.ts:23](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L23)
 
 ___
 
@@ -168,4 +168,4 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:24](https://github.com/JAGUARAVI/JagCmdHandler/blob/c9559fb/src/types/index.ts#L24)
+[src/types/index.ts:24](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L24)

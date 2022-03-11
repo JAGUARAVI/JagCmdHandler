@@ -44,7 +44,7 @@ export = class InteractionCommandHandler {
 		if (!command || command.config?.availibility == 1) return next();
 
 		if (interaction.isAutocomplete()) {
-			return;
+			return interaction.respond(await command.autocomplete(interaction));
 		}
 
 		const _reply = async (content: MessageOptions): Promise<Message> => {

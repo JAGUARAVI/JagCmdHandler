@@ -2,7 +2,7 @@ jag-cmd-handler / [Exports](modules.md)
 
 # Jag Cmd Handler [![CodeFactor](https://www.codefactor.io/repository/github/jaguaravi/jagcmdhandler/badge)](https://www.codefactor.io/repository/github/jaguaravi/jagcmdhandler)
 
-Jag Cmd Handler is and advanced [Discord.js 13](https://discord.js.org/) command handler. 
+Jag Cmd Handler is and advanced [Discord.js 14](https://discord.js.org/) command handler.
 
 ## Installation
 
@@ -12,18 +12,12 @@ Jag Cmd Handler is and advanced [Discord.js 13](https://discord.js.org/) command
     
 ## Usage/Examples
 
-```javascript
-const { Client } = require('jag-cmd-handler');
-
-// todo - add proper usage
-```
+**Coming soon™.**
 
   
 ## Documentation
 
-~~[Documentation](https://google.com)~~
-
-Will add docs soon.
+[Documentation](./docs/modules.md)
 
 ## License
 
