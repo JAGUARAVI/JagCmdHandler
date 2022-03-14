@@ -110,7 +110,7 @@ BaseClient.constructor
 
 #### Defined in
 
-[src/classes/Client.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L53)
+[src/classes/Client.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L53)
 
 ## Properties
 
@@ -124,7 +124,7 @@ BaseClient.application
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:611
+node_modules/discord.js/typings/index.d.ts:686
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:49](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L49)
+[src/classes/Client.ts:49](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L49)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:47](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L47)
+[src/classes/Client.ts:47](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L47)
 
 ___
 
@@ -158,7 +158,7 @@ BaseClient.channels
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:612
+node_modules/discord.js/typings/index.d.ts:687
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:45](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L45)
+[src/classes/Client.ts:45](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L45)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L35)
+[src/classes/Client.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L35)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L40)
+[src/classes/Client.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L40)
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:44](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L44)
+[src/classes/Client.ts:44](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L44)
 
 ___
 
@@ -222,7 +222,7 @@ BaseClient.guilds
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:614
+node_modules/discord.js/typings/index.d.ts:689
 
 ___
 
@@ -242,7 +242,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:42](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L42)
+[src/classes/Client.ts:42](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L42)
 
 ___
 
@@ -252,7 +252,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:51](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L51)
+[src/classes/Client.ts:51](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L51)
 
 ___
 
@@ -266,7 +266,7 @@ BaseClient.options
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:615
+node_modules/discord.js/typings/index.d.ts:690
 
 ___
 
@@ -280,7 +280,7 @@ BaseClient.readyTimestamp
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:617
+node_modules/discord.js/typings/index.d.ts:692
 
 ___
 
@@ -290,7 +290,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:50](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L50)
+[src/classes/Client.ts:50](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L50)
 
 ___
 
@@ -304,7 +304,7 @@ BaseClient.rest
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:334
+node_modules/discord.js/typings/index.d.ts:349
 
 ___
 
@@ -318,7 +318,7 @@ BaseClient.shard
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:619
+node_modules/discord.js/typings/index.d.ts:694
 
 ___
 
@@ -332,7 +332,7 @@ BaseClient.sweepers
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:618
+node_modules/discord.js/typings/index.d.ts:693
 
 ___
 
@@ -342,7 +342,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:48](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L48)
+[src/classes/Client.ts:48](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L48)
 
 ___
 
@@ -356,7 +356,7 @@ BaseClient.token
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:620
+node_modules/discord.js/typings/index.d.ts:695
 
 ___
 
@@ -370,7 +370,7 @@ BaseClient.user
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:622
+node_modules/discord.js/typings/index.d.ts:697
 
 ___
 
@@ -384,7 +384,7 @@ BaseClient.users
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:623
+node_modules/discord.js/typings/index.d.ts:698
 
 ___
 
@@ -394,7 +394,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L41)
+[src/classes/Client.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L41)
 
 ___
 
@@ -408,7 +408,7 @@ BaseClient.voice
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:624
+node_modules/discord.js/typings/index.d.ts:699
 
 ___
 
@@ -422,7 +422,7 @@ BaseClient.ws
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:625
+node_modules/discord.js/typings/index.d.ts:700
 
 ___
 
@@ -506,7 +506,7 @@ BaseClient.emojis
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:613
+node_modules/discord.js/typings/index.d.ts:688
 
 ___
 
@@ -524,7 +524,7 @@ BaseClient.readyAt
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:616
+node_modules/discord.js/typings/index.d.ts:691
 
 ___
 
@@ -542,7 +542,7 @@ BaseClient.uptime
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:621
+node_modules/discord.js/typings/index.d.ts:696
 
 ## Methods
 
@@ -589,7 +589,7 @@ BaseClient.destroy
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:626
+node_modules/discord.js/typings/index.d.ts:701
 
 ___
 
@@ -620,7 +620,7 @@ BaseClient.emit
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:652
+node_modules/discord.js/typings/index.d.ts:727
 
 ▸ **emit**<`S`\>(`event`, ...`args`): `boolean`
 
@@ -647,7 +647,7 @@ BaseClient.emit
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:653
+node_modules/discord.js/typings/index.d.ts:728
 
 ___
 
@@ -707,7 +707,7 @@ BaseClient.fetchGuildPreview
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:627
+node_modules/discord.js/typings/index.d.ts:702
 
 ___
 
@@ -731,7 +731,7 @@ BaseClient.fetchGuildTemplate
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:629
+node_modules/discord.js/typings/index.d.ts:704
 
 ___
 
@@ -755,7 +755,7 @@ BaseClient.fetchGuildWidget
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:634
+node_modules/discord.js/typings/index.d.ts:709
 
 ___
 
@@ -780,7 +780,7 @@ BaseClient.fetchInvite
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:628
+node_modules/discord.js/typings/index.d.ts:703
 
 ___
 
@@ -798,7 +798,7 @@ BaseClient.fetchPremiumStickerPacks
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:632
+node_modules/discord.js/typings/index.d.ts:707
 
 ___
 
@@ -822,7 +822,7 @@ BaseClient.fetchSticker
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:631
+node_modules/discord.js/typings/index.d.ts:706
 
 ___
 
@@ -840,7 +840,7 @@ BaseClient.fetchVoiceRegions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:630
+node_modules/discord.js/typings/index.d.ts:705
 
 ___
 
@@ -865,7 +865,7 @@ BaseClient.fetchWebhook
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:633
+node_modules/discord.js/typings/index.d.ts:708
 
 ___
 
@@ -889,7 +889,7 @@ BaseClient.generateInvite
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:635
+node_modules/discord.js/typings/index.d.ts:710
 
 ___
 
@@ -928,7 +928,7 @@ Initiates the Client. Necessary for basic functions (function added in JagCmdHan
 
 #### Defined in
 
-[src/classes/Client.ts:160](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L160)
+[src/classes/Client.ts:160](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L160)
 
 ___
 
@@ -946,7 +946,7 @@ BaseClient.isReady
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:637
+node_modules/discord.js/typings/index.d.ts:712
 
 ___
 
@@ -1034,7 +1034,7 @@ BaseClient.login
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:636
+node_modules/discord.js/typings/index.d.ts:711
 
 ___
 
@@ -1065,7 +1065,7 @@ BaseClient.off
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:655
+node_modules/discord.js/typings/index.d.ts:730
 
 ▸ **off**<`S`\>(`event`, `listener`): [`Client`](Client.md)
 
@@ -1092,7 +1092,7 @@ BaseClient.off
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:656
+node_modules/discord.js/typings/index.d.ts:731
 
 ___
 
@@ -1123,7 +1123,7 @@ BaseClient.on
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:640
+node_modules/discord.js/typings/index.d.ts:715
 
 ▸ **on**<`S`\>(`event`, `listener`): [`Client`](Client.md)
 
@@ -1150,7 +1150,7 @@ BaseClient.on
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:641
+node_modules/discord.js/typings/index.d.ts:716
 
 ___
 
@@ -1181,7 +1181,7 @@ BaseClient.once
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:646
+node_modules/discord.js/typings/index.d.ts:721
 
 ▸ **once**<`S`\>(`event`, `listener`): [`Client`](Client.md)
 
@@ -1208,7 +1208,7 @@ BaseClient.once
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:647
+node_modules/discord.js/typings/index.d.ts:722
 
 ___
 
@@ -1361,7 +1361,7 @@ Registers application commands from Client#commands globally or for a guild if i
 
 #### Defined in
 
-[src/classes/Client.ts:103](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L103)
+[src/classes/Client.ts:103](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L103)
 
 ___
 
@@ -1384,7 +1384,7 @@ Registers a command from file path.
 
 #### Defined in
 
-[src/classes/Client.ts:67](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L67)
+[src/classes/Client.ts:67](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L67)
 
 ___
 
@@ -1406,7 +1406,7 @@ Registers commands from directory path
 
 #### Defined in
 
-[src/classes/Client.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L88)
+[src/classes/Client.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L88)
 
 ___
 
@@ -1429,7 +1429,7 @@ Regsiters events from directory path
 
 #### Defined in
 
-[src/classes/Client.ts:135](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L135)
+[src/classes/Client.ts:135](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L135)
 
 ___
 
@@ -1459,7 +1459,7 @@ BaseClient.removeAllListeners
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:661
+node_modules/discord.js/typings/index.d.ts:736
 
 ▸ **removeAllListeners**<`S`\>(`event?`): [`Client`](Client.md)
 
@@ -1485,7 +1485,7 @@ BaseClient.removeAllListeners
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:662
+node_modules/discord.js/typings/index.d.ts:737
 
 ___
 
@@ -1640,7 +1640,7 @@ BaseClient.toJSON
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:638
+node_modules/discord.js/typings/index.d.ts:713
 
 ___
 
@@ -1662,7 +1662,7 @@ Unregisters application commands globally or for a guild if it is specified.
 
 #### Defined in
 
-[src/classes/Client.ts:127](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/classes/Client.ts#L127)
+[src/classes/Client.ts:127](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Client.ts#L127)
 
 ___
 

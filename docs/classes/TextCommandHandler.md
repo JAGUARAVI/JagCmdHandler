@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:16](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L16)
+[src/functions/TextCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L37)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L12)
+[src/functions/TextCommandHandler.ts:33](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L33)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:14](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L14)
+[src/functions/TextCommandHandler.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L35)
 
 ___
 
@@ -56,15 +56,15 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L15)
+[src/functions/TextCommandHandler.ts:36](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L36)
 
 ## Methods
 
 ### getErrorEmbed
 
-▸ **getErrorEmbed**(`msg`, `large?`, `language?`): `Embed`
+▸ **getErrorEmbed**(`msg`, `large?`, `language?`): `EmbedBuilder`
 
-Extend this function to customize error embeds..
+Extend this function to customize error Embeds..
 
 #### Parameters
 
@@ -76,11 +76,11 @@ Extend this function to customize error embeds..
 
 #### Returns
 
-`Embed`
+`EmbedBuilder`
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:42](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L42)
+[src/functions/TextCommandHandler.ts:63](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L63)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **getLanguage**(`client`, `message`): `Promise`<`string`\>
 
-Extend this function to return the language you want to use for error embeds.
+Extend this function to return the language you want to use for error Embeds.
 
 #### Parameters
 
@@ -103,7 +103,7 @@ Extend this function to return the language you want to use for error embeds.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L37)
+[src/functions/TextCommandHandler.ts:58](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L58)
 
 ___
 
@@ -126,7 +126,7 @@ Extend this function to return the prefix to be used.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:31](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L31)
+[src/functions/TextCommandHandler.ts:52](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L52)
 
 ___
 
@@ -151,4 +151,4 @@ This is the function which handles the messages.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/TextCommandHandler.ts#L53)
+[src/functions/TextCommandHandler.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L74)

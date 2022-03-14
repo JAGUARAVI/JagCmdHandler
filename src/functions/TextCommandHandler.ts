@@ -1,5 +1,25 @@
-import { Collection, Embed, TextChannel, GuildMember, Colors } from 'discord.js';
-import { MessageOptions, Message, CommandContext } from '../types';
+import {
+	Collection,
+	EmbedBuilder,
+	TextChannel,
+	GuildMember,
+	Colors,
+	ModalBuilder,
+	ActionRowBuilder,
+	TextInputBuilder,
+	InteractionCollector,
+	InteractionType,
+	ModalSubmitInteraction,
+	ComponentType,
+	ButtonStyle
+} from 'discord.js';
+
+import {
+	MessageOptions,
+	Message,
+	CommandContext,
+	PromptOptions
+} from '../types';
 
 import Client from '../classes/Client';
 import Utils from '../utils';
@@ -7,6 +27,7 @@ import Middleware from '../classes/base/Middleware';
 import Paginate from './Paginate';
 import DeletableMessage from './DeletableMessage';
 import ms from 'pretty-ms';
+import { ButtonBuilder } from '@discordjs/builders';
 
 export = class TextCommandHandler {
 	client: Client;
@@ -32,21 +53,21 @@ export = class TextCommandHandler {
 		return '!';
 	}
 
-	/** Extend this function to return the language you want to use for error embeds. */
+	/** Extend this function to return the language you want to use for error Embeds. */
 	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 	async getLanguage(client: Client, message: Message): Promise<string> {
 		return 'en';
 	}
 
-	/** Extend this function to customize error embeds.. */
-	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
+	/** Extend this function to customize error Embeds.. */
+	getErrorEmbed(msg: string, large?: boolean, language?: string): EmbedBuilder {
 		if (!language) language = 'en';
-		const embed = new Embed()
+		const Embed = new EmbedBuilder()
 			.setColor(Colors.Red)
 			.setDescription((!large ? ':x:  ' : '') + (msg ?? this.client.messages.get(language, 'error.body')));
-		if (large) embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
+		if (large) Embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
-		return embed;
+		return Embed;
 	}
 
 	/** This is the function which handles the messages. */
@@ -78,6 +99,8 @@ export = class TextCommandHandler {
 			}
 		});
 		args = argsCopy;
+
+		const language = await this.getLanguage(client, message);
 
 		const send = async (content: MessageOptions) => {
 			try {
@@ -132,22 +155,75 @@ export = class TextCommandHandler {
 			}
 		};
 
-		const prompt = async (options: MessageOptions) => {
-			try {
-				const msg = await message.channel.send(options);
+		const prompt = async (options: PromptOptions): Promise<{ [key: string]: string }[]> => {
+			// eslint-disable-next-line no-async-promise-executor
+			return new Promise(async (resolve, reject) => {
+				const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-				const reply = await message.channel.awaitMessages({
-					max: 1,
-					time: 60000,
-					errors: ['time'],
-					filter: (m) => m.author.id === message.author.id
+				const Modal = new ModalBuilder()
+					.setTitle(options.title ?? 'Enter Input')
+					.setCustomId(randomString)
+					.setComponents(...Utils.general.chunk(options.components, 5).map((chunk) =>
+						new ActionRowBuilder<TextInputBuilder>({ components: chunk.map((component) => new TextInputBuilder(component).toJSON()) })
+					));
+
+				message.reply({
+					content: `<@${message.user.id}> please click below.`,
+					components: [
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							new ButtonBuilder()
+								.setCustomId('submit')
+								.setLabel('Click Here')
+								.setStyle(ButtonStyle.Success)
+						)
+					],
+					allowedMentions: {
+						repliedUser: true,
+					}
 				});
 
-				msg.delete().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-				return reply.first();
-			} catch (e) {
-				Utils.logger.error(e);
-			}
+				const buttonCollector = message.createMessageComponentCollector({
+					time: 60000,
+					componentType: ComponentType.Button,
+					filter: (button) => button.customId === 'submit',
+				});
+
+				let autoEnd = true;
+
+				buttonCollector.on('collect', (button) => {
+					if (button.user.id !== message.user.id)
+						return button.reply({
+							embeds: [
+								this.getErrorEmbed(client.messages.parseVariables(client.messages.get(language, 'command.interaction'), {
+									user: `<@${message.user.id}>`
+								}))
+							],
+							ephemeral: false,
+						});
+					else {
+						autoEnd = true;
+						buttonCollector.stop();
+						button.showModal(Modal);
+					}
+				}).on('end', (collected, reason) => autoEnd ? reject(reason) : null);
+
+				const modalCollector = new InteractionCollector(client, {
+					channel: message.channel,
+					interactionType: InteractionType.ModalSubmit,
+					time: 60000,
+					filter: (modal: ModalSubmitInteraction) => modal.customId == randomString
+				});
+
+				modalCollector.on('collect', (modalInteraction) => {
+					if (modalInteraction.isModalSubmit() && modalInteraction.customId == randomString) {
+						modalCollector.stop();
+						return resolve(modalInteraction.fields.components.components.map((component) => { return { [component.customId]: component.value }; }));
+					}
+				})
+					.on('end', (collected, reason) => {
+						reject(reason);
+					});
+			});
 		};
 
 		message.user = message.author;
@@ -158,8 +234,8 @@ export = class TextCommandHandler {
 			send,
 			reply,
 			paginate,
-			prompt,
-			language: await this.getLanguage(client, message),
+			prompt: prompt.bind(this),
+			language,
 			args,
 			flags,
 			client
@@ -168,44 +244,44 @@ export = class TextCommandHandler {
 		let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
 		if (defaultChecks) {
 			if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
-				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
+				const Embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
 				ctx.send({
-					embeds: [embed]
+					embeds: [Embed]
 				});
 				return next();
 			}
 
 			if (command.permissions.serverOwnerOnly && ctx.source.member.user.id !== ctx.source.guild.ownerId) {
-				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
+				const Embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
 				ctx.send({
-					embeds: [embed]
+					embeds: [Embed]
 				});
 				return next();
 			}
 
 			if (command.permissions.client) {
 				if (!ctx.source.guild.me.permissions.has(command.permissions.client) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.client)) {
-					const embed = this.getErrorEmbed(
+					const Embed = this.getErrorEmbed(
 						client.messages.parseVariables(client.messages.get(ctx.language, 'command.botInsufficientPerissions'), { perms: command.permissions.client.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
-						embeds: [embed]
-					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [embed] }));
+						embeds: [Embed]
+					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [Embed] }));
 					return next();
 				}
 			}
 
 			if (command.permissions.user) {
 				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.user) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.user)) {
-					const embed = this.getErrorEmbed(
+					const Embed = this.getErrorEmbed(
 						client.messages.parseVariables(
 							client.messages.get(ctx.language, 'command.userInsufficientPerissions'), { perms: command.permissions.user.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }
 						),
 						true
 					);
 					ctx.send({
-						embeds: [embed]
-					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [embed] }));
+						embeds: [Embed]
+					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [Embed] }));
 					return next();
 				}
 			}

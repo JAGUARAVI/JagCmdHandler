@@ -47,7 +47,7 @@ BaseClientOptions.allowedMentions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3712
+node_modules/discord.js/typings/index.d.ts:3793
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L86)
+[src/types/index.ts:90](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L90)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:82](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L82)
+[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L86)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L85)
+[src/types/index.ts:89](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L89)
 
 ___
 
@@ -101,7 +101,7 @@ BaseClientOptions.failIfNotExists
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3714
+node_modules/discord.js/typings/index.d.ts:3795
 
 ___
 
@@ -115,7 +115,7 @@ BaseClientOptions.intents
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3716
+node_modules/discord.js/typings/index.d.ts:3797
 
 ___
 
@@ -129,7 +129,7 @@ BaseClientOptions.makeCache
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3711
+node_modules/discord.js/typings/index.d.ts:3792
 
 ___
 
@@ -141,7 +141,7 @@ Array containing Ids of bot owners (people who can use staff commands like eval.
 
 #### Defined in
 
-[src/types/index.ts:84](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L84)
+[src/types/index.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L88)
 
 ___
 
@@ -155,7 +155,7 @@ BaseClientOptions.partials
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3713
+node_modules/discord.js/typings/index.d.ts:3794
 
 ___
 
@@ -169,7 +169,7 @@ BaseClientOptions.presence
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3715
+node_modules/discord.js/typings/index.d.ts:3796
 
 ___
 
@@ -183,7 +183,7 @@ BaseClientOptions.rest
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3720
+node_modules/discord.js/typings/index.d.ts:3801
 
 ___
 
@@ -197,7 +197,7 @@ BaseClientOptions.shardCount
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3710
+node_modules/discord.js/typings/index.d.ts:3791
 
 ___
 
@@ -211,7 +211,7 @@ BaseClientOptions.shards
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3709
+node_modules/discord.js/typings/index.d.ts:3790
 
 ___
 
@@ -225,7 +225,7 @@ BaseClientOptions.sweepers
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3718
+node_modules/discord.js/typings/index.d.ts:3799
 
 ___
 
@@ -239,7 +239,7 @@ BaseClientOptions.waitGuildTimeout
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3717
+node_modules/discord.js/typings/index.d.ts:3798
 
 ___
 
@@ -253,7 +253,7 @@ BaseClientOptions.ws
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3719
+node_modules/discord.js/typings/index.d.ts:3800
 
 ## Methods
 
@@ -277,4 +277,4 @@ BaseClientOptions.jsonTransformer
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:3721
+node_modules/discord.js/typings/index.d.ts:3802

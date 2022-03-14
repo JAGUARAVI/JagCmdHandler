@@ -1,4 +1,4 @@
-import { ActionRow, ButtonComponent, Embed, TextChannel, GuildMember, User, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, CacheType, ComponentType } from 'discord.js';
+import { ActionRowBuilder, EmbedBuilder, TextChannel, GuildMember, User, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, CacheType, ComponentType, ButtonBuilder } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 export = class DeletableMessage {
@@ -33,10 +33,10 @@ export = class DeletableMessage {
 		return false;
 	}
 
-	generateButton(disabled = false): ActionRow {
-		return new ActionRow()
+	generateButton(disabled = false): ActionRowBuilder {
+		return new ActionRowBuilder()
 			.addComponents(
-				new ButtonComponent()
+				new ButtonBuilder()
 					.setCustomId('5')
 					.setStyle(ButtonStyle.Danger)
 					.setEmoji({ id: '852511333165563915', })
@@ -80,7 +80,7 @@ export = class DeletableMessage {
 		if (interaction.user.id != this.user) {
 			interaction.reply({
 				embeds: [
-					new Embed()
+					new EmbedBuilder()
 						.setDescription(`Only <@${this.user}> can interact with this message.`)
 						.setColor(Colors.Red)
 				],

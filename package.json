@@ -1,6 +1,6 @@
 {
   "name": "jag-cmd-handler",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.4",
   "description": "An advanced djs 14 command handler.",
   "main": "lib/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "chalk": "^4.1.2",
-    "discord.js": "^14.0.0-dev.1646654941.b162f27",
+    "discord.js": "^14.0.0-dev.1647216471.87a6b84",
     "moment": "^2.29.1",
     "pretty-ms": "^7.0.1"
   },

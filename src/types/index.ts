@@ -1,4 +1,5 @@
-import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, ApplicationCommandOptionData, ApplicationCommandPermissionData, PermissionsString, ApplicationCommand, Guild, ApplicationCommandType } from 'discord.js';
+import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, TextInputComponentData, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, ApplicationCommandOptionData, ApplicationCommandPermissionData, PermissionsString, ApplicationCommand, Guild, ApplicationCommandType, MessageEditOptions } from 'discord.js';
+import { APITextInputComponent } from 'discord-api-types/v10';
 import Client from '../classes/Client';
 
 export interface Message extends BaseMessage {
@@ -6,7 +7,7 @@ export interface Message extends BaseMessage {
 }
 
 export interface Data {
-    [key: string]: string | Data
+	[key: string]: string | Data
 }
 
 export interface CommandContext {
@@ -23,7 +24,7 @@ export interface CommandContext {
 	reply(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
 	send(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
 	paginate(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
-	prompt(Payload: MessagePayload | MessageOptions): Promise<Message>
+	prompt(Payload: PromptOptions): Promise<{ [key: string]: string }[]>
 }
 
 export interface CommandConfig {
@@ -61,7 +62,7 @@ export interface CommandPermissions {
 	[key: string]: any;
 }
 
-export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions {
+export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions, MessageEditOptions {
 	delete?: boolean
 	failIfNotExists?: boolean
 	/** Only for paginate */
@@ -76,6 +77,9 @@ export interface MessageOptions extends DefaultMesageOption, InteractionReplyOpt
 	flags?: any
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	files?: any
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	embeds?: any
+	// remove on next djs update
 }
 
 export interface ClientOptions extends BaseClientOptions {
@@ -88,4 +92,9 @@ export interface ClientOptions extends BaseClientOptions {
 		[key: string]: any;
 		owners?: Array<string>;
 	};
+}
+
+export interface PromptOptions {
+	title?: string;
+	components: Array<TextInputComponentData | APITextInputComponent>
 }

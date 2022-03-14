@@ -10,6 +10,8 @@
 
 - `InteractionReplyOptions`
 
+- `MessageEditOptions`
+
   ↳ **`MessageOptions`**
 
 ## Table of contents
@@ -52,7 +54,7 @@ DefaultMesageOption.allowedMentions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4712
+node_modules/discord.js/typings/index.d.ts:4788
 
 ___
 
@@ -66,13 +68,13 @@ DefaultMesageOption.attachments
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4716
+node_modules/discord.js/typings/index.d.ts:4792
 
 ___
 
 ### components
 
-• `Optional` **components**: (`ActionRow`<`MessageActionRowComponent`\> \| `Required`<`BaseComponentData`\> & `ActionRowData`<`MessageActionRowComponentData`\> \| `APIActionRowComponent`<`APIMessageActionRowComponent`\>)[]
+• `Optional` **components**: (`ActionRow`<`MessageActionRowComponent`\> \| `APIActionRowComponent`<`APIMessageActionRowComponent`\> \| `JSONEncodable`<`APIActionRowComponent`<`APIMessageActionRowComponent`\>\> \| `Required`<`BaseComponentData`\> & `ActionRowData`<`MessageActionRowComponent` \| `MessageActionRowComponentData`\>)[]
 
 #### Inherited from
 
@@ -80,7 +82,7 @@ DefaultMesageOption.components
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4707
+node_modules/discord.js/typings/index.d.ts:4782
 
 ___
 
@@ -94,7 +96,7 @@ DefaultMesageOption.content
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4705
+node_modules/discord.js/typings/index.d.ts:4780
 
 ___
 
@@ -104,21 +106,21 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:65](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L65)
+[src/types/index.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L66)
 
 ___
 
 ### embeds
 
-• `Optional` **embeds**: (`Embed` \| `APIEmbed`)[]
+• `Optional` **embeds**: `any`
 
-#### Inherited from
+#### Overrides
 
 DefaultMesageOption.embeds
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4706
+[src/types/index.ts:81](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L81)
 
 ___
 
@@ -132,7 +134,7 @@ InteractionReplyOptions.ephemeral
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4562
+node_modules/discord.js/typings/index.d.ts:4632
 
 ___
 
@@ -142,7 +144,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L66)
+[src/types/index.ts:67](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L67)
 
 ___
 
@@ -156,7 +158,7 @@ InteractionReplyOptions.fetchReply
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4563
+node_modules/discord.js/typings/index.d.ts:4633
 
 ___
 
@@ -170,7 +172,7 @@ DefaultMesageOption.files
 
 #### Defined in
 
-[src/types/index.ts:78](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L78)
+[src/types/index.ts:79](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L79)
 
 ___
 
@@ -184,7 +186,7 @@ DefaultMesageOption.flags
 
 #### Defined in
 
-[src/types/index.ts:76](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L76)
+[src/types/index.ts:77](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L77)
 
 ___
 
@@ -198,7 +200,7 @@ DefaultMesageOption.nonce
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4704
+node_modules/discord.js/typings/index.d.ts:4779
 
 ___
 
@@ -210,7 +212,7 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L68)
+[src/types/index.ts:69](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L69)
 
 ___
 
@@ -224,7 +226,7 @@ DefaultMesageOption.reply
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4714
+node_modules/discord.js/typings/index.d.ts:4790
 
 ___
 
@@ -238,7 +240,7 @@ DefaultMesageOption.stickers
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4715
+node_modules/discord.js/typings/index.d.ts:4791
 
 ___
 
@@ -252,7 +254,7 @@ InteractionReplyOptions.threadId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:5170
+node_modules/discord.js/typings/index.d.ts:5246
 
 ___
 
@@ -264,7 +266,7 @@ Only for paginate & deletableMessage
 
 #### Defined in
 
-[src/types/index.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L74)
+[src/types/index.ts:75](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L75)
 
 ___
 
@@ -278,7 +280,7 @@ DefaultMesageOption.tts
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4703
+node_modules/discord.js/typings/index.d.ts:4778
 
 ## Methods
 
@@ -294,7 +296,7 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:72](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L72)
+[src/types/index.ts:73](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L73)
 
 ___
 
@@ -310,4 +312,4 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:70](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L70)
+[src/types/index.ts:71](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L71)

@@ -1,5 +1,6 @@
 import { CommandContext, CommandConfig, CommandPermissions } from '../../types';
 import { ApplicationCommandOptionChoice, AutocompleteInteraction } from 'discord.js';
+import Client from '../Client';
 
 export default class BaseCommand {
 	config: CommandConfig;
@@ -18,7 +19,7 @@ export default class BaseCommand {
 
 	/** Use if you have an Autocomplete option. Return the data and don't use `AutocompleteInteraction#respond` */
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	async autocomplete(interaction: AutocompleteInteraction): Promise<Array<ApplicationCommandOptionChoice>> {
+	async autocomplete(client: Client, interaction: AutocompleteInteraction): Promise<Array<ApplicationCommandOptionChoice>> {
 		return [];
 	}
 

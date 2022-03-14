@@ -97,7 +97,7 @@ BaseMessage.activity
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1520
+node_modules/discord.js/typings/index.d.ts:1595
 
 ___
 
@@ -111,7 +111,7 @@ BaseMessage.applicationId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1521
+node_modules/discord.js/typings/index.d.ts:1596
 
 ___
 
@@ -125,7 +125,7 @@ BaseMessage.attachments
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1522
+node_modules/discord.js/typings/index.d.ts:1597
 
 ___
 
@@ -139,7 +139,7 @@ BaseMessage.author
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1523
+node_modules/discord.js/typings/index.d.ts:1598
 
 ___
 
@@ -153,7 +153,7 @@ BaseMessage.channelId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1525
+node_modules/discord.js/typings/index.d.ts:1600
 
 ___
 
@@ -167,7 +167,7 @@ BaseMessage.client
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:323
+node_modules/discord.js/typings/index.d.ts:338
 
 ___
 
@@ -181,7 +181,7 @@ BaseMessage.components
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1527
+node_modules/discord.js/typings/index.d.ts:1602
 
 ___
 
@@ -195,7 +195,7 @@ BaseMessage.content
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1528
+node_modules/discord.js/typings/index.d.ts:1603
 
 ___
 
@@ -209,7 +209,7 @@ BaseMessage.createdTimestamp
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1530
+node_modules/discord.js/typings/index.d.ts:1605
 
 ___
 
@@ -223,7 +223,7 @@ BaseMessage.editedTimestamp
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1535
+node_modules/discord.js/typings/index.d.ts:1610
 
 ___
 
@@ -237,7 +237,7 @@ BaseMessage.embeds
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1536
+node_modules/discord.js/typings/index.d.ts:1611
 
 ___
 
@@ -251,7 +251,7 @@ BaseMessage.flags
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1557
+node_modules/discord.js/typings/index.d.ts:1632
 
 ___
 
@@ -265,7 +265,7 @@ BaseMessage.groupActivityApplication
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1537
+node_modules/discord.js/typings/index.d.ts:1612
 
 ___
 
@@ -279,7 +279,7 @@ BaseMessage.guildId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1538
+node_modules/discord.js/typings/index.d.ts:1613
 
 ___
 
@@ -293,7 +293,7 @@ BaseMessage.id
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1541
+node_modules/discord.js/typings/index.d.ts:1616
 
 ___
 
@@ -307,7 +307,7 @@ BaseMessage.interaction
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1542
+node_modules/discord.js/typings/index.d.ts:1617
 
 ___
 
@@ -321,7 +321,7 @@ BaseMessage.mentions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1544
+node_modules/discord.js/typings/index.d.ts:1619
 
 ___
 
@@ -335,7 +335,7 @@ BaseMessage.nonce
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1545
+node_modules/discord.js/typings/index.d.ts:1620
 
 ___
 
@@ -349,7 +349,7 @@ BaseMessage.pinned
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1548
+node_modules/discord.js/typings/index.d.ts:1623
 
 ___
 
@@ -363,7 +363,7 @@ BaseMessage.reactions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1549
+node_modules/discord.js/typings/index.d.ts:1624
 
 ___
 
@@ -377,7 +377,7 @@ BaseMessage.reference
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1558
+node_modules/discord.js/typings/index.d.ts:1633
 
 ___
 
@@ -391,7 +391,7 @@ BaseMessage.stickers
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1550
+node_modules/discord.js/typings/index.d.ts:1625
 
 ___
 
@@ -405,7 +405,7 @@ BaseMessage.system
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1551
+node_modules/discord.js/typings/index.d.ts:1626
 
 ___
 
@@ -419,7 +419,7 @@ BaseMessage.tts
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1553
+node_modules/discord.js/typings/index.d.ts:1628
 
 ___
 
@@ -433,7 +433,7 @@ BaseMessage.type
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1554
+node_modules/discord.js/typings/index.d.ts:1629
 
 ___
 
@@ -443,7 +443,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/types/index.ts#L5)
+[src/types/index.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L6)
 
 ___
 
@@ -457,7 +457,7 @@ BaseMessage.webhookId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1556
+node_modules/discord.js/typings/index.d.ts:1631
 
 ## Accessors
 
@@ -475,7 +475,7 @@ BaseMessage.channel
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1524
+node_modules/discord.js/typings/index.d.ts:1599
 
 ___
 
@@ -493,7 +493,7 @@ BaseMessage.cleanContent
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1526
+node_modules/discord.js/typings/index.d.ts:1601
 
 ___
 
@@ -511,7 +511,7 @@ BaseMessage.createdAt
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1529
+node_modules/discord.js/typings/index.d.ts:1604
 
 ___
 
@@ -529,7 +529,7 @@ BaseMessage.crosspostable
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1531
+node_modules/discord.js/typings/index.d.ts:1606
 
 ___
 
@@ -547,7 +547,7 @@ BaseMessage.deletable
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1532
+node_modules/discord.js/typings/index.d.ts:1607
 
 ___
 
@@ -565,7 +565,7 @@ BaseMessage.editable
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1533
+node_modules/discord.js/typings/index.d.ts:1608
 
 ___
 
@@ -583,7 +583,7 @@ BaseMessage.editedAt
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1534
+node_modules/discord.js/typings/index.d.ts:1609
 
 ___
 
@@ -601,7 +601,7 @@ BaseMessage.guild
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1539
+node_modules/discord.js/typings/index.d.ts:1614
 
 ___
 
@@ -619,7 +619,7 @@ BaseMessage.hasThread
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1540
+node_modules/discord.js/typings/index.d.ts:1615
 
 ___
 
@@ -637,7 +637,7 @@ BaseMessage.member
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1543
+node_modules/discord.js/typings/index.d.ts:1618
 
 ___
 
@@ -655,7 +655,7 @@ BaseMessage.partial
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1546
+node_modules/discord.js/typings/index.d.ts:1621
 
 ___
 
@@ -673,7 +673,7 @@ BaseMessage.pinnable
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1547
+node_modules/discord.js/typings/index.d.ts:1622
 
 ___
 
@@ -691,7 +691,7 @@ BaseMessage.thread
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1552
+node_modules/discord.js/typings/index.d.ts:1627
 
 ___
 
@@ -709,7 +709,7 @@ BaseMessage.url
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1555
+node_modules/discord.js/typings/index.d.ts:1630
 
 ## Methods
 
@@ -739,7 +739,7 @@ BaseMessage.awaitMessageComponent
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1559
+node_modules/discord.js/typings/index.d.ts:1634
 
 ___
 
@@ -763,7 +763,7 @@ BaseMessage.awaitReactions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1562
+node_modules/discord.js/typings/index.d.ts:1637
 
 ___
 
@@ -793,7 +793,7 @@ BaseMessage.createMessageComponentCollector
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1564
+node_modules/discord.js/typings/index.d.ts:1639
 
 ___
 
@@ -817,7 +817,7 @@ BaseMessage.createReactionCollector
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1563
+node_modules/discord.js/typings/index.d.ts:1638
 
 ___
 
@@ -835,7 +835,7 @@ BaseMessage.crosspost
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1572
+node_modules/discord.js/typings/index.d.ts:1647
 
 ___
 
@@ -853,7 +853,7 @@ BaseMessage.delete
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1567
+node_modules/discord.js/typings/index.d.ts:1642
 
 ___
 
@@ -877,7 +877,7 @@ BaseMessage.edit
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1568
+node_modules/discord.js/typings/index.d.ts:1643
 
 ___
 
@@ -902,7 +902,7 @@ BaseMessage.equals
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1569
+node_modules/discord.js/typings/index.d.ts:1644
 
 ___
 
@@ -926,7 +926,7 @@ BaseMessage.fetch
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1573
+node_modules/discord.js/typings/index.d.ts:1648
 
 ___
 
@@ -944,7 +944,7 @@ BaseMessage.fetchReference
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1570
+node_modules/discord.js/typings/index.d.ts:1645
 
 ___
 
@@ -962,7 +962,7 @@ BaseMessage.fetchWebhook
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1571
+node_modules/discord.js/typings/index.d.ts:1646
 
 ___
 
@@ -980,7 +980,7 @@ BaseMessage.inGuild
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1584
+node_modules/discord.js/typings/index.d.ts:1659
 
 ___
 
@@ -1004,7 +1004,7 @@ BaseMessage.pin
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1574
+node_modules/discord.js/typings/index.d.ts:1649
 
 ___
 
@@ -1028,7 +1028,7 @@ BaseMessage.react
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1575
+node_modules/discord.js/typings/index.d.ts:1650
 
 ___
 
@@ -1046,7 +1046,7 @@ BaseMessage.removeAttachments
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1576
+node_modules/discord.js/typings/index.d.ts:1651
 
 ___
 
@@ -1070,7 +1070,7 @@ BaseMessage.reply
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1577
+node_modules/discord.js/typings/index.d.ts:1652
 
 ___
 
@@ -1094,7 +1094,7 @@ BaseMessage.resolveComponent
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1578
+node_modules/discord.js/typings/index.d.ts:1653
 
 ___
 
@@ -1118,7 +1118,7 @@ BaseMessage.startThread
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1579
+node_modules/discord.js/typings/index.d.ts:1654
 
 ___
 
@@ -1142,7 +1142,7 @@ BaseMessage.suppressEmbeds
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1580
+node_modules/discord.js/typings/index.d.ts:1655
 
 ___
 
@@ -1160,7 +1160,7 @@ BaseMessage.toJSON
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1581
+node_modules/discord.js/typings/index.d.ts:1656
 
 ___
 
@@ -1178,7 +1178,7 @@ BaseMessage.toString
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1582
+node_modules/discord.js/typings/index.d.ts:1657
 
 ___
 
@@ -1202,7 +1202,7 @@ BaseMessage.unpin
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:1583
+node_modules/discord.js/typings/index.d.ts:1658
 
 ___
 
@@ -1220,4 +1220,4 @@ BaseMessage.valueOf
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:325
+node_modules/discord.js/typings/index.d.ts:340

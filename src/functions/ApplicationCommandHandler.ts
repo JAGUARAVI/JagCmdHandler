@@ -1,5 +1,24 @@
-import { Collection, Embed, TextChannel, GuildMember, Colors, CommandInteraction } from 'discord.js';
-import { MessageOptions, Message, CommandContext } from '../types';
+import {
+	Collection,
+	EmbedBuilder,
+	TextChannel,
+	GuildMember,
+	Colors,
+	CommandInteraction,
+	ModalBuilder,
+	TextInputBuilder,
+	InteractionCollector,
+	ModalSubmitInteraction,
+	InteractionType,
+	ActionRowBuilder
+} from 'discord.js';
+
+import {
+	MessageOptions,
+	Message,
+	CommandContext,
+	PromptOptions
+} from '../types';
 
 import Client from '../classes/Client';
 import Utils from '../utils';
@@ -18,22 +37,22 @@ export = class InteractionCommandHandler {
 		this.client = client;
 	}
 
-	/** Extend this function to return the language you want to use for error embeds. */
+	/** Extend this function to return the language you want to use for error Embeds. */
 	async getLanguage(client: Client, interaction: CommandInteraction): Promise<string> {
 		if (interaction.guildLocale) return interaction.guildLocale.substring(0, 2);
 		else if (interaction.locale) return interaction.locale.substring(0, 2);
 		else return 'en';
 	}
 
-	/** Extend this function to customize error embeds.. */
-	getErrorEmbed(msg: string, large?: boolean, language?: string): Embed {
+	/** Extend this function to customize error Embeds.. */
+	getErrorEmbed(msg: string, large?: boolean, language?: string): EmbedBuilder {
 		if (!language) language = 'en';
-		const embed = new Embed()
+		const Embed = new EmbedBuilder()
 			.setColor(Colors.Red)
 			.setDescription((!large ? ':x:  ' : '') + (msg ?? this.client.messages.get(language, 'error.body')));
-		if (large) embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
+		if (large) Embed.setAuthor({ name: this.client.messages.get(language, 'error.header'), iconURL: 'https://i.imgur.com/M6CN1Ft.png' });
 
-		return embed;
+		return Embed;
 	}
 
 	/** This is the function which handles the interactions. */
@@ -44,7 +63,7 @@ export = class InteractionCommandHandler {
 		if (!command || command.config?.availibility == 1) return next();
 
 		if (interaction.isAutocomplete()) {
-			return interaction.respond(await command.autocomplete(interaction));
+			return interaction.respond(await command.autocomplete(this.client, interaction));
 		}
 
 		const _reply = async (content: MessageOptions): Promise<Message> => {
@@ -76,24 +95,33 @@ export = class InteractionCommandHandler {
 			}
 		};
 
-		const prompt = async (options: MessageOptions) => {
-			try {
-				if (!(interaction.replied || interaction.deferred)) await interaction.deferReply();
+		const prompt = async (options: PromptOptions): Promise<{ [key: string]: string }[]> => {
+			// eslint-disable-next-line no-async-promise-executor
+			return new Promise(async (resolve, reject) => {
+				const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-				const msg = await interaction.followUp(options) as Message;
+				const Modal = new ModalBuilder()
+					.setTitle(options.title ?? 'Enter Input')
+					.setCustomId(randomString)
+					.setComponents(...Utils.general.chunk(options.components, 5).map((chunk) =>
+						new ActionRowBuilder<TextInputBuilder>({ components: chunk.map((component) => new TextInputBuilder(component).toJSON()) })
+					));
 
-				const replies = await interaction.channel.awaitMessages({
-					max: 1,
+				interaction.showModal(Modal);
+				const collector = new InteractionCollector(client, {
+					channel: interaction.channel,
+					interactionType: InteractionType.ModalSubmit,
 					time: 60000,
-					errors: ['time'],
-					filter: (m) => m.author.id === interaction.user.id
+					filter: (modal: ModalSubmitInteraction) => modal.customId == randomString
 				});
 
-				msg.delete?.().catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
-				return replies.first();
-			} catch (e) {
-				Utils.logger.error(e);
-			}
+				collector.on('collect', (modalInteraction) => {
+					if (modalInteraction.isModalSubmit() && modalInteraction.customId == randomString) {
+						collector.stop();
+						return resolve(modalInteraction.fields.components.components.map((component) => { return { [component.customId]: component.value }; }));
+					}
+				}).on('end', (collected, reason) => reject(reason));
+			});
 		};
 
 		const ctx: CommandContext = {
@@ -112,41 +140,41 @@ export = class InteractionCommandHandler {
 		let timestamps: Collection<string, number>, now: number, cooldownAmount: number;
 		if (defaultChecks) {
 			if (command.permissions.botOwnerOnly && !client.data.owners.includes(ctx.source.member.user.id)) {
-				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
+				const Embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.ownerOnly'));
 				ctx.send({
-					embeds: [embed]
+					embeds: [Embed]
 				});
 				return next();
 			}
 
 			if (command.permissions.serverOwnerOnly && ctx.source.member.user.id !== ctx.source.guild.ownerId) {
-				const embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
+				const Embed = this.getErrorEmbed(client.messages.get(ctx.language, 'command.serverOwnerOnly'));
 				ctx.send({
-					embeds: [embed]
+					embeds: [Embed]
 				});
 				return next();
 			}
 
 			if (command.permissions.client) {
 				if (!ctx.source.guild.me.permissions.has(command.permissions.client) && !ctx.source.guild.me.permissionsIn(ctx.source.channelId).has(command.permissions.client)) {
-					const embed = this.getErrorEmbed(
+					const Embed = this.getErrorEmbed(
 						client.messages.parseVariables(client.messages.get(ctx.language, 'command.botInsufficientPerissions'), { perms: command.permissions.client.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
-						embeds: [embed]
-					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [embed] }));
+						embeds: [Embed]
+					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [Embed] }));
 					return next();
 				}
 			}
 
 			if (command.permissions.user) {
 				if (!(ctx.source.member as GuildMember).permissions.has(command.permissions.user) && !(ctx.source.member as GuildMember).permissionsIn(ctx.source.channelId).has(command.permissions.user)) {
-					const embed = this.getErrorEmbed(
+					const Embed = this.getErrorEmbed(
 						client.messages.parseVariables(client.messages.get(ctx.language, 'command.userInsufficientPerissions'), { perms: command.permissions.user.map((p: string | number | symbol) => `> \`- ${p.toString()}\``).join('\n') }), true
 					);
 					ctx.send({
-						embeds: [embed]
-					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [embed] }));
+						embeds: [Embed]
+					}).catch(() => ctx.source.guild.members.cache.get(ctx.source.user.id)?.send({ embeds: [Embed] }));
 					return next();
 				}
 			}

@@ -26,7 +26,7 @@ export = {
 		return null;
 	},
 
-	embedURL(title: string, url: string, display: string): string {
+	embedBuilderURL(title: string, url: string, display: string): string {
 		return `[${title}](${url.replace(/\)/g, '%27')}${display ? ` '${display}'` : ''})`;
 	},
 

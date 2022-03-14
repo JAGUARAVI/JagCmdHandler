@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:15](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L15)
+[src/functions/ApplicationCommandHandler.ts:34](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L34)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L12)
+[src/functions/ApplicationCommandHandler.ts:31](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L31)
 
 ___
 
@@ -44,15 +44,15 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:14](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L14)
+[src/functions/ApplicationCommandHandler.ts:33](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L33)
 
 ## Methods
 
 ### getErrorEmbed
 
-▸ **getErrorEmbed**(`msg`, `large?`, `language?`): `Embed`
+▸ **getErrorEmbed**(`msg`, `large?`, `language?`): `EmbedBuilder`
 
-Extend this function to customize error embeds..
+Extend this function to customize error Embeds..
 
 #### Parameters
 
@@ -64,11 +64,11 @@ Extend this function to customize error embeds..
 
 #### Returns
 
-`Embed`
+`EmbedBuilder`
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:29](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L29)
+[src/functions/ApplicationCommandHandler.ts:48](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L48)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **getLanguage**(`client`, `interaction`): `Promise`<`string`\>
 
-Extend this function to return the language you want to use for error embeds.
+Extend this function to return the language you want to use for error Embeds.
 
 #### Parameters
 
@@ -91,7 +91,7 @@ Extend this function to return the language you want to use for error embeds.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:22](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L22)
+[src/functions/ApplicationCommandHandler.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L41)
 
 ___
 
@@ -116,4 +116,4 @@ This is the function which handles the interactions.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/76c0a4e/src/functions/ApplicationCommandHandler.ts#L40)
+[src/functions/ApplicationCommandHandler.ts:59](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L59)

@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { ActionRow, ButtonComponent, Embed, TextChannel, EmbedAuthorData, EmbedFooterData, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, TextChannel, EmbedAuthorData, EmbedFooterData, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
@@ -17,32 +17,32 @@ const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
 };
 
 
-export = class EasyEmbedPages {
+export = class EasyEmbedBuilderPages {
 	/** Channel object or an object with send as a function which returns a `Message`. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> };
 	/** The content to be dynamically adjusted and displayed */
 	content: MessageOptions | MessagePayload;
-	/** UserId of person who can interact with the embed. */
+	/** UserId of person who can interact with the EmbedBuilder. */
 	user?: string;
-	/** Message object which contains the interactable embed */
+	/** Message object which contains the interactable EmbedBuilder */
 	message: Message;
 	/** Button collector used to collect interactions. */
 	collector: InteractionCollector<ButtonInteraction>;
 
-	/** Embed pages... Automagically generated */
-	pages: Array<Embed>;
+	/** EmbedBuilder pages... Automagically generated */
+	pages: Array<EmbedBuilder>;
 	/** Current page number. */
 	page: number;
-	/** Pages with embed data for extra configuration for each page. */
+	/** Pages with EmbedBuilder data for extra configuration for each page. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	dataPages: Array<any>;
 
-	/** General embed color. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder color. (Can be specified differently for each page using `dataPages`) */
 	color?: string;
-	/** General embed url. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder url. (Can be specified differently for each page using `dataPages`) */
 	url?: string;
-	/** General embed title. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder title. (Can be specified differently for each page using `dataPages`) */
 	title?: string;
 
 	/** General author object. (Can be specified differently for each page using `dataPages`) */
@@ -50,19 +50,19 @@ export = class EasyEmbedPages {
 	/** General footer object. (Can be specified differently for each page using `dataPages`) */
 	footer?: EmbedFooterData;
 
-	/** General embed thumbnail. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder thumbnail. (Can be specified differently for each page using `dataPages`) */
 	thumbnail?: string;
-	/** General embed large image. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder large image. (Can be specified differently for each page using `dataPages`) */
 	image?: string;
-	/** General embed description. (Can be specified differently for each page using `dataPages`) */
+	/** General EmbedBuilder description. (Can be specified differently for each page using `dataPages`) */
 	description?: string;
-	/** Function used to modify each embed page for better customizability. Edit the embed object provided instead of returning one. */
-	pageGen?: (embed: Embed) => void | Promise<void>;
-	/** Whether to display the refresh button used by users to manually refrest embed data. */
+	/** Function used to modify each EmbedBuilder page for better customizability. Edit the EmbedBuilder object provided instead of returning one. */
+	pageGen?: (EmbedBuilder: EmbedBuilder) => void | Promise<void>;
+	/** Whether to display the refresh button used by users to manually refrest EmbedBuilder data. */
 	refresh: boolean;
-	/** Function called to refresh embed data when user manually requests to. Not needed if `refresh` is false. */
+	/** Function called to refresh EmbedBuilder data when user manually requests to. Not needed if `refresh` is false. */
 	refreshData?: () => unknown;
-	/** Whether to send the paginate embed in an ephemeral message. (Only for application command response.) */
+	/** Whether to send the paginate EmbedBuilder in an ephemeral message. (Only for application command response.) */
 	ephemeral: boolean;
 
 	/** The time after which the button collector stops (in milliseconds). */
@@ -102,35 +102,35 @@ export = class EasyEmbedPages {
 		return false;
 	}
 
-	generateButtons(size: number, currentPage: number, disabled = false): Array<ActionRow> {
-		const rows = [new ActionRow()];
+	generateButtons(size: number, currentPage: number, disabled = false): Array<ActionRowBuilder<ButtonBuilder>> {
+		const rows = [new ActionRowBuilder()];
 		const row = rows[0];
 
 		if (size > 2) {
 			row
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('1')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515586068185088' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('2')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515728514744340' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('3')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515302231375902' })
 						.setDisabled(disabled ?? currentPage == size - 1)
 				)
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('4')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515213080395816' })
@@ -141,14 +141,14 @@ export = class EasyEmbedPages {
 		else if (size == 2) {
 			row
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('2')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515728514744340' })
 						.setDisabled(disabled ?? currentPage == 0)
 				)
 				.addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('3')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515302231375902' })
@@ -157,7 +157,7 @@ export = class EasyEmbedPages {
 		}
 
 		if (!this.ephemeral) row.addComponents(
-			new ButtonComponent()
+			new ButtonBuilder()
 				.setCustomId('5')
 				.setStyle(ButtonStyle.Danger)
 				.setEmoji({ id: '852511333165563915' })
@@ -165,10 +165,10 @@ export = class EasyEmbedPages {
 		);
 
 		if (this.refresh) {
-			if (row.components.length >= 5) {
-				rows.push(new ActionRow());
+			if (size > 2 && !this.ephemeral) {
+				rows.push(new ActionRowBuilder());
 				rows[1].addComponents(
-					new ButtonComponent()
+					new ButtonBuilder()
 						.setCustomId('6')
 						.setStyle(ButtonStyle.Secondary)
 						.setEmoji({ name: '🔄' })
@@ -176,7 +176,7 @@ export = class EasyEmbedPages {
 				);
 			}
 			else row.addComponents(
-				new ButtonComponent()
+				new ButtonBuilder()
 					.setCustomId('6')
 					.setStyle(ButtonStyle.Secondary)
 					.setEmoji({ name: '🔄' })
@@ -231,13 +231,13 @@ export = class EasyEmbedPages {
 			if ((this.dataPages[index] && this.dataPages[index].image) || this.image) data.image = this.dataPages[index] && this.dataPages[index].image || this.image;
 			if (this.dataPages[index] && this.dataPages[index].fields) this.dataPages[index].fields.map((y: { name?: string, value: string, inline: boolean }) => data.fields.push({ name: y.name || '\u200b', value: y.value || '\u200b', inline: y.inline || false }));
 
-			const embed = new Embed(data);
-			this.pageGen(embed);
-			this.pages.push(embed);
+			const Embed = new EmbedBuilder(data);
+			this.pageGen(Embed);
+			this.pages.push(Embed);
 		}
 	}
 
-	/** Sends the Paginate embed and starts the button collection. */
+	/** Sends the Paginate EmbedBuilder and starts the button collection. */
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	async start(options?: { [key: string]: any }, page = 0): Promise<Message> {
 		this.page = options.page || page;
@@ -333,7 +333,7 @@ export = class EasyEmbedPages {
 		if (this.user && interaction.user.id != this.user) {
 			return interaction.reply({
 				embeds: [
-					new Embed()
+					new EmbedBuilder()
 						.setDescription(`Only <@${this.user}> can interact with this message.`)
 						.setColor(Colors.Red)
 				],
