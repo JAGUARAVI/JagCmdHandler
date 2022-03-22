@@ -17,7 +17,8 @@ import {
 	MessageOptions,
 	Message,
 	CommandContext,
-	PromptOptions
+	PromptOptions,
+	PaginateMessageOptions
 } from '../types';
 
 import Client from '../classes/Client';
@@ -30,11 +31,15 @@ import ms from 'pretty-ms';
 export = class InteractionCommandHandler {
 	client: Client;
 
+	/** Whether or not to send a DeletableMessage by default. */
+	deleteByDefault: boolean;
+
 	cooldowns = new Collection<string, Collection<string, number>>();
 	checks = new Middleware();
 
-	constructor(client: Client) {
+	constructor(client: Client, options = { deleteByDefault: true }) {
 		this.client = client;
+		this.deleteByDefault = options.deleteByDefault != null ? options.deleteByDefault : true;
 	}
 
 	/** Extend this function to return the language you want to use for error Embeds. */
@@ -76,7 +81,8 @@ export = class InteractionCommandHandler {
 
 		const reply = async (content: MessageOptions) => {
 			try {
-				const del = content.delete != false && !content.ephemeral;
+				if (content.delete == null) content.delete = this.deleteByDefault;
+				const del = content.delete == true && !content.ephemeral;
 				return await (del ? new DeletableMessage({ send: _reply }, content).start(interaction.member as GuildMember) : _reply(content));
 			} catch (e) {
 				Utils.logger.error(e);
@@ -85,7 +91,7 @@ export = class InteractionCommandHandler {
 
 		const send = reply;
 
-		const paginate = async (options: MessageOptions) => {
+		const paginate = async (options: PaginateMessageOptions) => {
 			try {
 				const paginator = new Paginate({ send: _reply }, options);
 				await paginator.start({ user: interaction.user });

@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[src/classes/Messages.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Messages.ts#L6)
+[src/classes/Messages.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L6)
 
 ## Methods
 
@@ -45,7 +45,7 @@ Get data from object path. (Example- 'en.errors.title')
 
 #### Defined in
 
-[src/classes/Messages.ts:20](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Messages.ts#L20)
+[src/classes/Messages.ts:20](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L20)
 
 ___
 
@@ -67,7 +67,7 @@ Get keys of objects from path.
 
 #### Defined in
 
-[src/classes/Messages.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Messages.ts#L53)
+[src/classes/Messages.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L53)
 
 ___
 
@@ -90,7 +90,7 @@ Import data.
 
 #### Defined in
 
-[src/classes/Messages.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Messages.ts#L13)
+[src/classes/Messages.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L13)
 
 ___
 
@@ -113,4 +113,4 @@ Parse variables in string.
 
 #### Defined in
 
-[src/classes/Messages.ts:44](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Messages.ts#L44)
+[src/classes/Messages.ts:44](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L44)

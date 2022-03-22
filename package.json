@@ -18,7 +18,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "chalk": "^4.1.2",
-    "discord.js": "^14.0.0-dev.1647216471.87a6b84",
+    "discord.js": "^14.0.0-dev.1647259751.2297c2b",
     "moment": "^2.29.1",
     "pretty-ms": "^7.0.1"
   },

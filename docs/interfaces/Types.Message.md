@@ -443,7 +443,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L6)
+[src/types/index.ts:24](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L24)
 
 ___
 

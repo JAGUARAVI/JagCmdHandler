@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[src/types/index.ts:56](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L56)
+[src/types/index.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L74)
 
 ___
 
@@ -42,7 +42,7 @@ Permissions for Bot in order to execute the command.
 
 #### Defined in
 
-[src/types/index.ts:54](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L54)
+[src/types/index.ts:72](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L72)
 
 ___
 
@@ -54,7 +54,7 @@ Whether to enable this command by default or set using build() - For Application
 
 #### Defined in
 
-[src/types/index.ts:58](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L58)
+[src/types/index.ts:76](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L76)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:55](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L55)
+[src/types/index.ts:73](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L73)
 
 ___
 
@@ -76,7 +76,7 @@ Permissions for Users in order to execute the command.
 
 #### Defined in
 
-[src/types/index.ts:52](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L52)
+[src/types/index.ts:70](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L70)
 
 ## Methods
 
@@ -99,4 +99,4 @@ Function to build command permissions - For ApplicationCommand only.
 
 #### Defined in
 
-[src/types/index.ts:60](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L60)
+[src/types/index.ts:78](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L78)

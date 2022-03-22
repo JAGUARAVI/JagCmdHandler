@@ -9,6 +9,7 @@
 - [checks](ApplicationCommandHandler.md#checks)
 - [client](ApplicationCommandHandler.md#client)
 - [cooldowns](ApplicationCommandHandler.md#cooldowns)
+- [deleteByDefault](ApplicationCommandHandler.md#deletebydefault)
 
 ### Methods
 
@@ -24,7 +25,7 @@
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:34](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L34)
+[src/functions/ApplicationCommandHandler.ts:38](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L38)
 
 ___
 
@@ -34,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:31](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L31)
+[src/functions/ApplicationCommandHandler.ts:32](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L32)
 
 ___
 
@@ -44,7 +45,19 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:33](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L33)
+[src/functions/ApplicationCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L37)
+
+___
+
+### deleteByDefault
+
+• **deleteByDefault**: `boolean`
+
+Whether or not to send a DeletableMessage by default.
+
+#### Defined in
+
+[src/functions/ApplicationCommandHandler.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L35)
 
 ## Methods
 
@@ -68,7 +81,7 @@ Extend this function to customize error Embeds..
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:48](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L48)
+[src/functions/ApplicationCommandHandler.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L53)
 
 ___
 
@@ -91,7 +104,7 @@ Extend this function to return the language you want to use for error Embeds.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L41)
+[src/functions/ApplicationCommandHandler.ts:46](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L46)
 
 ___
 
@@ -116,4 +129,4 @@ This is the function which handles the interactions.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:59](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/ApplicationCommandHandler.ts#L59)
+[src/functions/ApplicationCommandHandler.ts:64](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L64)

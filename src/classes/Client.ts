@@ -28,7 +28,8 @@ const defaultOptions: ClientOptions = {
 			interval: 60,
 			lifetime: 100
 		}
-	}
+	},
+	failIfNotExists: false
 };
 
 class Client extends BaseClient {

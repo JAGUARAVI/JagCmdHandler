@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[src/types/index.ts:99](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L99)
+[src/types/index.ts:115](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L115)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:98](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L98)
+[src/types/index.ts:114](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L114)

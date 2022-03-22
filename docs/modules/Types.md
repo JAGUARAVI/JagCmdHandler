@@ -13,4 +13,5 @@
 - [Data](../interfaces/Types.Data.md)
 - [Message](../interfaces/Types.Message.md)
 - [MessageOptions](../interfaces/Types.MessageOptions.md)
+- [PaginateMessageOptions](../interfaces/Types.PaginateMessageOptions.md)
 - [PromptOptions](../interfaces/Types.PromptOptions.md)

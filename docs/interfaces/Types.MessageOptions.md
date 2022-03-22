@@ -14,6 +14,8 @@
 
   ↳ **`MessageOptions`**
 
+  ↳↳ [`PaginateMessageOptions`](Types.PaginateMessageOptions.md)
+
 ## Table of contents
 
 ### Properties
@@ -25,22 +27,15 @@
 - [delete](Types.MessageOptions.md#delete)
 - [embeds](Types.MessageOptions.md#embeds)
 - [ephemeral](Types.MessageOptions.md#ephemeral)
-- [failIfNotExists](Types.MessageOptions.md#failifnotexists)
 - [fetchReply](Types.MessageOptions.md#fetchreply)
 - [files](Types.MessageOptions.md#files)
 - [flags](Types.MessageOptions.md#flags)
 - [nonce](Types.MessageOptions.md#nonce)
-- [refresh](Types.MessageOptions.md#refresh)
 - [reply](Types.MessageOptions.md#reply)
 - [stickers](Types.MessageOptions.md#stickers)
 - [threadId](Types.MessageOptions.md#threadid)
 - [time](Types.MessageOptions.md#time)
 - [tts](Types.MessageOptions.md#tts)
-
-### Methods
-
-- [pageGen](Types.MessageOptions.md#pagegen)
-- [refreshData](Types.MessageOptions.md#refreshdata)
 
 ## Properties
 
@@ -54,7 +49,7 @@ DefaultMesageOption.allowedMentions
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4788
+node_modules/discord.js/typings/index.d.ts:4759
 
 ___
 
@@ -68,7 +63,7 @@ DefaultMesageOption.attachments
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4792
+node_modules/discord.js/typings/index.d.ts:4763
 
 ___
 
@@ -82,7 +77,7 @@ DefaultMesageOption.components
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4782
+node_modules/discord.js/typings/index.d.ts:4753
 
 ___
 
@@ -96,7 +91,7 @@ DefaultMesageOption.content
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4780
+node_modules/discord.js/typings/index.d.ts:4751
 
 ___
 
@@ -104,23 +99,25 @@ ___
 
 • `Optional` **delete**: `boolean`
 
+For sending DeletableMessages
+
 #### Defined in
 
-[src/types/index.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L66)
+[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L85)
 
 ___
 
 ### embeds
 
-• `Optional` **embeds**: `any`
+• `Optional` **embeds**: (`APIEmbed` \| `JSONEncodable`<`APIEmbed`\>)[]
 
-#### Overrides
+#### Inherited from
 
 DefaultMesageOption.embeds
 
 #### Defined in
 
-[src/types/index.ts:81](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L81)
+node_modules/discord.js/typings/index.d.ts:4752
 
 ___
 
@@ -134,17 +131,7 @@ InteractionReplyOptions.ephemeral
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4632
-
-___
-
-### failIfNotExists
-
-• `Optional` **failIfNotExists**: `boolean`
-
-#### Defined in
-
-[src/types/index.ts:67](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L67)
+node_modules/discord.js/typings/index.d.ts:4603
 
 ___
 
@@ -158,21 +145,21 @@ InteractionReplyOptions.fetchReply
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4633
+node_modules/discord.js/typings/index.d.ts:4604
 
 ___
 
 ### files
 
-• `Optional` **files**: `any`
+• `Optional` **files**: (`MessageAttachment` \| `FileOptions` \| `BufferResolvable` \| `Stream`)[]
 
-#### Overrides
+#### Inherited from
 
 DefaultMesageOption.files
 
 #### Defined in
 
-[src/types/index.ts:79](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L79)
+node_modules/discord.js/typings/index.d.ts:4760
 
 ___
 
@@ -186,7 +173,7 @@ DefaultMesageOption.flags
 
 #### Defined in
 
-[src/types/index.ts:77](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L77)
+[src/types/index.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L88)
 
 ___
 
@@ -200,19 +187,7 @@ DefaultMesageOption.nonce
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4779
-
-___
-
-### refresh
-
-• `Optional` **refresh**: `boolean`
-
-Only for paginate
-
-#### Defined in
-
-[src/types/index.ts:69](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L69)
+node_modules/discord.js/typings/index.d.ts:4750
 
 ___
 
@@ -226,7 +201,7 @@ DefaultMesageOption.reply
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4790
+node_modules/discord.js/typings/index.d.ts:4761
 
 ___
 
@@ -240,7 +215,7 @@ DefaultMesageOption.stickers
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4791
+node_modules/discord.js/typings/index.d.ts:4762
 
 ___
 
@@ -254,7 +229,7 @@ InteractionReplyOptions.threadId
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:5246
+node_modules/discord.js/typings/index.d.ts:5217
 
 ___
 
@@ -262,11 +237,9 @@ ___
 
 • `Optional` **time**: `number`
 
-Only for paginate & deletableMessage
-
 #### Defined in
 
-[src/types/index.ts:75](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L75)
+[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L86)
 
 ___
 
@@ -280,36 +253,4 @@ DefaultMesageOption.tts
 
 #### Defined in
 
-node_modules/discord.js/typings/index.d.ts:4778
-
-## Methods
-
-### pageGen
-
-▸ `Optional` **pageGen**(): `void`
-
-Only for paginate
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[src/types/index.ts:73](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L73)
-
-___
-
-### refreshData
-
-▸ `Optional` **refreshData**(): `unknown`
-
-Only for paginate
-
-#### Returns
-
-`unknown`
-
-#### Defined in
-
-[src/types/index.ts:71](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/types/index.ts#L71)
+node_modules/discord.js/typings/index.d.ts:4749

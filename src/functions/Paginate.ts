@@ -22,7 +22,7 @@ export = class EasyEmbedBuilderPages {
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> };
 	/** The content to be dynamically adjusted and displayed */
-	content: MessageOptions | MessagePayload;
+	content: MessageOptions;
 	/** UserId of person who can interact with the EmbedBuilder. */
 	user?: string;
 	/** Message object which contains the interactable EmbedBuilder */

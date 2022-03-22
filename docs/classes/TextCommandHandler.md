@@ -9,6 +9,7 @@
 - [checks](TextCommandHandler.md#checks)
 - [client](TextCommandHandler.md#client)
 - [cooldowns](TextCommandHandler.md#cooldowns)
+- [deleteByDefault](TextCommandHandler.md#deletebydefault)
 - [messageReplies](TextCommandHandler.md#messagereplies)
 
 ### Methods
@@ -26,7 +27,7 @@
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L37)
+[src/functions/TextCommandHandler.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L41)
 
 ___
 
@@ -36,7 +37,7 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:33](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L33)
+[src/functions/TextCommandHandler.ts:34](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L34)
 
 ___
 
@@ -46,7 +47,19 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L35)
+[src/functions/TextCommandHandler.ts:39](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L39)
+
+___
+
+### deleteByDefault
+
+• **deleteByDefault**: `boolean`
+
+Whether or not to send a DeletableMessage by default.
+
+#### Defined in
+
+[src/functions/TextCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L37)
 
 ___
 
@@ -56,7 +69,7 @@ ___
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:36](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L36)
+[src/functions/TextCommandHandler.ts:40](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L40)
 
 ## Methods
 
@@ -80,7 +93,7 @@ Extend this function to customize error Embeds..
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:63](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L63)
+[src/functions/TextCommandHandler.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L68)
 
 ___
 
@@ -103,7 +116,7 @@ Extend this function to return the language you want to use for error Embeds.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:58](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L58)
+[src/functions/TextCommandHandler.ts:63](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L63)
 
 ___
 
@@ -126,7 +139,7 @@ Extend this function to return the prefix to be used.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:52](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L52)
+[src/functions/TextCommandHandler.ts:57](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L57)
 
 ___
 
@@ -151,4 +164,4 @@ This is the function which handles the messages.
 
 #### Defined in
 
-[src/functions/TextCommandHandler.ts:74](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/functions/TextCommandHandler.ts#L74)
+[src/functions/TextCommandHandler.ts:79](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/TextCommandHandler.ts#L79)

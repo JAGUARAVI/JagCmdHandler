@@ -18,7 +18,8 @@ import {
 	MessageOptions,
 	Message,
 	CommandContext,
-	PromptOptions
+	PromptOptions,
+	PaginateMessageOptions
 } from '../types';
 
 import Client from '../classes/Client';
@@ -32,12 +33,16 @@ import { ButtonBuilder } from '@discordjs/builders';
 export = class TextCommandHandler {
 	client: Client;
 
+	/** Whether or not to send a DeletableMessage by default. */
+	deleteByDefault: boolean;
+
 	cooldowns = new Collection<string, Collection<string, number>>();
 	messageReplies = new Map<string, Array<string>>();
 	checks = new Middleware();
 
-	constructor(client: Client) {
+	constructor(client: Client, options = { deleteByDefault: true }) {
 		this.client = client;
+		this.deleteByDefault = options.deleteByDefault != null ? options.deleteByDefault : true;
 
 		this.client.on('messageDelete', async (message) => {
 			this.messageReplies.get(message.id)?.map(async (id) => {
@@ -105,7 +110,8 @@ export = class TextCommandHandler {
 		const send = async (content: MessageOptions) => {
 			try {
 				if (typeof content === 'string') content = { content };
-				const del = content.delete != false;
+				if (content.delete == null) content.delete = this.deleteByDefault;
+				const del = content.delete == true && !content.ephemeral;
 				const msg = await (del ? new DeletableMessage({ send: message.channel.send.bind(message.channel) }, content).start(message.member) : message.channel.send(content));
 
 				if (del) {
@@ -123,8 +129,8 @@ export = class TextCommandHandler {
 		const reply = async (content: MessageOptions) => {
 			try {
 				if (typeof content === 'string') content = { content };
-				content.failIfNotExists = false;
-				const del = content.delete != false;
+				if (content.delete == null) content.delete = this.deleteByDefault;
+				const del = content.delete == true && !content.ephemeral;
 				const msg = await (del ? new DeletableMessage({ send: message.reply.bind(message) }, content).start(message.member) : message.reply(content));
 
 				if (del) {
@@ -139,7 +145,7 @@ export = class TextCommandHandler {
 			}
 		};
 
-		const paginate = async (options: MessageOptions) => {
+		const paginate = async (options: PaginateMessageOptions) => {
 			try {
 				const paginator = new Paginate({ send }, options);
 				await paginator.start({ user: message.author });

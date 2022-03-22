@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[src/classes/Resolve.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L7)
+[src/classes/Resolve.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L7)
 
 ## Properties
 
@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[src/classes/Resolve.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L5)
+[src/classes/Resolve.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L5)
 
 ## Methods
 
@@ -66,7 +66,7 @@ Resolves a Channel from search string and Guild to search from.
 
 #### Defined in
 
-[src/classes/Resolve.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L41)
+[src/classes/Resolve.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L41)
 
 ___
 
@@ -89,7 +89,7 @@ Resolves a GuildMember from search string and Guild to search from.
 
 #### Defined in
 
-[src/classes/Resolve.ts:23](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L23)
+[src/classes/Resolve.ts:23](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L23)
 
 ___
 
@@ -112,7 +112,7 @@ Resolves a Role from search string and Guild to search from.
 
 #### Defined in
 
-[src/classes/Resolve.ts:31](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L31)
+[src/classes/Resolve.ts:31](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L31)
 
 ___
 
@@ -134,4 +134,4 @@ Resolves a User object from search string.
 
 #### Defined in
 
-[src/classes/Resolve.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/bd4ae4b/src/classes/Resolve.ts#L12)
+[src/classes/Resolve.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Resolve.ts#L12)

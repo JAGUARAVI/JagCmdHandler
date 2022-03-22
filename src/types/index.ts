@@ -1,5 +1,23 @@
-import { Message as BaseMessage, Interaction, MessagePayload, MessageOptions as DefaultMesageOption, TextInputComponentData, ClientOptions as BaseClientOptions, User, InteractionReplyOptions, ApplicationCommandOptionData, ApplicationCommandPermissionData, PermissionsString, ApplicationCommand, Guild, ApplicationCommandType, MessageEditOptions } from 'discord.js';
+import {
+	Message as BaseMessage,
+	Interaction,
+	MessagePayload,
+	MessageOptions as DefaultMesageOption,
+	TextInputComponentData,
+	ClientOptions as BaseClientOptions,
+	User,
+	InteractionReplyOptions,
+	ApplicationCommandOptionData,
+	ApplicationCommandPermissionData,
+	PermissionsString,
+	ApplicationCommand,
+	Guild,
+	ApplicationCommandType,
+	MessageEditOptions
+} from 'discord.js';
+
 import { APITextInputComponent } from 'discord-api-types/v10';
+
 import Client from '../classes/Client';
 
 export interface Message extends BaseMessage {
@@ -63,23 +81,21 @@ export interface CommandPermissions {
 }
 
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions, MessageEditOptions {
+	/** For sending DeletableMessages */
 	delete?: boolean
-	failIfNotExists?: boolean
-	/** Only for paginate */
+	time?: number
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	flags?: any
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+}
+
+export interface PaginateMessageOptions extends MessageOptions {
 	refresh?: boolean
 	/** Only for paginate */
 	refreshData?: () => unknown
 	/** Only for paginate */
 	pageGen?: () => void
 	/** Only for paginate & deletableMessage */
-	time?: number
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	flags?: any
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	files?: any
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	embeds?: any
-	// remove on next djs update
 }
 
 export interface ClientOptions extends BaseClientOptions {
