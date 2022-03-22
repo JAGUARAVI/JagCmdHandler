@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, TextChannel, EmbedAuthorData, EmbedFooterData, MessagePayload, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, TextChannel, EmbedAuthorData, EmbedFooterData, InteractionCollector, ButtonInteraction, Colors, ButtonStyle, ComponentType } from 'discord.js';
 import { Message, MessageOptions } from '../types';
 
 const chunk = <T>(array: Array<T>, chunkSize = 0): Array<Array<T>> => {
