@@ -99,11 +99,11 @@ ___
 
 • `Optional` **delete**: `boolean`
 
-For sending DeletableMessages
+For sending `DeletableMessage`s
 
 #### Defined in
 
-[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L85)
+[src/types/index.ts:89](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L89)
 
 ___
 
@@ -173,7 +173,7 @@ DefaultMesageOption.flags
 
 #### Defined in
 
-[src/types/index.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L88)
+[src/types/index.ts:95](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L95)
 
 ___
 
@@ -237,9 +237,11 @@ ___
 
 • `Optional` **time**: `number`
 
+Idle timeout for `DeletableMessages`s
+
 #### Defined in
 
-[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L86)
+[src/types/index.ts:92](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L92)
 
 ___
 

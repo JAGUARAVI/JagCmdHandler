@@ -68,7 +68,7 @@ export = class InteractionCommandHandler {
 		if (!command || command.config?.availibility == 1) return next();
 
 		if (interaction.isAutocomplete()) {
-			return interaction.respond(await command.autocomplete(this.client, interaction));
+			return interaction.respond(await command.autocomplete(this.client, interaction)).catch(Utils.logger.error);
 		}
 
 		const _reply = async (content: MessageOptions): Promise<Message> => {
@@ -95,7 +95,7 @@ export = class InteractionCommandHandler {
 			try {
 				const paginator = new Paginate({ send: _reply }, options);
 				await paginator.start({ user: interaction.user });
-				return paginator.message;
+				return paginator;
 			} catch (e) {
 				Utils.logger.error(e);
 			}
@@ -218,9 +218,10 @@ export = class InteractionCommandHandler {
 			}
 		} catch (e: any) {	// eslint-disable-line  @typescript-eslint/no-explicit-any
 			ctx.reply({
-				embeds: [this.getErrorEmbed(client.messages.parseVariables(ctx.client.messages.get(ctx.language, 'errors.body') + '\n' + ctx.client.messages.get(ctx.language, 'errors.message'), { error: e.message ?? e }), true)],
+				embeds: [this.getErrorEmbed('**' + ctx.client.messages.parseVariables(ctx.client.messages.get(ctx.language, 'errors.body') + '**%nl%' + ctx.client.messages.get(ctx.language, 'errors.message'), { error: e.message ?? e }), true, ctx.language)],
 				allowedMentions: { repliedUser: false },
-				ephemeral: true
+				ephemeral: true,
+				components: []
 			});
 			Utils.logger.error(e);
 		}

@@ -32,7 +32,7 @@ Name of the event for which the body is executed when emitted.
 
 #### Defined in
 
-[src/classes/base/BaseEvent.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/BaseEvent.ts#L7)
+[src/classes/base/BaseEvent.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/BaseEvent.ts#L7)
 
 ## Properties
 
@@ -42,7 +42,7 @@ Name of the event for which the body is executed when emitted.
 
 #### Defined in
 
-[src/classes/base/BaseEvent.ts:4](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/BaseEvent.ts#L4)
+[src/classes/base/BaseEvent.ts:4](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/BaseEvent.ts#L4)
 
 ## Methods
 
@@ -65,4 +65,4 @@ Event body which gets executed.
 
 #### Defined in
 
-[src/classes/base/BaseEvent.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/BaseEvent.ts#L12)
+[src/classes/base/BaseEvent.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/BaseEvent.ts#L12)

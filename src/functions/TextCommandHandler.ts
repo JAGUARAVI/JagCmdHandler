@@ -150,12 +150,17 @@ export = class TextCommandHandler {
 				const paginator = new Paginate({ send }, options);
 				await paginator.start({ user: message.author });
 
-				let arr = this.messageReplies.get(message.id);
-				if (!arr) arr = [];
-				arr.push(paginator.message.id);
-				this.messageReplies.set(message.id, arr);
+				if (options.delete == null) options.delete = this.deleteByDefault;
+				const del = options.delete == true;
 
-				return paginator.message;
+				if (del) {
+					let arr = this.messageReplies.get(message.id);
+					if (!arr) arr = [];
+					arr.push(paginator.message.id);
+					this.messageReplies.set(message.id, arr);
+				}
+
+				return paginator;
 			} catch (e) {
 				Utils.logger.error(e);
 			}

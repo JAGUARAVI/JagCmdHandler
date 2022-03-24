@@ -1,4 +1,15 @@
-import { Client as BaseClient, Options, Collection, ApplicationCommand, Guild, ApplicationCommandPermissionData, ApplicationCommandType, GuildResolvable, Partials } from 'discord.js';
+import {
+	Client as BaseClient,
+	Options,
+	Collection,
+	ApplicationCommand,
+	Guild,
+	ApplicationCommandPermissionData,
+	ApplicationCommandType,
+	GuildResolvable,
+	Partials
+} from 'discord.js';
+
 import { GatewayIntentBits } from 'discord-api-types/v10';
 import { promises as fs } from 'fs';
 import { join } from 'path';
@@ -13,7 +24,14 @@ import Resolve from './Resolve';
 import Messages from './Messages';
 
 const defaultOptions: ClientOptions = {
-	partials: [Partials.User, Partials.GuildMember, Partials.Message, Partials.Channel, Partials.Reaction, Partials.GuildScheduledEvent],
+	partials: [
+		Partials.User,
+		Partials.GuildMember,
+		Partials.Message,
+		Partials.Channel,
+		Partials.Reaction,
+		Partials.GuildScheduledEvent
+	],
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,

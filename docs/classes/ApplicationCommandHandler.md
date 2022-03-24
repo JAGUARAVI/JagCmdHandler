@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:38](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L38)
+[src/functions/ApplicationCommandHandler.ts:38](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L38)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:32](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L32)
+[src/functions/ApplicationCommandHandler.ts:32](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L32)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L37)
+[src/functions/ApplicationCommandHandler.ts:37](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L37)
 
 ___
 
@@ -57,7 +57,7 @@ Whether or not to send a DeletableMessage by default.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L35)
+[src/functions/ApplicationCommandHandler.ts:35](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L35)
 
 ## Methods
 
@@ -81,7 +81,7 @@ Extend this function to customize error Embeds..
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L53)
+[src/functions/ApplicationCommandHandler.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L53)
 
 ___
 
@@ -104,7 +104,7 @@ Extend this function to return the language you want to use for error Embeds.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:46](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L46)
+[src/functions/ApplicationCommandHandler.ts:46](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L46)
 
 ___
 
@@ -129,4 +129,4 @@ This is the function which handles the interactions.
 
 #### Defined in
 
-[src/functions/ApplicationCommandHandler.ts:64](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/functions/ApplicationCommandHandler.ts#L64)
+[src/functions/ApplicationCommandHandler.ts:64](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/functions/ApplicationCommandHandler.ts#L64)

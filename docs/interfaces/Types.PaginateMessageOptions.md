@@ -8,6 +8,8 @@
 
 - [`MessageOptions`](Types.MessageOptions.md)
 
+- `Omit`<`APIEmbed`, ``"timestamp"`` \| ``"video"`` \| ``"provider"`` \| ``"type"`` \| ``"fields"``\>
+
   ↳ **`PaginateMessageOptions`**
 
 ## Table of contents
@@ -16,21 +18,30 @@
 
 - [allowedMentions](Types.PaginateMessageOptions.md#allowedmentions)
 - [attachments](Types.PaginateMessageOptions.md#attachments)
+- [author](Types.PaginateMessageOptions.md#author)
+- [color](Types.PaginateMessageOptions.md#color)
 - [components](Types.PaginateMessageOptions.md#components)
 - [content](Types.PaginateMessageOptions.md#content)
 - [delete](Types.PaginateMessageOptions.md#delete)
+- [description](Types.PaginateMessageOptions.md#description)
 - [embeds](Types.PaginateMessageOptions.md#embeds)
 - [ephemeral](Types.PaginateMessageOptions.md#ephemeral)
 - [fetchReply](Types.PaginateMessageOptions.md#fetchreply)
 - [files](Types.PaginateMessageOptions.md#files)
 - [flags](Types.PaginateMessageOptions.md#flags)
+- [footer](Types.PaginateMessageOptions.md#footer)
+- [image](Types.PaginateMessageOptions.md#image)
 - [nonce](Types.PaginateMessageOptions.md#nonce)
+- [pages](Types.PaginateMessageOptions.md#pages)
 - [refresh](Types.PaginateMessageOptions.md#refresh)
 - [reply](Types.PaginateMessageOptions.md#reply)
 - [stickers](Types.PaginateMessageOptions.md#stickers)
 - [threadId](Types.PaginateMessageOptions.md#threadid)
+- [thumbnail](Types.PaginateMessageOptions.md#thumbnail)
 - [time](Types.PaginateMessageOptions.md#time)
+- [title](Types.PaginateMessageOptions.md#title)
 - [tts](Types.PaginateMessageOptions.md#tts)
+- [url](Types.PaginateMessageOptions.md#url)
 
 ### Methods
 
@@ -67,6 +78,40 @@ node_modules/discord.js/typings/index.d.ts:4763
 
 ___
 
+### author
+
+• `Optional` **author**: `APIEmbedAuthor`
+
+Author information
+
+See https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
+
+#### Inherited from
+
+Omit.author
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:784
+
+___
+
+### color
+
+• `Optional` **color**: `number`
+
+Color code of the embed
+
+#### Inherited from
+
+Omit.color
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:748
+
+___
+
 ### components
 
 • `Optional` **components**: (`ActionRow`<`MessageActionRowComponent`\> \| `APIActionRowComponent`<`APIMessageActionRowComponent`\> \| `JSONEncodable`<`APIActionRowComponent`<`APIMessageActionRowComponent`\>\> \| `Required`<`BaseComponentData`\> & `ActionRowData`<`MessageActionRowComponent` \| `MessageActionRowComponentData`\>)[]
@@ -99,7 +144,7 @@ ___
 
 • `Optional` **delete**: `boolean`
 
-For sending DeletableMessages
+For sending `DeletableMessage`s
 
 #### Inherited from
 
@@ -107,7 +152,25 @@ For sending DeletableMessages
 
 #### Defined in
 
-[src/types/index.ts:85](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L85)
+[src/types/index.ts:89](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L89)
+
+___
+
+### description
+
+• `Optional` **description**: `string`
+
+Description of embed
+
+Length limit: 4096 characters
+
+#### Inherited from
+
+Omit.description
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:736
 
 ___
 
@@ -177,7 +240,43 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:88](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L88)
+[src/types/index.ts:95](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L95)
+
+___
+
+### footer
+
+• `Optional` **footer**: `APIEmbedFooter`
+
+Footer information
+
+See https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
+
+#### Inherited from
+
+Omit.footer
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:754
+
+___
+
+### image
+
+• `Optional` **image**: `APIEmbedImage`
+
+Image information
+
+See https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
+
+#### Inherited from
+
+Omit.image
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:760
 
 ___
 
@@ -195,13 +294,27 @@ node_modules/discord.js/typings/index.d.ts:4750
 
 ___
 
+### pages
+
+• **pages**: (`APIEmbed` \| `JSONEncodable`<`APIEmbed`\>)[]
+
+Specific page data for more customization.
+
+#### Defined in
+
+[src/types/index.ts:105](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L105)
+
+___
+
 ### refresh
 
 • `Optional` **refresh**: `boolean`
 
+Whether or not to allow the user to refresh the embed.
+
 #### Defined in
 
-[src/types/index.ts:93](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L93)
+[src/types/index.ts:99](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L99)
 
 ___
 
@@ -247,9 +360,29 @@ node_modules/discord.js/typings/index.d.ts:5217
 
 ___
 
+### thumbnail
+
+• `Optional` **thumbnail**: `APIEmbedThumbnail`
+
+Thumbnail information
+
+See https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
+
+#### Inherited from
+
+Omit.thumbnail
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:766
+
+___
+
 ### time
 
 • `Optional` **time**: `number`
+
+Idle timeout for `DeletableMessages`s
 
 #### Inherited from
 
@@ -257,7 +390,25 @@ ___
 
 #### Defined in
 
-[src/types/index.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L86)
+[src/types/index.ts:92](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L92)
+
+___
+
+### title
+
+• `Optional` **title**: `string`
+
+Title of embed
+
+Length limit: 256 characters
+
+#### Inherited from
+
+Omit.title
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:722
 
 ___
 
@@ -273,21 +424,37 @@ ___
 
 node_modules/discord.js/typings/index.d.ts:4749
 
+___
+
+### url
+
+• `Optional` **url**: `string`
+
+URL of embed
+
+#### Inherited from
+
+Omit.url
+
+#### Defined in
+
+node_modules/discord-api-types/payloads/v10/channel.d.ts:740
+
 ## Methods
 
 ### pageGen
 
-▸ `Optional` **pageGen**(): `void`
+▸ `Optional` **pageGen**(): `void` \| `Promise`<[`MessageOptions`](Types.MessageOptions.md)\>
 
-Only for paginate
+Function to customize the paginate message sent.
 
 #### Returns
 
-`void`
+`void` \| `Promise`<[`MessageOptions`](Types.MessageOptions.md)\>
 
 #### Defined in
 
-[src/types/index.ts:97](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L97)
+[src/types/index.ts:103](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L103)
 
 ___
 
@@ -295,7 +462,7 @@ ___
 
 ▸ `Optional` **refreshData**(): `unknown`
 
-Only for paginate
+The function which refreshes the data.
 
 #### Returns
 
@@ -303,4 +470,4 @@ Only for paginate
 
 #### Defined in
 
-[src/types/index.ts:95](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/types/index.ts#L95)
+[src/types/index.ts:101](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/types/index.ts#L101)

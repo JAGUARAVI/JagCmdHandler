@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[src/classes/base/Middleware.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/Middleware.ts#L5)
+[src/classes/base/Middleware.ts:5](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/Middleware.ts#L5)
 
 ## Properties
 
@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[src/classes/base/Middleware.ts:3](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/Middleware.ts#L3)
+[src/classes/base/Middleware.ts:3](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/Middleware.ts#L3)
 
 ## Methods
 
@@ -57,7 +57,7 @@ Run all the middlewares with provided args. Next middleware is executed after th
 
 #### Defined in
 
-[src/classes/base/Middleware.ts:18](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/Middleware.ts#L18)
+[src/classes/base/Middleware.ts:18](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/Middleware.ts#L18)
 
 ___
 
@@ -79,4 +79,4 @@ Add a middleware to execute.
 
 #### Defined in
 
-[src/classes/base/Middleware.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/base/Middleware.ts#L11)
+[src/classes/base/Middleware.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/base/Middleware.ts#L11)

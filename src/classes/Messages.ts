@@ -1,18 +1,19 @@
 import { Locale } from 'discord-api-types/v10';
 import * as DefaultData from '../languages/default.json';
-import {Data} from '../types/index';
+import { Data } from '../types/index';
+import Utils from '../utils';
 
 export = class Messages {
     data: Data;
 
     constructor(data: Data = {}) {
-        this.data = Object.assign({}, DefaultData, data);
+        this.data = Utils.merge(DefaultData, data, false);
     }
 
     /** Import data. */
     import(data: Data, language?: string): this {
-        if (language) this.data = Object.assign(this.data, { [language]: data });
-        else this.data = Object.assign(this.data, data);
+        if (language) this.data = Utils.merge(this.data, { [language]: data }, false);
+        else this.data = Utils.merge(this.data, data, false);
         return this;
     }
 
@@ -42,6 +43,7 @@ export = class Messages {
     /** Parse variables in string. */
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     parseVariables(str: string, data: { [key: string]: any } = {}): string {
+        if (!str) return '';
         data.nl = '\n';
         return str.replace(/%([^%]+)%/g, (match, key: string) => {
             if (data[key] != null) return data[key].toString();
@@ -64,5 +66,15 @@ export = class Messages {
         }
 
         return Object.keys(ob);
+    }
+
+    /**
+     * Reset all data.
+     * @param keepDefault If true, keep default data.
+     */
+    clear(keepDefault = true): this {
+        if (keepDefault) this.data = Object.assign({}, DefaultData);
+        else this.data = {};
+        return this;
     }
 }

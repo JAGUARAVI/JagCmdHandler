@@ -10,6 +10,7 @@
 
 ### Methods
 
+- [clear](Messages.md#clear)
 - [get](Messages.md#get)
 - [getKeys](Messages.md#getkeys)
 - [import](Messages.md#import)
@@ -23,9 +24,31 @@
 
 #### Defined in
 
-[src/classes/Messages.ts:6](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L6)
+[src/classes/Messages.ts:7](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L7)
 
 ## Methods
+
+### clear
+
+▸ **clear**(`keepDefault?`): [`Messages`](Messages.md)
+
+Reset all data.
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `keepDefault` | `boolean` | `true` | If true, keep default data. |
+
+#### Returns
+
+[`Messages`](Messages.md)
+
+#### Defined in
+
+[src/classes/Messages.ts:75](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L75)
+
+___
 
 ### get
 
@@ -45,7 +68,7 @@ Get data from object path. (Example- 'en.errors.title')
 
 #### Defined in
 
-[src/classes/Messages.ts:20](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L20)
+[src/classes/Messages.ts:21](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L21)
 
 ___
 
@@ -67,7 +90,7 @@ Get keys of objects from path.
 
 #### Defined in
 
-[src/classes/Messages.ts:53](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L53)
+[src/classes/Messages.ts:55](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L55)
 
 ___
 
@@ -90,7 +113,7 @@ Import data.
 
 #### Defined in
 
-[src/classes/Messages.ts:13](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L13)
+[src/classes/Messages.ts:14](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L14)
 
 ___
 
@@ -113,4 +136,4 @@ Parse variables in string.
 
 #### Defined in
 
-[src/classes/Messages.ts:44](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Messages.ts#L44)
+[src/classes/Messages.ts:45](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Messages.ts#L45)

@@ -110,7 +110,7 @@ BaseClient.constructor
 
 #### Defined in
 
-[src/classes/Client.ts:54](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L54)
+[src/classes/Client.ts:72](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L72)
 
 ## Properties
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:50](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L50)
+[src/classes/Client.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L68)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:48](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L48)
+[src/classes/Client.ts:66](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L66)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:46](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L46)
+[src/classes/Client.ts:64](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L64)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:36](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L36)
+[src/classes/Client.ts:54](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L54)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:41](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L41)
+[src/classes/Client.ts:59](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L59)
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:45](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L45)
+[src/classes/Client.ts:63](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L63)
 
 ___
 
@@ -242,7 +242,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:43](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L43)
+[src/classes/Client.ts:61](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L61)
 
 ___
 
@@ -252,7 +252,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:52](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L52)
+[src/classes/Client.ts:70](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L70)
 
 ___
 
@@ -290,7 +290,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:51](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L51)
+[src/classes/Client.ts:69](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L69)
 
 ___
 
@@ -342,7 +342,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:49](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L49)
+[src/classes/Client.ts:67](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L67)
 
 ___
 
@@ -394,7 +394,7 @@ ___
 
 #### Defined in
 
-[src/classes/Client.ts:42](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L42)
+[src/classes/Client.ts:60](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L60)
 
 ___
 
@@ -928,7 +928,7 @@ Initiates the Client. Necessary for basic functions (function added in JagCmdHan
 
 #### Defined in
 
-[src/classes/Client.ts:161](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L161)
+[src/classes/Client.ts:179](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L179)
 
 ___
 
@@ -1361,7 +1361,7 @@ Registers application commands from Client#commands globally or for a guild if i
 
 #### Defined in
 
-[src/classes/Client.ts:104](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L104)
+[src/classes/Client.ts:122](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L122)
 
 ___
 
@@ -1384,7 +1384,7 @@ Registers a command from file path.
 
 #### Defined in
 
-[src/classes/Client.ts:68](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L68)
+[src/classes/Client.ts:86](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L86)
 
 ___
 
@@ -1406,7 +1406,7 @@ Registers commands from directory path
 
 #### Defined in
 
-[src/classes/Client.ts:89](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L89)
+[src/classes/Client.ts:107](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L107)
 
 ___
 
@@ -1429,7 +1429,7 @@ Regsiters events from directory path
 
 #### Defined in
 
-[src/classes/Client.ts:136](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L136)
+[src/classes/Client.ts:154](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L154)
 
 ___
 
@@ -1662,7 +1662,7 @@ Unregisters application commands globally or for a guild if it is specified.
 
 #### Defined in
 
-[src/classes/Client.ts:128](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/classes/Client.ts#L128)
+[src/classes/Client.ts:146](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/classes/Client.ts#L146)
 
 ___
 

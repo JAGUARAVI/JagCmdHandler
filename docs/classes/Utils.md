@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[src/utils/index.ts:9](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/utils/index.ts#L9)
+[src/utils/index.ts:9](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/utils/index.ts#L9)
 
 ___
 
@@ -68,24 +68,25 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:8](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/utils/index.ts#L8)
+[src/utils/index.ts:8](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/utils/index.ts#L8)
 
 ___
 
 ### merge
 
-▪ `Static` **merge**: (`model`: { `[key: string]`: `any`;  }, `value`: { `[key: string]`: `any`;  }) => { `[key: string]`: `any`;  } = `Merge`
+▪ `Static` **merge**: (`model`: { `[key: string]`: `any`;  }, `value`: { `[key: string]`: `any`;  }, `strict`: `boolean`) => { `[key: string]`: `any`;  } = `Merge`
 
 #### Type declaration
 
-▸ (`model`, `value`): `Object`
+▸ (`model`, `value`, `strict?`): `Object`
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `model` | `Object` |
-| `value` | `Object` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `model` | `Object` | `undefined` |
+| `value` | `Object` | `undefined` |
+| `strict` | `boolean` | `true` |
 
 ##### Returns
 
@@ -93,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/utils/index.ts#L12)
+[src/utils/index.ts:12](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/utils/index.ts#L12)
 
 ___
 
@@ -117,7 +118,7 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/utils/index.ts#L11)
+[src/utils/index.ts:11](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/utils/index.ts#L11)
 
 ___
 
@@ -133,4 +134,4 @@ ___
 
 #### Defined in
 
-[src/utils/index.ts:10](https://github.com/JAGUARAVI/JagCmdHandler/blob/e70513f/src/utils/index.ts#L10)
+[src/utils/index.ts:10](https://github.com/JAGUARAVI/JagCmdHandler/blob/f4e0b8f/src/utils/index.ts#L10)

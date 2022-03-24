@@ -30,8 +30,9 @@ export = class EasyEmbedBuilderPages {
 	/** Button collector used to collect interactions. */
 	collector: InteractionCollector<ButtonInteraction>;
 
-	/** EmbedBuilder pages... Automagically generated */
-	pages: Array<EmbedBuilder>;
+	/** EmbedBuilder pages... Automagically generated! */
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	pages: Array<any>;
 	/** Current page number. */
 	page: number;
 	/** Pages with EmbedBuilder data for extra configuration for each page. */
@@ -56,19 +57,17 @@ export = class EasyEmbedBuilderPages {
 	image?: string;
 	/** General EmbedBuilder description. (Can be specified differently for each page using `dataPages`) */
 	description?: string;
-	/** Function used to modify each EmbedBuilder page for better customizability. Edit the EmbedBuilder object provided instead of returning one. */
-	pageGen?: (EmbedBuilder: EmbedBuilder) => void | Promise<void>;
+	/** Function used to modify each EmbedBuilder page for better customizability. Return the edited data. */
+	pageGen?: (option: MessageOptions, page: number) => void | MessageOptions | Promise<MessageOptions>;
 	/** Whether to display the refresh button used by users to manually refrest EmbedBuilder data. */
 	refresh: boolean;
 	/** Function called to refresh EmbedBuilder data when user manually requests to. Not needed if `refresh` is false. */
-	refreshData?: () => unknown;
+	refreshData?: () => unknown | Promise<unknown>;
 	/** Whether to send the paginate EmbedBuilder in an ephemeral message. (Only for application command response.) */
 	ephemeral: boolean;
 
 	/** The time after which the button collector stops (in milliseconds). */
 	time: number;
-	/** Used to store timeouts. */
-	timeout: NodeJS.Timeout;
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	constructor(channel: TextChannel | { send: (content: MessageOptions) => Promise<Message> }, data: { [key: string]: any }) {
@@ -113,28 +112,28 @@ export = class EasyEmbedBuilderPages {
 						.setCustomId('1')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515586068185088' })
-						.setDisabled(disabled ?? currentPage == 0)
+						.setDisabled(disabled || currentPage == 0)
 				)
 				.addComponents(
 					new ButtonBuilder()
 						.setCustomId('2')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515728514744340' })
-						.setDisabled(disabled ?? currentPage == 0)
+						.setDisabled(disabled || currentPage == 0)
 				)
 				.addComponents(
 					new ButtonBuilder()
 						.setCustomId('3')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515302231375902' })
-						.setDisabled(disabled ?? currentPage == size - 1)
+						.setDisabled(disabled || currentPage == size - 1)
 				)
 				.addComponents(
 					new ButtonBuilder()
 						.setCustomId('4')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515213080395816' })
-						.setDisabled(disabled ?? currentPage == size - 1)
+						.setDisabled(disabled || currentPage == size - 1)
 				);
 		}
 
@@ -145,14 +144,14 @@ export = class EasyEmbedBuilderPages {
 						.setCustomId('2')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515728514744340' })
-						.setDisabled(disabled ?? currentPage == 0)
+						.setDisabled(disabled || currentPage == 0)
 				)
 				.addComponents(
 					new ButtonBuilder()
 						.setCustomId('3')
 						.setStyle(ButtonStyle.Primary)
 						.setEmoji({ id: '852515302231375902' })
-						.setDisabled(disabled ?? currentPage == 1)
+						.setDisabled(disabled || currentPage == 1)
 				);
 		}
 
@@ -208,6 +207,7 @@ export = class EasyEmbedBuilderPages {
 				fields: []
 			};
 
+			if (this.dataPages[index] instanceof EmbedBuilder) this.dataPages[index] = this.dataPages[index].toJSON();
 			if (this.description && array[index]) {
 				let i = array[index].join('');
 				if (index < great) i = `${i}...`;
@@ -232,7 +232,6 @@ export = class EasyEmbedBuilderPages {
 			if (this.dataPages[index] && this.dataPages[index].fields) this.dataPages[index].fields.map((y: { name?: string, value: string, inline: boolean }) => data.fields.push({ name: y.name || '\u200b', value: y.value || '\u200b', inline: y.inline || false }));
 
 			const Embed = new EmbedBuilder(data);
-			this.pageGen(Embed);
 			this.pages.push(Embed);
 		}
 	}
@@ -258,13 +257,10 @@ export = class EasyEmbedBuilderPages {
 			this.page = 0;
 		}
 
-		this.message = await this.channel.send(this.generateMessage());
+		this.message = await this.channel.send(await this.generateMessage());
 
-		this.collector = this.message.createMessageComponentCollector({ componentType: ComponentType.Button, filter: this.filter.bind(this) });
+		this.collector = this.message.createMessageComponentCollector({ componentType: ComponentType.Button, filter: this.filter.bind(this), idle: this.time });
 		this.collector.on('collect', this._handleInteraction.bind(this));
-
-		if (this.time) this.timeout = setTimeout(this.stop.bind(this), this.time);
-
 		return this.message;
 	}
 
@@ -306,7 +302,7 @@ export = class EasyEmbedBuilderPages {
 
 		this.generatePages();
 
-		this.message.edit(this.generateMessage());
+		this.message.edit(await this.generateMessage());
 
 		return this.message;
 	}
@@ -314,10 +310,10 @@ export = class EasyEmbedBuilderPages {
 	/** Stops the button collector. */
 	async stop(): Promise<void> {
 		if (this.collector) this.collector.stop();
-		if (this.message) this.message.edit(this.generateMessage(true)).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
+		if (this.message) this.message.edit(await this.generateMessage(true)).catch(() => { /* eslint-disable-line @typescript-eslint/no-empty-function */ });
 	}
 
-	generateMessage(disabled = false): MessageOptions {
+	async generateMessage(disabled = false): Promise<MessageOptions> {
 		const message: MessageOptions = {
 			embeds: [this.pages[this.page]],
 			ephemeral: this.ephemeral,
@@ -326,7 +322,10 @@ export = class EasyEmbedBuilderPages {
 		};
 		if (this.pages.length > 1 || !this.ephemeral) message.components = this.generateButtons(this.pages.length, this.page, disabled);
 
-		return message;
+		const generated = await this.pageGen(message, this.page);
+
+		if (generated) return generated;
+		else return message;
 	}
 
 	async _handleInteraction(interaction: ButtonInteraction): Promise<void> {
@@ -346,25 +345,25 @@ export = class EasyEmbedBuilderPages {
 				if (this.pages.length <= 1) break;
 				if (this.page === 0) break;
 				this.page = 0;
-				this.message.edit(this.generateMessage());
+				this.message.edit(await this.generateMessage());
 				break;
 			}
 			case '2': {
 				if (this.pages.length <= 1) break;
 				if (this.page > 0) --this.page;
-				this.message.edit(this.generateMessage());
+				this.message.edit(await this.generateMessage());
 				break;
 			}
 			case '3': {
 				if (this.page < this.pages.length - 1) ++this.page;
-				this.message.edit(this.generateMessage());
+				this.message.edit(await this.generateMessage());
 				break;
 			}
 			case '4': {
 				if (this.pages.length <= 1) break;
 				if (this.page === (this.pages.length - 1)) break;
 				this.page = this.pages.length - 1;
-				this.message.edit(this.generateMessage());
+				this.message.edit(await this.generateMessage());
 				break;
 			}
 			case '5': {
@@ -372,7 +371,7 @@ export = class EasyEmbedBuilderPages {
 				break;
 			}
 			case '6': {
-				this.update(this.refreshData());
+				this.update(await this.refreshData());
 				break;
 			}
 			default:
@@ -380,8 +379,5 @@ export = class EasyEmbedBuilderPages {
 		}
 
 		interaction.deferUpdate();
-
-		if (this.time) clearTimeout(this.timeout);
-		this.timeout = setTimeout(this.stop.bind(this), this.time);
 	}
 }

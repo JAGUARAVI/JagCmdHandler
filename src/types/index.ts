@@ -13,12 +13,16 @@ import {
 	ApplicationCommand,
 	Guild,
 	ApplicationCommandType,
-	MessageEditOptions
+	MessageEditOptions,
 } from 'discord.js';
 
 import { APITextInputComponent } from 'discord-api-types/v10';
 
+import { JSONEncodable } from '@discordjs/builders';
+import { APIEmbed } from 'discord-api-types/v10';
+
 import Client from '../classes/Client';
+import Paginate from '../functions/Paginate';
 
 export interface Message extends BaseMessage {
 	user?: User;
@@ -41,7 +45,7 @@ export interface CommandContext {
 	client: Client;
 	reply(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
 	send(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
-	paginate(Payload: MessagePayload | MessageOptions): Promise<Message | null>;
+	paginate(Payload: MessagePayload | MessageOptions): Promise<Paginate>;
 	prompt(Payload: PromptOptions): Promise<{ [key: string]: string }[]>
 }
 
@@ -81,21 +85,24 @@ export interface CommandPermissions {
 }
 
 export interface MessageOptions extends DefaultMesageOption, InteractionReplyOptions, MessageEditOptions {
-	/** For sending DeletableMessages */
+	/** For sending `DeletableMessage`s */
 	delete?: boolean
-	time?: number
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	flags?: any
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-}
 
-export interface PaginateMessageOptions extends MessageOptions {
+	/** Idle timeout for `DeletableMessages`s*/
+	time?: number
+
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	flags?: any}
+
+export interface PaginateMessageOptions extends MessageOptions, Omit<APIEmbed, 'timestamp' | 'video' | 'provider' | 'type' | 'fields'> {
+	/** Whether or not to allow the user to refresh the embed. */
 	refresh?: boolean
-	/** Only for paginate */
+	/** The function which refreshes the data. */
 	refreshData?: () => unknown
-	/** Only for paginate */
-	pageGen?: () => void
-	/** Only for paginate & deletableMessage */
+	/** Function to customize the paginate message sent. */
+	pageGen?: () => void | Promise<MessageOptions>
+	/** Specific page data for more customization. */
+	pages: (JSONEncodable<APIEmbed> | APIEmbed)[]
 }
 
 export interface ClientOptions extends BaseClientOptions {
